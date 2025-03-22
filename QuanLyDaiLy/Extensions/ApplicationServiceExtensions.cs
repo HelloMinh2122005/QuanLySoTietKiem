@@ -21,12 +21,16 @@ public static class ApplicationServiceExtensions
         services.AddScoped<ISoTietKiemRepo, SoTietKiemRepository>();
 
         // Register ViewModels
-        services.AddTransient<ThongTinSoTietKiemViewModel>();
         services.AddTransient<DashboardViewModel>();
+        services.AddTransient<ThemSoTietKiemViewModel>();
+        services.AddTransient<DanhSachSoTietKiemViewModel>();
+        services.AddTransient<CapNhatSoTietKiemViewModel>();
 
         // Register Views
-        services.AddTransient<ThongTinSoTietKiem>();
         services.AddTransient<Dashboard>();
+        services.AddTransient<ThemSoTietKiem>();
+        services.AddTransient<DanhSachSoTietKiem>();
+        services.AddTransient<CapNhatSoTietKiem>();
 
         // Register the main window (if needed)
         services.AddSingleton<MainWindow>();

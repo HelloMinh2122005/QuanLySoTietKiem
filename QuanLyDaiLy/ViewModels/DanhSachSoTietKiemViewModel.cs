@@ -1,53 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using Microsoft.Extensions.DependencyInjection;
+using QuanLyDaiLy.Views;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows.Controls;
+using System.Windows.Input;
+using QuanLyDaiLy.Commands;
 
 namespace QuanLyDaiLy.ViewModels
 {
     public class DanhSachSoTietKiemViewModel : INotifyPropertyChanged
     {
-        public class SoTietKiem
+        public ICommand ThemSoTietKiemCommand { get; }
+        public ICommand CapNhatSoTietKiemCommand { get; }
+        private readonly IServiceProvider _serviceProvider;
+
+        public DanhSachSoTietKiemViewModel(IServiceProvider serviceProvider)
         {
-            public int STT { get; set; }
-            public string MaSo { get; set; }
-            public string LoaiTietKiem { get; set; }
-            public string KhachHang { get; set; }
-            public decimal SoDu { get; set; }
-            public bool IsSelected { get; set; }
+            //DanhSachSoTietKiem = new ObservableCollection<SoTietKiem>(danhSach);
+            _serviceProvider = serviceProvider;
+            ThemSoTietKiemCommand = new RelayCommand(OpenThemSoTietKiem);
+            CapNhatSoTietKiemCommand = new RelayCommand(CapNhatSoTietKiem);
         }
 
-        private ObservableCollection<SoTietKiem> _danhSachSoTietKiem;
-
-        public DanhSachSoTietKiemViewModel()
+        public void OpenThemSoTietKiem()
         {
-            var danhSach = new List<SoTietKiem>
-            {
-                new SoTietKiem { IsSelected = false, MaSo = "23520906", LoaiTietKiem = "Không kỳ hạn", KhachHang = "Hứa Văn Lý", SoDu = 15756.800m },
-                new SoTietKiem { IsSelected = false, MaSo = "23520923", LoaiTietKiem = "3 tháng", KhachHang = "Hồ Nguyên Minh", SoDu = 21854.320m },
-                new SoTietKiem { IsSelected = false, MaSo = "23520922", LoaiTietKiem = "6 tháng", KhachHang = "Trần Thị Mộng Trúc Ngân", SoDu = 17356.480m },
-                new SoTietKiem { IsSelected = false, MaSo = "23520950", LoaiTietKiem = "Không kỳ hạn", KhachHang = "Nguyễn Tấn Trần Minh Khang", SoDu = 100739645.000m },
-                new SoTietKiem { IsSelected = false, MaSo = "12345678", LoaiTietKiem = "3 tháng", KhachHang = "Huỳnh Thị Hồ Mộng Trinh", SoDu = 19375698.000m }
-            };
-
-            for (int i = 0; i < danhSach.Count; i++)
-            {
-                danhSach[i].STT = i + 1;
-            }
-
-            DanhSachSoTietKiem = new ObservableCollection<SoTietKiem>(danhSach);
+            var themSoTietKiem = _serviceProvider.GetRequiredService<ThemSoTietKiem>();
+            themSoTietKiem.Show();
         }
 
-        public ObservableCollection<SoTietKiem> DanhSachSoTietKiem
+        public void CapNhatSoTietKiem()
         {
-            get => _danhSachSoTietKiem;
-            set
-            {
-                _danhSachSoTietKiem = value;
-                OnPropertyChanged();
-            }
+            var capnhatSoTietKiem = _serviceProvider.GetRequiredService<CapNhatSoTietKiem>();
+            capnhatSoTietKiem.Show();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -55,7 +38,5 @@ namespace QuanLyDaiLy.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-       
     }
 }
