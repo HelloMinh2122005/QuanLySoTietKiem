@@ -7,6 +7,10 @@
         Background="#EBDFD7"
         WindowState="Maximized">
 
+    <Window.Resources>
+        <DropShadowEffect x:Key="DropShadowEffect" Color="Black" BlurRadius="10" ShadowDepth="0" Opacity="0.5"/>
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -186,7 +190,7 @@
         </Grid>
 
         <!-- DataGrid -->
-        <Border Grid.Row="3" Padding="30" CornerRadius="17" Background="#F2EAE5" Margin="30,18,30,0">
+        <Border Grid.Row="3" Padding="30" CornerRadius="17" Background="#F2EAE5" Margin="30,18,30,0"  Effect="{StaticResource DropShadowEffect}">
             <DataGrid AutoGenerateColumns="False" GridLinesVisibility="None" 
               HeadersVisibility="Column" CanUserAddRows="False" BorderThickness="0" LoadingRow="DataGrid_LoadingRow" Background="Transparent">
                 <DataGrid.Resources>

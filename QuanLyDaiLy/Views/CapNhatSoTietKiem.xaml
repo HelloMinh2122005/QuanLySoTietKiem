@@ -194,8 +194,9 @@
                                    Margin="0,0,0,0"/>
                             <TextBox Grid.Row="1"
                                      Width="152"
-                                     Height="30"
-                                     Background="#FFFFFF" 
+                                     Background="Transparent"
+                                     Height="30" 
+                                     IsReadOnly="True"
                                      BorderBrush="#33000000"
                                      HorizontalAlignment="Left"
                                      VerticalAlignment="Center"
@@ -370,8 +371,9 @@
                                    Margin="0,0,0,0"/>
                         <TextBox Grid.Row="1"
                                  Width="490"
-                                 Height="30"
-                                 Background="#FFFFFF" 
+                                 Background="Transparent"
+                                 Height="30" 
+                                 IsReadOnly="True"
                                  BorderBrush="#33000000"
                                  HorizontalAlignment="Left"
                                  VerticalAlignment="Center"
