@@ -8,6 +8,7 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
     public DbSet<SoTietKiem> DsSoTietKiem { get; set; } = null!;
     public DbSet<LoaiTietKiem> DsLoaiTietKiem { get; set; } = null!;
     public DbSet<KhachHang> DsKhachHang { get; set; } = null!;
+    public DbSet<ThamSo> thamSo { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
