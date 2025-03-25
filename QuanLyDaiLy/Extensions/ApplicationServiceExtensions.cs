@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using QuanLyDaiLy.Interfaces;
 using QuanLyDaiLy.Repositories;
 using QuanLyDaiLy.Services;
@@ -13,6 +14,13 @@ public static class ApplicationServiceExtensions
     {
         // Register database
         services.AddSingleton<DatabaseService>();
+        
+        // Đăng ký DataContext từ DatabaseService
+        services.AddDbContext<DataContext>(options =>
+        {
+            var dbPath = DatabaseService.GetDefaultDatabasePath();
+            options.UseSqlite($"Data Source={dbPath}");
+        });
 
         // Register pages and ViewModels (transient/scoped/singleton)
         services.AddScoped<IKhachHangRepo, KhachHangRepository>();
@@ -21,12 +29,16 @@ public static class ApplicationServiceExtensions
         services.AddScoped<ISoTietKiemRepo, SoTietKiemRepository>();
 
         // Register ViewModels
-        services.AddTransient<ThongTinSoTietKiemViewModel>();
         services.AddTransient<DashboardViewModel>();
+        services.AddTransient<ThemSoTietKiemViewModel>();
+        services.AddTransient<DanhSachSoTietKiemViewModel>();
+        services.AddTransient<CapNhatSoTietKiemViewModel>();
 
         // Register Views
-        services.AddTransient<ThongTinSoTietKiem>();
         services.AddTransient<Dashboard>();
+        services.AddTransient<ThemSoTietKiem>();
+        services.AddTransient<DanhSachSoTietKiem>();
+        services.AddTransient<CapNhatSoTietKiem>();
 
         // Register the main window (if needed)
         services.AddSingleton<MainWindow>();

@@ -1,8 +1,10 @@
 ﻿<Application x:Class="QuanLyDaiLy.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:QuanLyDaiLy">
+             xmlns:local="clr-namespace:QuanLyDaiLy"
+             xmlns:global="clr-namespace:">
     <Application.Resources>
-         
+        <global:MaLoaiToTenConverter x:Key="MaLoaiToTenConverter"/>
+        <global:CmndToKhachHangConverter x:Key="CmndToKhachHangConverter"/>
     </Application.Resources>
 </Application>

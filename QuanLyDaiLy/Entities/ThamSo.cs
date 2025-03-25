@@ -2,5 +2,5 @@
 
 public class ThamSo
 {
-    public decimal SoTienGoiToiThieu { get; set; } = 100000;
+    public static decimal SoTienGoiToiThieu { get; set; } = 100000;
 }

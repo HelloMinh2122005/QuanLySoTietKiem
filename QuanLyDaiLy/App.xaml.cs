@@ -3,6 +3,8 @@ using QuanLyDaiLy.Extensions;
 using QuanLyDaiLy.Services;
 using QuanLyDaiLy.Views;
 using System.Windows;
+using Microsoft.EntityFrameworkCore;
+using QuanLyDaiLy.Repositories;
 
 namespace QuanLyDaiLy;
 
@@ -19,12 +21,26 @@ public partial class App : Application
 
         var services = new ServiceCollection();
         services.ConfigureServices(); 
+
+        
+        
         ServiceProvider = services.BuildServiceProvider();
+        
+        // Lưu vào Resources để truy cập ở Converter
+        Resources["ServiceProvider"] = ServiceProvider;
 
         var dbService = ServiceProvider.GetRequiredService<DatabaseService>();
         await dbService.Initialize();
 
-        var dashboard = ServiceProvider.GetRequiredService<Dashboard>();
-        dashboard.Show();
+        //var dashboard = ServiceProvider.GetRequiredService<Dashboard>();
+        //dashboard.Show();
+        
+        // seed data
+        var context = ServiceProvider.GetRequiredService<DataContext>();
+        context.Database.Migrate(); // Đảm bảo DB đã tạo
+        context.SeedData();
+
+        var danhSachSoTietKiem = ServiceProvider.GetRequiredService<DanhSachSoTietKiem>();
+        danhSachSoTietKiem.Show();
     }
 }

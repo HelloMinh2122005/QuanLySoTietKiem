@@ -6,7 +6,7 @@ public class LoaiTietKiem
 {
     [Key]
     public string MaLoaiTietKiem { get; set; } = "";
-    public LoaiTietKiemEnum TenLoaiTietKiem { get; set; } = LoaiTietKiemEnum.KhongKyHan;
+    public LoaiTietKiemEnum? TenLoaiTietKiem { get; set; } = LoaiTietKiemEnum.KhongKyHan;
     public ICollection<SoTietKiem> DsSoTietKiem { get; set; } = [];
 }
 

@@ -15,7 +15,7 @@ namespace QuanLyDaiLy.ViewModels
         public DashboardViewModel(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            OpenThongTinSoTietKiemCommand = new RelayCommand(OpenThongTinSoTietKiem);
+            OpenThemSoTietKiemCommand = new RelayCommand(OpenThemSoTietKiem);
         }
 
         public string Message
@@ -31,12 +31,12 @@ namespace QuanLyDaiLy.ViewModels
             }
         }
 
-        public ICommand OpenThongTinSoTietKiemCommand { get; }
+        public ICommand OpenThemSoTietKiemCommand { get; }
 
-        private void OpenThongTinSoTietKiem()
+        private void OpenThemSoTietKiem()
         {
-            var thongTinSoTietKiem = _serviceProvider.GetRequiredService<ThongTinSoTietKiem>();
-            thongTinSoTietKiem.Show();
+            var themSoTietKiem = _serviceProvider.GetRequiredService<ThemSoTietKiem>();
+            themSoTietKiem.Show();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -46,6 +46,4 @@ namespace QuanLyDaiLy.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
-
-    
 }
