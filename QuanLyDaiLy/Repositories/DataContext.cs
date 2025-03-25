@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using QuanLyDaiLy.Entities;
+using QuanLyDaiLy.Helpers;
 
 namespace QuanLyDaiLy.Repositories;
 
@@ -14,22 +15,20 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
     {
         base.OnModelCreating(modelBuilder);
 
+        // Configure KhachHang relationship
         modelBuilder.Entity<KhachHang>()
             .HasMany(kh => kh.DsSoTietKiem)
-            .WithOne()
+            .WithOne(stk => stk.KhachHang)
             .HasForeignKey(stk => stk.CMND)
             .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<SoTietKiem>()
-            .HasOne<LoaiTietKiem>()
-            .WithMany()
+            .HasOne(stk => stk.LoaiTietKiem)
+            .WithMany(ltk => ltk.DsSoTietKiem)
             .HasForeignKey(stk => stk.MaLoaiTietKiem)
             .OnDelete(DeleteBehavior.Restrict);
 
-        modelBuilder.Entity<SoTietKiem>()
-            .HasOne<LoaiTietKiem>()
-            .WithMany(ltk => ltk.DsSoTietKiem)
-            .HasForeignKey(stk => stk.MaLoaiTietKiem)
-            .OnDelete(DeleteBehavior.Cascade);
+        // Seed the database
+        DatabaseSeeder.SeedDatabase(modelBuilder);
     }
 }

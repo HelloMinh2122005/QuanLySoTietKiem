@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:QuanLyDaiLy.ViewModels"
         Title="Danh Sách Sổ Tiết Kiệm" 
-        Height="1020" Width="1180" 
+        Height="930" Width="1180" 
         Background="#EBDFD7"
         WindowState="Maximized">
 
@@ -41,8 +41,10 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Image Source="pack://application:,,,/QuanLyDaiLy;component/Resources/searchicon.png" Width="24" Height="24" VerticalAlignment="Center" Margin="24,0,0,0"/>
-                    <TextBox Grid.Column="1" FontFamily="Arial" FontSize="16" Padding="13" Text="Tìm kiếm sổ tiết kiệm" BorderThickness="0"
-                             Background="Transparent" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+                    <TextBox Grid.Column="1" FontFamily="Arial" FontSize="16" Padding="13" 
+                             Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" 
+                             BorderThickness="0" Background="Transparent" 
+                             VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
                 </Grid>
             </Border>
         </Grid>
@@ -61,7 +63,10 @@
                 <TextBlock Text="Loại tiết kiệm" FontFamily="Arial" FontStyle="Normal" FontWeight="Normal" FontSize="20" LineHeight="23" 
                       VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#060606" TextAlignment="Left" Height="30" Width="150"/>
 
-                <ComboBox Width="200" Height="30" Margin="0,0,0,0" FontSize="20" SelectedIndex="0" Background="White" BorderThickness="0" Padding="15,0,15,0">
+                <ComboBox Width="200" Height="30" Margin="0,0,0,0" FontSize="20" Background="White" BorderThickness="0" Padding="15,0,15,0"
+                          ItemsSource="{Binding DanhSachLoaiTietKiem}" 
+                          SelectedItem="{Binding SelectedLoaiTietKiem, Mode=TwoWay}" 
+                          DisplayMemberPath="TenLoaiTietKiem">
                     <ComboBox.Template>
                         <ControlTemplate TargetType="{x:Type ComboBox}">
                             <Grid>
@@ -99,12 +104,6 @@
                             </Grid>
                         </ControlTemplate>
                     </ComboBox.Template>
-                    <ComboBox.Items>
-                        <ComboBoxItem Content="Tất cả"/>
-                        <ComboBoxItem Content="Không kỳ hạn"/>
-                        <ComboBoxItem Content="3 tháng"/>
-                        <ComboBoxItem Content="6 tháng"/>
-                    </ComboBox.Items>
                 </ComboBox>
             </StackPanel>
 
@@ -135,7 +134,7 @@
                    TextAlignment="Center" Width="70" Height="34" Foreground="#92492D"/>
                 </Button>
 
-                <Button Width="120" Height="35" Background="#E65F2B" Foreground="White" Margin="0,0,10,0">
+                <Button Width="120" Height="35" Background="#E65F2B" Foreground="White" Margin="0,0,10,0" Command="{Binding XoaSoTietKiemCommand}">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border x:Name="buttonBorder" Background="{TemplateBinding Background}" 
@@ -190,9 +189,17 @@
         </Grid>
 
         <!-- DataGrid -->
-        <Border Grid.Row="3" Padding="30" CornerRadius="17" Background="#F2EAE5" Margin="30,18,30,0"  Effect="{StaticResource DropShadowEffect}">
-            <DataGrid AutoGenerateColumns="False" GridLinesVisibility="None" 
-              HeadersVisibility="Column" CanUserAddRows="False" BorderThickness="0" LoadingRow="DataGrid_LoadingRow" Background="Transparent">
+        <Border Grid.Row="3" Padding="30" CornerRadius="17" Background="#F2EAE5" Margin="30,18,30,0"  Effect="{StaticResource DropShadowEffect}" VerticalAlignment="Stretch" Height="710">
+            <DataGrid ItemsSource="{Binding DanhSachSoTietKiem}" 
+                      SelectedItem="{Binding SelectedSoTietKiem, Mode=TwoWay}"
+                      AutoGenerateColumns="False" 
+                      GridLinesVisibility="None" 
+                      VerticalAlignment="Stretch"
+                      HeadersVisibility="Column" 
+                      CanUserAddRows="False" 
+                      BorderThickness="0" 
+                      LoadingRow="DataGrid_LoadingRow" 
+                      Background="Transparent">
                 <DataGrid.Resources>
                     <!-- Style cho header -->
                     <Style TargetType="DataGridColumnHeader">
@@ -272,39 +279,7 @@
                 </DataGrid.RowStyle>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="STT" Width="100" FontSize="20">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
-                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                                <Setter Property="Padding" Value="0,0,0,0"/>
-                                <Setter Property="ContentTemplate">
-                                    <Setter.Value>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding}" 
-                                               FontFamily="Arial" 
-                                               FontSize="20" 
-                                               FontWeight="Normal" 
-                                               LineHeight="23" 
-                                               VerticalAlignment="Center"
-                                               HorizontalAlignment="Left"/>
-                                        </DataTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
-                    </DataGridTextColumn>
-
-                    <DataGridCheckBoxColumn Header="Chọn" Width="100">
-                        <DataGridCheckBoxColumn.ElementStyle>
-                            <Style TargetType="CheckBox">
-                                <Setter Property="VerticalAlignment" Value="Center"/>
-                                <Setter Property="HorizontalAlignment" Value="Left"/>
-                                <Setter Property="Margin" Value="8,0,0,0"/>
-                            </Style>
-                        </DataGridCheckBoxColumn.ElementStyle>
-                    </DataGridCheckBoxColumn>
-
-                    <DataGridTextColumn Header="Mã số" Width="100">
+                    <DataGridTextColumn Header="Mã sổ" Width="100" Binding="{Binding MaSoTietKiem}">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
                                 <Setter Property="VerticalAlignment" Value="Center"/>
@@ -317,7 +292,20 @@
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
 
-                    <DataGridTextColumn Header="Loại tiết kiệm" Width="300">
+                    <DataGridTextColumn Header="Loại tiêt kiệm" Width="200" Binding="{Binding LoaiTietKiem.TenLoaiTietKiem}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="HorizontalAlignment" Value="Left"/>
+                                <Setter Property="TextAlignment" Value="Left"/>
+                                <Setter Property="LineHeight" Value="23"/>
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="Margin" Value="0"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Header="Ngày mở sổ" Width="300" Binding="{Binding NgayMoSo}">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
                                 <Setter Property="VerticalAlignment" Value="Center"/>
@@ -328,7 +316,7 @@
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
 
-                    <DataGridTextColumn Header="Khách hàng" Width="*">
+                    <DataGridTextColumn Header="Khách hàng" Width="*" Binding="{Binding KhachHang.TenKhachHang}">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
                                 <Setter Property="VerticalAlignment" Value="Center"/>
@@ -339,7 +327,7 @@
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
 
-                    <DataGridTextColumn Header="Số dư" Width="300">
+                    <DataGridTextColumn Header="Số dư" Width="300" Binding="{Binding SoTienGui, StringFormat='{}{0:N0} VNĐ'}">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
                                 <Setter Property="VerticalAlignment" Value="Center"/>

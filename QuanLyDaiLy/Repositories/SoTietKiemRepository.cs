@@ -46,7 +46,7 @@ public class SoTietKiemRepository : ISoTietKiemRepo
 
     public async Task Update(SoTietKiem soTietKiem)
     {
-        _dataContext.Entry(Update).State = EntityState.Modified;
+        _dataContext.Entry(soTietKiem).State = EntityState.Modified;
         await _dataContext.SaveChangesAsync();
     }
 }
