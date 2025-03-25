@@ -1,37 +1,18 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.CompilerServices;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace QuanLyDaiLy.Entities;
 
 public class SoTietKiem
 {
     [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public long MaSoTietKiem { get; set; }
-    private string _cmnd = string.Empty;
-
-    public string CMND
-    {
-        get => _cmnd; 
-        set
-        {
-            if (_cmnd != value)
-            {
-                _cmnd = value; 
-                OnPropertyChanged(); 
-            }
-        }
-    }
+    public string MaSoTietKiem { get; set; } = "";
+    public string CMND { get; set; } = "";
     public string MaLoaiTietKiem { get; set; } = "";
     public decimal SoTienGui { get; set; } = 0;
     public DateTime NgayMoSo { get; set; } = DateTime.Now;
-    
-    public event PropertyChangedEventHandler? PropertyChanged;
-    protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
+
+    // Navigation properties
+    public KhachHang KhachHang { get; set; } = new();
+    public LoaiTietKiem LoaiTietKiem { get; set; } = new();
 
 }

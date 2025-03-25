@@ -34,11 +34,6 @@ public partial class App : Application
 
         //var dashboard = ServiceProvider.GetRequiredService<Dashboard>();
         //dashboard.Show();
-        
-        // seed data
-        var context = ServiceProvider.GetRequiredService<DataContext>();
-        context.Database.Migrate(); // Đảm bảo DB đã tạo
-        context.SeedData();
 
         var danhSachSoTietKiem = ServiceProvider.GetRequiredService<DanhSachSoTietKiem>();
         danhSachSoTietKiem.Show();

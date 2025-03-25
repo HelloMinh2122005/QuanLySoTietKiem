@@ -1,148 +1,94 @@
-﻿    using System.Windows;
-    using Microsoft.EntityFrameworkCore;
-    using QuanLyDaiLy.Entities;
-    using QuanLyDaiLy.Interfaces;
-    using QuanLyDaiLy.Services;
 
-    namespace QuanLyDaiLy.Repositories;
+using Microsoft.EntityFrameworkCore;
+using QuanLyDaiLy.Entities;
+using QuanLyDaiLy.Interfaces;
+using QuanLyDaiLy.Services;
 
-    public class SoTietKiemRepository(DatabaseService databaseService) : ISoTietKiemRepo
+namespace QuanLyDaiLy.Repositories;
+
+public class SoTietKiemRepository : ISoTietKiemRepo
+{
+    private readonly DataContext _dataContext;
+    public SoTietKiemRepository(DatabaseService databaseService)
     {
-        public async Task<bool> ThemSoTietKiemAsync(SoTietKiem soTietKiem)
+        _dataContext = databaseService.DataContext;
+        if (_dataContext == null)
         {
-            try
-            {
-                
-                databaseService.DataContext.DsSoTietKiem.Add(soTietKiem);
-                await databaseService.DataContext.SaveChangesAsync();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Lỗi khi thêm sổ tiết kiệm: {ex.Message}");
-                return false;
-            }
+            throw new ArgumentNullException(nameof(databaseService), "Database not initialized");
         }
-        
-        public async Task<List<SoTietKiem>> FindAllAsync()
-        {
-            try
-            {
-                if (databaseService == null)
-                {
-                    Console.WriteLine("databaseService is null");
-                    return new List<SoTietKiem>();
-                }
-
-                if (databaseService.DataContext == null)
-                {
-                    Console.WriteLine("DataContext is null");
-                    return new List<SoTietKiem>();
-                }
-
-                return await databaseService.DataContext.DsSoTietKiem.ToListAsync();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Loi khi lay danh sach so tiet kiem: {ex.Message}");
-                return new List<SoTietKiem>();
-            }
-        }
-
-        public async Task<List<SoTietKiem>> FindAllByLoaiTietKiemAsync(string maLoaiTietKiem,string maSearchText)
-        {
-            try
-            {
-                if (databaseService == null)
-                {
-                    Console.WriteLine("databaseService is null");
-                    return new List<SoTietKiem>();
-                }
-
-                if (databaseService.DataContext == null)
-                {
-                    Console.WriteLine("DataContext is null");
-                    return new List<SoTietKiem>();
-                }
-
-                var query = databaseService.DataContext.DsSoTietKiem.AsQueryable();
-
-                if (!string.IsNullOrEmpty(maLoaiTietKiem))
-                {
-                    query = query.Where(stk => stk.MaLoaiTietKiem == maLoaiTietKiem);
-                }
-
-                if (!string.IsNullOrEmpty(maSearchText))
-                {
-                    int transformedMaSearchText = Int32.Parse(maSearchText);
-                    query = query.Where(stk => stk.MaSoTietKiem.Equals(transformedMaSearchText));
-                }
-
-                return await query.ToListAsync();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Loi khi lay danh sach so tiet kiem: {ex.Message}");
-                return new List<SoTietKiem>();
-            }
-        }
-        
-        public async Task XoaSoTietKiem(long maSoTietKiem)
-        {
-            try
-            {
-                // Tìm bản ghi cần xóa
-                var loaiTietKiem = await databaseService.DataContext.DsSoTietKiem.FirstOrDefaultAsync(l => l.MaSoTietKiem == maSoTietKiem);
-
-                if (loaiTietKiem != null)
-                {
-                    // Xóa bản ghi
-                    databaseService.DataContext.DsSoTietKiem.Remove(loaiTietKiem);
-                    await databaseService.DataContext.SaveChangesAsync();
-                    MessageBox.Show("Xoa thanh cong!");
-                }
-                else
-                {
-                    MessageBox.Show("Khong tim thay loai tiet kiem can xoa!");
-                }
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine($"Loi khi xoa so tiet kiem: {ex.Message}");
-            }
-        }
-
-        public async Task<bool> CapNhatTheoMaTietKiem(long maSoTietKiem, SoTietKiem soTietKiemMoi)
-        {
-            try
-            {
-                // Tìm bản ghi cần cập nhật
-                var soTietKiem = await databaseService.DataContext.DsSoTietKiem
-                    .FirstOrDefaultAsync(stk => stk.MaSoTietKiem == maSoTietKiem);
-
-                if (soTietKiem == null)
-                {
-                    Console.WriteLine("Không tìm thấy sổ tiết kiệm cần cập nhật.");
-                    return false;
-                }
-
-                // Cập nhật thông tin
-                soTietKiem.CMND = soTietKiemMoi.CMND;
-                soTietKiem.MaLoaiTietKiem = soTietKiemMoi.MaLoaiTietKiem;
-                soTietKiem.SoTienGui = soTietKiemMoi.SoTienGui;
-                soTietKiem.NgayMoSo = soTietKiemMoi.NgayMoSo;
-
-                // Lưu thay đổi
-                await databaseService.DataContext.SaveChangesAsync();
-
-                Console.WriteLine("Cập nhật thành công!");
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Lỗi khi cập nhật sổ tiết kiệm: {ex.Message}");
-                return false;
-            }
-        }
-
     }
+    public async Task Create(SoTietKiem soTietKiem)
+    {
+        _dataContext.DsSoTietKiem.Add(soTietKiem);
+        await _dataContext.SaveChangesAsync();
+    }
+
+    public async Task Delete(string id)
+    {
+        var existingSoTietKiem = await _dataContext.DsSoTietKiem.FindAsync(id);
+        if (existingSoTietKiem != null)
+        {
+            _dataContext.DsSoTietKiem.Remove(existingSoTietKiem);
+            await _dataContext.SaveChangesAsync();
+        }
+    }
+
+    public async Task<IEnumerable<SoTietKiem>> GetAll()
+    {
+        return await _dataContext.DsSoTietKiem
+          .Include(stk => stk.KhachHang)
+          .ToListAsync();
+    }
+
+    public async Task<SoTietKiem> GetById(string id)
+    {
+        SoTietKiem? soTietKiem = await _dataContext.DsSoTietKiem.FindAsync(id);
+        return soTietKiem ?? throw new Exception("SoTietKiem not found");
+    }
+
+    public async Task Update(SoTietKiem soTietKiem)
+    {
+        // Tìm entity hiện có trong database
+        var existingEntity = await _dataContext.DsSoTietKiem
+            .FindAsync(soTietKiem.MaSoTietKiem);
+
+        if (existingEntity == null)
+        {
+            throw new Exception("Không tìm thấy sổ tiết kiệm.");
+        }
+
+        // Sao chép giá trị từ tham số vào entity đã tải
+        _dataContext.Entry(existingEntity).CurrentValues.SetValues(soTietKiem);
+
+        try
+        {
+            await _dataContext.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException ex)
+        {
+            // Xử lý xung đột concurrency
+            var entry = ex.Entries.Single();
+            await entry.ReloadAsync(); // Tải lại giá trị mới từ database
+            throw new Exception("Dữ liệu đã bị thay đổi. Vui lòng thử lại.");
+        }
+    }
+    
+    public async Task<IEnumerable<SoTietKiem>> Search(string? maLoaiTietKiem, string? searchText)
+    {
+        var query = _dataContext.DsSoTietKiem.AsQueryable();
+
+        if (!string.IsNullOrEmpty(maLoaiTietKiem))
+        {
+            query = query.Where(stk => stk.MaLoaiTietKiem == maLoaiTietKiem);
+        }
+
+        if (!string.IsNullOrEmpty(searchText))
+        {
+            query = query.Where(stk =>
+                stk.MaSoTietKiem.ToString().Contains(searchText) ||
+                stk.KhachHang.TenKhachHang.Contains(searchText));
+        }
+
+        return await query.Include(stk => stk.KhachHang).ToListAsync();
+    }
+}

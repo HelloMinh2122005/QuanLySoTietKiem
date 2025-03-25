@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using QuanLyDaiLy.Views;
 using System.Windows.Input;
 using System.Windows;
@@ -23,6 +23,7 @@ namespace QuanLyDaiLy.ViewModels
         
         private readonly IKhachHangRepo _khachHangRepo;
         private readonly ISoTietKiemRepo _soTietKiemRepo;
+        private readonly IThamSoRepo _thamSoRepo;
 
         private ObservableCollection<LoaiTietKiem> _dsLoaiTietKiem;
         public ObservableCollection<LoaiTietKiem> DsLoaiTietKiem
@@ -107,8 +108,8 @@ namespace QuanLyDaiLy.ViewModels
             }
         }
         
-        private long _maSoTietKiem;
-        public long MaSoTietKiem
+        private string _maSoTietKiem;
+        public string MaSoTietKiem
         {
             get => _maSoTietKiem;
             set
@@ -147,7 +148,7 @@ namespace QuanLyDaiLy.ViewModels
             LoaiTietKiemDuocChon = DsLoaiTietKiem.Where(item => item.MaLoaiTietKiem == soTietKiem.MaLoaiTietKiem).FirstOrDefault();
         }
 
-        public CapNhatSoTietKiemViewModel(IKhachHangRepo khachHangRepo,ILoaiTietKiemRepo LoaiTietKiemRepo,ISoTietKiemRepo SoTietKiemRepo)
+        public CapNhatSoTietKiemViewModel(IKhachHangRepo khachHangRepo,ILoaiTietKiemRepo LoaiTietKiemRepo,ISoTietKiemRepo SoTietKiemRepo, IThamSoRepo ThamSoRepo)
         {
             //command
             CloseCommand = new RelayCommand(ExecuteClose);
@@ -157,6 +158,7 @@ namespace QuanLyDaiLy.ViewModels
             _khachHangRepo = khachHangRepo;
             _loaiTietKiemRepo = LoaiTietKiemRepo;
             _soTietKiemRepo = SoTietKiemRepo;
+            _thamSoRepo = ThamSoRepo;
 
             
             LoadLoaiTietKiem();
@@ -165,7 +167,7 @@ namespace QuanLyDaiLy.ViewModels
         
         private async Task TimKiemKhachHangAsync(string cmnd)
         {
-            var data = await _khachHangRepo.FindByCMND(cmnd);
+            var data = await _khachHangRepo.GetById(cmnd);
             DiaChi = data.DiaChi;
             TenKhachHang = data.TenKhachHang;
 
@@ -173,7 +175,7 @@ namespace QuanLyDaiLy.ViewModels
         
         private async void LoadLoaiTietKiem()
         {
-            var danhSach = await _loaiTietKiemRepo.FindAll();
+            var danhSach = await _loaiTietKiemRepo.GetAll();
             DsLoaiTietKiem = new ObservableCollection<LoaiTietKiem>(danhSach);
         }
 
@@ -185,31 +187,36 @@ namespace QuanLyDaiLy.ViewModels
         private async void CapNhat()
         {
             // Kiểm tra các trường
-            string validationError = ValidateFields();
+            string validationError = await ValidateFields();
             if (!string.IsNullOrEmpty(validationError))
             {
                 MessageBox.Show(validationError, "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
+            var loaiTietKiem = await _loaiTietKiemRepo.GetById(LoaiTietKiemDuocChon.MaLoaiTietKiem);
+            var khachHang = await _khachHangRepo.GetById(Cmnd);
             // Tạo đối tượng SoTietKiem từ dữ liệu hiện có
             var soTietKiem = new SoTietKiem
             {
+                MaSoTietKiem = MaSoTietKiem,
+                LoaiTietKiem = loaiTietKiem,
                 MaLoaiTietKiem = LoaiTietKiemDuocChon.MaLoaiTietKiem,
                 SoTienGui = SoTienGui,
                 NgayMoSo = NgayMoSo,
+                KhachHang = khachHang,
                 CMND = Cmnd
             };
 
             // Gọi repository để lưu vào CSDL
-            bool result = await _soTietKiemRepo.CapNhatTheoMaTietKiem(MaSoTietKiem, soTietKiem);
-            if (result)
+            try
             {
+                await _soTietKiemRepo.Update(soTietKiem);
                 MessageBox.Show("Cập nhật sổ tiết kiệm thành công!", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
                 CapNhatEvent?.Invoke(this, soTietKiem);
                 ExecuteClose();
             }
-            else
+            catch (Exception e)
             {
                 MessageBox.Show("Cập nhật sổ tiết kiệm thất bại. Vui lòng thử lại.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -217,7 +224,7 @@ namespace QuanLyDaiLy.ViewModels
                        
         }
         
-        private string ValidateFields()
+        private async Task<string> ValidateFields()
         {
             // Kiểm tra CMND
             if (string.IsNullOrWhiteSpace(Cmnd))
@@ -237,12 +244,13 @@ namespace QuanLyDaiLy.ViewModels
                 return "Vui lòng chọn loại tiết kiệm.";
             }
 
+            var thamSo = await _thamSoRepo.Get();
             // Kiểm tra số tiền gửi
-            if (SoTienGui < ThamSo.SoTienGoiToiThieu)
+            if (SoTienGui < thamSo.SoTienGoiToiThieu)
             {
                 Console.WriteLine(SoTienGui);
 
-                return $"Số tiền gửi tối thiểu là ${ThamSo.SoTienGoiToiThieu}";
+                return $"Số tiền gửi tối thiểu là {thamSo.SoTienGoiToiThieu}.";
             }
 
             // Kiểm tra ngày mở sổ

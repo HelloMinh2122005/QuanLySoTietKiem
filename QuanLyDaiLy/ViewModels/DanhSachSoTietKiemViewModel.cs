@@ -1,13 +1,13 @@
-﻿using System.Collections.ObjectModel;
 using Microsoft.Extensions.DependencyInjection;
 using QuanLyDaiLy.Views;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows;
 using System.Windows.Input;
 using QuanLyDaiLy.Commands;
+using System.Collections.ObjectModel;
 using QuanLyDaiLy.Entities;
 using QuanLyDaiLy.Interfaces;
+using System.Windows;
 
 namespace QuanLyDaiLy.ViewModels
 {
@@ -16,29 +16,41 @@ namespace QuanLyDaiLy.ViewModels
         public ICommand ThemSoTietKiemCommand { get; }
         public ICommand CapNhatSoTietKiemCommand { get; }
         public ICommand XoaSoTietKiemCommand { get; }
-        
-
-
-        
+        private readonly IServiceProvider _serviceProvider;
         private readonly ISoTietKiemRepo _soTietKiemRepo;
-        
         private readonly ILoaiTietKiemRepo _loaiTietKiemRepo;
 
-
-        private readonly IServiceProvider _serviceProvider;
-        
-        private ObservableCollection<SoTietKiem> _danhSachSoTietKiem;
-        public ObservableCollection<SoTietKiem> DanhSachSoTietKiem
+        public DanhSachSoTietKiemViewModel(
+            IServiceProvider serviceProvider,
+            ISoTietKiemRepo soTietKiemRepo,
+            ILoaiTietKiemRepo loaiTietKiemRepo
+        )
         {
-            get => _danhSachSoTietKiem;
+            _serviceProvider = serviceProvider;
+            _soTietKiemRepo = soTietKiemRepo;
+            _loaiTietKiemRepo = loaiTietKiemRepo;
+            _ = LoadData();
+
+            _selectedLoaiTietKiem = new();
+            _selectedSoTietKiem = new();
+
+            ThemSoTietKiemCommand = new RelayCommand(OpenThemSoTietKiem);
+            CapNhatSoTietKiemCommand = new RelayCommand(CapNhatSoTietKiem);
+            XoaSoTietKiemCommand = new RelayCommand(XoaSoTietKiem);
+        }
+
+        private SoTietKiem _selectedSoTietKiem;
+        public SoTietKiem SelectedSoTietKiem
+        {
+            get => _selectedSoTietKiem;
             set
             {
-                _danhSachSoTietKiem = value;
+                _selectedSoTietKiem = value;
                 OnPropertyChanged();
             }
         }
-        
-        private ObservableCollection<LoaiTietKiem> _danhSachLoaiTietKiem;
+
+        private ObservableCollection<LoaiTietKiem> _danhSachLoaiTietKiem = [];
         public ObservableCollection<LoaiTietKiem> DanhSachLoaiTietKiem
         {
             get => _danhSachLoaiTietKiem;
@@ -48,176 +60,101 @@ namespace QuanLyDaiLy.ViewModels
                 OnPropertyChanged();
             }
         }
-        
-        private LoaiTietKiem? _loaiTietKiemDuocChon;
-        public LoaiTietKiem? LoaiTietKiemDuocChon
+
+        private ObservableCollection<SoTietKiem> _danhSachSoTietKiem = [];
+        public ObservableCollection<SoTietKiem> DanhSachSoTietKiem
         {
-            get => _loaiTietKiemDuocChon;
+            get => _danhSachSoTietKiem;
             set
             {
-                _loaiTietKiemDuocChon = value;
+                _danhSachSoTietKiem = value;
                 OnPropertyChanged();
-                LoadDanhSachSoTietKiemAsync();
             }
         }
-        
+
+        private LoaiTietKiem _selectedLoaiTietKiem;
+        public LoaiTietKiem SelectedLoaiTietKiem
+        {
+            get => _selectedLoaiTietKiem;
+            set
+            {
+                if (SelectedLoaiTietKiem != value)
+                {
+                    _selectedLoaiTietKiem = value;
+                    OnPropertyChanged();
+                    FilterByLoaiTietKiem();
+                }
+            }
+        }
+
         private string _searchText = "";
         public string SearchText
         {
             get => _searchText;
             set
             {
-                _searchText = value;
-                OnPropertyChanged();
-                // PlaceholderText = string.IsNullOrEmpty(_searchText) ? "Tìm kiếm sổ tiết kiệm" : "";
-                LoadDanhSachSoTietKiemAsync();
-                
+                if (_searchText != value)
+                {
+                    _searchText = value;
+                    OnPropertyChanged();
+                    FilterByLoaiTietKiem();
+                }
             }
         }
-        
-        // private string _placeholderText = "Tìm kiếm sổ tiết kiệm";
-        // public string PlaceholderText
-        // {
-        //     get => _placeholderText;
-        //     set
-        //     {
-        //         _placeholderText = value;
-        //         OnPropertyChanged();
-        //     }
-        // }
-        
-        private List<long> _dsCanXoa = new();
-        public List<long> DsCanXoa
-        {
-            get => _dsCanXoa;
-            set
-            {
-                _dsCanXoa = value;
-                OnPropertyChanged();
-            }
-        }
-        
-        public void XuLyCheckBox(bool isChecked, long id)
-        {
-            if (isChecked)
-            {
-                if (!DsCanXoa.Contains(id))
-                    DsCanXoa.Add(id);
-            }
-            else
-            {
-                DsCanXoa.Remove(id);
-            }
-        }
-        
-        private SoTietKiem? _soTietKiemDuocChon;
-        public SoTietKiem? SoTietKiemDuocChon
-        {
-            get => _soTietKiemDuocChon;
-            set
-            {
-                _soTietKiemDuocChon = value;
-                OnPropertyChanged();
-            }
-        }
-        
-       
 
-        public DanhSachSoTietKiemViewModel(IServiceProvider serviceProvider,  ISoTietKiemRepo soTietKiemRepo,ILoaiTietKiemRepo LoaiTietKiemRepo)
-        {
-            _serviceProvider = serviceProvider;
-
-            XoaSoTietKiemCommand = new RelayCommand(XoaSoTietKiem);
-            ThemSoTietKiemCommand = new RelayCommand(OpenThemSoTietKiem);
-            CapNhatSoTietKiemCommand = new RelayCommand(CapNhatSoTietKiem);
-            
-            _soTietKiemRepo = soTietKiemRepo;
-            _loaiTietKiemRepo = LoaiTietKiemRepo;
-
-            LoadLoaiTietKiem();
-
-            LoadDanhSachSoTietKiemAsync();
-            
-        }
-        
-        
-        
-        private async void XoaSoTietKiem()
-        {
-            if (DsCanXoa == null || !DsCanXoa.Any())
-            {
-                MessageBox.Show("Không có phần tử nào để xóa!");
-                return;
-            }
-
-            // Xóa các item có ID trong danh sách
-            DanhSachSoTietKiem = new ObservableCollection<SoTietKiem>(
-                DanhSachSoTietKiem.Where(stk => !DsCanXoa.Contains(stk.MaSoTietKiem))
-            );
-            
-            // Xóa trong database
-            foreach (var item in _dsCanXoa)
-            {
-                await _soTietKiemRepo.XoaSoTietKiem(item);
-            }
-            
-            // reset
-            DsCanXoa.Clear();
-        }
-        
-        public async Task LoadDanhSachSoTietKiemAsync()
+        private async Task LoadData()
         {
             try
             {
-                var danhSach = await _soTietKiemRepo.FindAllByLoaiTietKiemAsync(_loaiTietKiemDuocChon?.MaLoaiTietKiem, _searchText);
-                DanhSachSoTietKiem = new ObservableCollection<SoTietKiem>();
+                var danhSachSoTietKiem = await _soTietKiemRepo.GetAll();
+                var danhSachLoaiTietKiem = await _loaiTietKiemRepo.GetAll();
+
+                DanhSachLoaiTietKiem.Clear();
                 DanhSachSoTietKiem.Clear();
-                foreach (var soTietKiem in danhSach)
-                {
-                    DanhSachSoTietKiem.Add(soTietKiem);
-                }
-                
+
+                DanhSachSoTietKiem = [.. danhSachSoTietKiem];
+                DanhSachLoaiTietKiem = [.. danhSachLoaiTietKiem];
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Loi khi tai danh sach so tiet kiem: {ex.Message}");
+                MessageBox.Show($"Lỗi khi tải dữ liệu: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        
-        private async void LoadLoaiTietKiem()
+
+        private void FilterByLoaiTietKiem()
         {
-            var danhSach = await _loaiTietKiemRepo.FindAll();
-            DanhSachLoaiTietKiem = new ObservableCollection<LoaiTietKiem>();
-            DanhSachLoaiTietKiem.Add(new LoaiTietKiem
+            if (SelectedLoaiTietKiem == null || string.IsNullOrEmpty(SelectedLoaiTietKiem.MaLoaiTietKiem))
             {
-                TenLoaiTietKiem = null
-            });
-
-            foreach (var loaiTietKiem in danhSach)
-            {
-                DanhSachLoaiTietKiem.Add(loaiTietKiem);   
+                _ = LoadData();
+                return;
             }
+
+            _ = LoadDataForSelectedType();
         }
 
+        private async Task LoadDataForSelectedType()
+        {
+            try
+            {
+                var danhSachSoTietKiem = await _soTietKiemRepo.Search(SelectedLoaiTietKiem.MaLoaiTietKiem, SearchText);
+                DanhSachSoTietKiem = [.. danhSachSoTietKiem];
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải dữ liệu: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
 
         public void OpenThemSoTietKiem()
         {
-            var themSoTietKiemViewModel = _serviceProvider.GetRequiredService<ThemSoTietKiemViewModel>();
-    
-            // Đăng ký sự kiện
-            themSoTietKiemViewModel.LapSoEvent += (sender, soTietKiem) =>
-            {
-                DanhSachSoTietKiem.Add(soTietKiem);
-            };
-
-            var themSoTietKiemView = new ThemSoTietKiem(themSoTietKiemViewModel);
-            themSoTietKiemView.Show();
+            var themSoTietKiem = _serviceProvider.GetRequiredService<ThemSoTietKiem>();
+            themSoTietKiem.Closed += (s, e) => _ = LoadData(); 
+            themSoTietKiem.Show();
         }
-
 
         public void CapNhatSoTietKiem()
         {
-            if (SoTietKiemDuocChon == null)
+            if (SelectedSoTietKiem == null)
             {
                 MessageBox.Show("Vui lòng chọn một sổ tiết kiệm để cập nhật!");
                 return;
@@ -225,18 +162,46 @@ namespace QuanLyDaiLy.ViewModels
      
             
             var capNhatSoTietKiemViewModel = _serviceProvider.GetRequiredService<CapNhatSoTietKiemViewModel>();
-            capNhatSoTietKiemViewModel.SetData(SoTietKiemDuocChon);
+            capNhatSoTietKiemViewModel.SetData(SelectedSoTietKiem);
             
                    
             capNhatSoTietKiemViewModel.CapNhatEvent += (sender, soTietKiem) =>
             {
-                LoadDanhSachSoTietKiemAsync();
+                LoadData();
             };
             
             var capnhatSoTietKiem = new CapNhatSoTietKiem(capNhatSoTietKiemViewModel);
             
             capnhatSoTietKiem.Show();
-            
+        }
+
+        public async void XoaSoTietKiem()
+        {
+            if (SelectedSoTietKiem == null)
+            {
+                MessageBox.Show("Vui lòng chọn sổ tiết kiệm để xóa", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            var result = MessageBox.Show(
+                $"Bạn có chắc chắn muốn xóa sổ tiết kiệm {SelectedSoTietKiem.MaSoTietKiem}?",
+                "Xác nhận xóa",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    await _soTietKiemRepo.Delete(SelectedSoTietKiem.MaSoTietKiem);
+                    await LoadData();
+                    MessageBox.Show("Xóa sổ tiết kiệm thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Lỗi khi xóa sổ tiết kiệm: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -245,4 +210,4 @@ namespace QuanLyDaiLy.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
-}
+} 

@@ -5,26 +5,52 @@ using QuanLyDaiLy.Services;
 
 namespace QuanLyDaiLy.Repositories;
 
-public class LoaiTietKiemRepository(DatabaseService databaseService) : ILoaiTietKiemRepo
+public class LoaiTietKiemRepository : ILoaiTietKiemRepo
 {
-    public async Task<List<LoaiTietKiem>> FindAll()
+    private readonly DataContext dataContext;
+    public LoaiTietKiemRepository(DatabaseService databaseService)
     {
-        return await databaseService.DataContext.DsLoaiTietKiem.ToListAsync();
-    }
-    
-    public async Task<LoaiTietKiem> FindTheoMaLoaiTietKiemAsync(string maLoaiTietKiem)
-    {
-        try
+        dataContext = databaseService.DataContext;
+        if (dataContext == null)
         {
-            var result = await databaseService.DataContext.DsLoaiTietKiem
-                .FirstOrDefaultAsync(ltk => ltk.MaLoaiTietKiem == maLoaiTietKiem);
-            return result;
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Lỗi khi tìm sổ theo mã loại tiết kiệm: {ex.Message}");
-            return new LoaiTietKiem();
+            throw new ArgumentNullException(nameof(databaseService.DataContext), "Database not initialized");
         }
     }
 
+    public async Task Create(LoaiTietKiem loaiTietKiem)
+    {
+        dataContext.DsLoaiTietKiem.Add(loaiTietKiem);
+        await dataContext.SaveChangesAsync();
+    }
+
+    public async Task Delete(string id)
+    {
+        var loaiTietKiem = await dataContext.DsLoaiTietKiem.FindAsync(id);
+        if (loaiTietKiem != null)
+        {
+            dataContext.DsLoaiTietKiem.Remove(loaiTietKiem);
+            await dataContext.SaveChangesAsync();
+        }
+    }
+
+    public async Task<IEnumerable<LoaiTietKiem>> GetAll()
+    {
+        return await dataContext.DsLoaiTietKiem
+            .Include(ltk => ltk.DsSoTietKiem)
+            .ToListAsync();
+    }
+
+    public async Task<LoaiTietKiem> GetById(string id)
+    {
+        LoaiTietKiem? loaiTietKiem = await dataContext.DsLoaiTietKiem
+            .Include(ltk => ltk.DsSoTietKiem)
+            .FirstOrDefaultAsync(ltk => ltk.MaLoaiTietKiem == id);
+        return loaiTietKiem ?? throw new Exception("LoaiTietKiem not found");
+    }
+
+    public async Task Update(LoaiTietKiem loaiTietKiem)
+    {
+        dataContext.Entry(loaiTietKiem).State = EntityState.Modified;
+        await dataContext.SaveChangesAsync();
+    }
 }

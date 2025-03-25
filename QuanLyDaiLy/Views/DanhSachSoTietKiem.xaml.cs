@@ -24,27 +24,5 @@ namespace QuanLyDaiLy.Views
         {
             e.Row.Header = (e.Row.GetIndex() + 1).ToString();
         }
-
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            if (sender is CheckBox checkBox && checkBox.Tag is long id)
-            {
-                if (DataContext is DanhSachSoTietKiemViewModel viewModel)
-                {
-                    viewModel.XuLyCheckBox(true, id);
-                }
-            }
-        }
-
-        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            if (sender is CheckBox checkBox && checkBox.Tag is long id)
-            {
-                if (DataContext is DanhSachSoTietKiemViewModel viewModel)
-                {
-                    viewModel.XuLyCheckBox(false, id);
-                }
-            }
-        }
     }
 }

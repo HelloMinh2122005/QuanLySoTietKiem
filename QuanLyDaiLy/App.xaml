@@ -4,7 +4,5 @@
              xmlns:local="clr-namespace:QuanLyDaiLy"
              xmlns:global="clr-namespace:">
     <Application.Resources>
-        <global:MaLoaiToTenConverter x:Key="MaLoaiToTenConverter"/>
-        <global:CmndToKhachHangConverter x:Key="CmndToKhachHangConverter"/>
     </Application.Resources>
 </Application>

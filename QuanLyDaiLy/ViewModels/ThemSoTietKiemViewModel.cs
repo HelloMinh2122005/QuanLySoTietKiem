@@ -7,6 +7,7 @@ using QuanLyDaiLy.Commands;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using QuanLyDaiLy.Entities;
+using QuanLyDaiLy.Helpers;
 using QuanLyDaiLy.Interfaces;
 
 namespace QuanLyDaiLy.ViewModels
@@ -25,6 +26,8 @@ namespace QuanLyDaiLy.ViewModels
         private readonly IKhachHangRepo _khachHangRepo;
         
         private readonly ISoTietKiemRepo _soTietKiemRepo;
+
+        private readonly IThamSoRepo _thamSoRepo;
 
 
 
@@ -109,7 +112,7 @@ namespace QuanLyDaiLy.ViewModels
             }
         }
 
-        public ThemSoTietKiemViewModel(IKhachHangRepo khachHangRepo,ILoaiTietKiemRepo LoaiTietKiemRepo,ISoTietKiemRepo SoTietKiemRepo)
+        public ThemSoTietKiemViewModel(IKhachHangRepo khachHangRepo,ILoaiTietKiemRepo LoaiTietKiemRepo,ISoTietKiemRepo SoTietKiemRepo, IThamSoRepo ThamSoRepo)
         {
             //command
             CloseCommand = new RelayCommand(ExecuteClose);
@@ -120,6 +123,7 @@ namespace QuanLyDaiLy.ViewModels
             _khachHangRepo = khachHangRepo;
             _loaiTietKiemRepo = LoaiTietKiemRepo;
             _soTietKiemRepo = SoTietKiemRepo;
+            _thamSoRepo = ThamSoRepo;
 
             //field
             NgayMoSo = DateTime.Today;
@@ -137,38 +141,43 @@ namespace QuanLyDaiLy.ViewModels
 
         private async void LoadLoaiTietKiem()
         {
-            var danhSach = await _loaiTietKiemRepo.FindAll();
+            var danhSach = await _loaiTietKiemRepo.GetAll();
             DsLoaiTietKiem = new ObservableCollection<LoaiTietKiem>(danhSach);
         }
         
         private async void LapSo()
         {
             // Kiểm tra các trường
-            string validationError = ValidateFields();
+            string validationError = await ValidateFields();
             if (!string.IsNullOrEmpty(validationError))
             {
                 MessageBox.Show(validationError, "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-
+            
+            var loaiTietKiem = await _loaiTietKiemRepo.GetById(LoaiTietKiemDuocChon.MaLoaiTietKiem);
+            var khachHang = await _khachHangRepo.GetById(Cmnd);
             // Tạo đối tượng SoTietKiem từ dữ liệu hiện có
             var soTietKiem = new SoTietKiem
             {
+                MaSoTietKiem = IdGenerator.GenerateId<SoTietKiem>(),
                 MaLoaiTietKiem = LoaiTietKiemDuocChon.MaLoaiTietKiem,
                 SoTienGui = SoTienGui,
+                KhachHang = khachHang,
+                LoaiTietKiem = loaiTietKiem,
                 NgayMoSo = NgayMoSo,
                 CMND = Cmnd
             };
 
             // Gọi repository để lưu vào CSDL
-            bool result = await _soTietKiemRepo.ThemSoTietKiemAsync(soTietKiem);
-            if (result)
+            try
             {
+                await _soTietKiemRepo.Create(soTietKiem);
                 MessageBox.Show("Lập sổ tiết kiệm thành công!", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
                 LapSoEvent?.Invoke(this, soTietKiem);
                 ExecuteClose();
             }
-            else
+            catch (Exception e)
             {
                 MessageBox.Show("Lập sổ tiết kiệm thất bại. Vui lòng thử lại.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -180,7 +189,7 @@ namespace QuanLyDaiLy.ViewModels
 
 
 
-        private string ValidateFields()
+        private async Task<string> ValidateFields()
         {
             // Kiểm tra CMND
             if (string.IsNullOrWhiteSpace(Cmnd))
@@ -200,13 +209,15 @@ namespace QuanLyDaiLy.ViewModels
                 return "Vui lòng chọn loại tiết kiệm.";
             }
 
+            var thamSo = await _thamSoRepo.Get();
             // Kiểm tra số tiền gửi
-            if (SoTienGui < ThamSo.SoTienGoiToiThieu)
+            if (SoTienGui < thamSo.SoTienGoiToiThieu)
             {
                 Console.WriteLine(SoTienGui);
 
-                return $"Số tiền gửi tối thiểu là ${ThamSo.SoTienGoiToiThieu}";
+                return $"Số tiền gửi tối thiểu là {thamSo.SoTienGoiToiThieu}.";
             }
+
 
             // Kiểm tra ngày mở sổ
             if (NgayMoSo == default || NgayMoSo > DateTime.Today)
@@ -231,7 +242,7 @@ namespace QuanLyDaiLy.ViewModels
         
         private async Task TimKiemKhachHangAsync(string cmnd)
         {
-            KhachHang = await _khachHangRepo.FindByCMND(cmnd);
+            KhachHang = await _khachHangRepo.GetById(cmnd);
         }
     }
 } 
