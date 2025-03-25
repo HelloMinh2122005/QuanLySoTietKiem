@@ -35,7 +35,8 @@ public class SoTietKiemRepository : ISoTietKiemRepo
     public async Task<IEnumerable<SoTietKiem>> GetAll()
     {
         return await _dataContext.DsSoTietKiem
-            .ToListAsync();
+          .Include(stk => stk.KhachHang)
+          .ToListAsync();
     }
 
     public async Task<SoTietKiem> GetById(string id)

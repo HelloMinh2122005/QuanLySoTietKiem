@@ -14,4 +14,5 @@ public class SoTietKiem
     // Navigation properties
     public KhachHang KhachHang { get; set; } = new();
     public LoaiTietKiem LoaiTietKiem { get; set; } = new();
+
 }
