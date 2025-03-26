@@ -29,7 +29,19 @@ namespace QuanLyDaiLy.ViewModels
 
         private readonly IThamSoRepo _thamSoRepo;
 
-
+        private string _maSoTietKiem;
+        public string MaSoTietKiem
+        {
+            get => _maSoTietKiem;
+            set
+            {
+                if (_maSoTietKiem != value)
+                {
+                    _maSoTietKiem = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         private DateTime _ngayMoSo;
         public DateTime NgayMoSo
@@ -137,6 +149,7 @@ namespace QuanLyDaiLy.ViewModels
             KhachHang = null;
             LoaiTietKiemDuocChon = null;
             SoTienGui = 0;
+            MaSoTietKiem = null;
         }
 
         private async void LoadLoaiTietKiem()
@@ -175,7 +188,7 @@ namespace QuanLyDaiLy.ViewModels
                 await _soTietKiemRepo.Create(soTietKiem);
                 MessageBox.Show("Lập sổ tiết kiệm thành công!", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
                 LapSoEvent?.Invoke(this, soTietKiem);
-                ExecuteClose();
+                MaSoTietKiem = soTietKiem.MaSoTietKiem;
             }
             catch (Exception e)
             {

@@ -139,7 +139,8 @@
                                      FontSize="14"
                                      Foreground="#9A000000"
                                      TextAlignment="Left"
-                                     BorderThickness="1" />
+                                     BorderThickness="1" 
+                                     Text="{Binding MaSoTietKiem, Mode=OneWay}"/>
                         </Grid>
 
                         <!-- CMND -->
@@ -429,7 +430,7 @@
                         <TextBlock Text="Lập sổ" FontFamily="Segoe UI Variable" FontSize="18" FontWeight="Normal" 
                                     TextAlignment="Center" Width="70" Height="34" Foreground="#92492D"/>
                     </Button>
-                    <Button Width="120" Height="35" Background="#FFB498" Margin="0,0,20,0">
+                    <Button Width="120" Height="35" Background="#FFB498" Margin="0,0,20,0" Command="{Binding ThemSoCommand}">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border x:Name="buttonBorder" Background="{TemplateBinding Background}" 
