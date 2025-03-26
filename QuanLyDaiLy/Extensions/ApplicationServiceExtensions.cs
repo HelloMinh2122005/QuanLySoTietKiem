@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using QuanLyDaiLy.Interfaces;
 using QuanLyDaiLy.Repositories;
 using QuanLyDaiLy.Services;
@@ -13,6 +14,13 @@ public static class ApplicationServiceExtensions
     {
         // Register database
         services.AddSingleton<DatabaseService>();
+        
+        // Đăng ký DataContext từ DatabaseService
+        services.AddDbContext<DataContext>(options =>
+        {
+            var dbPath = DatabaseService.GetDefaultDatabasePath();
+            options.UseSqlite($"Data Source={dbPath}");
+        });
 
         // Register pages and ViewModels (transient/scoped/singleton)
         services.AddScoped<IKhachHangRepo, KhachHangRepository>();

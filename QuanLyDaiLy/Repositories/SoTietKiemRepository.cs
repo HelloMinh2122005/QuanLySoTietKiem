@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+
+using Microsoft.EntityFrameworkCore;
 using QuanLyDaiLy.Entities;
 using QuanLyDaiLy.Interfaces;
 using QuanLyDaiLy.Services;
@@ -47,7 +48,47 @@ public class SoTietKiemRepository : ISoTietKiemRepo
 
     public async Task Update(SoTietKiem soTietKiem)
     {
-        _dataContext.Entry(soTietKiem).State = EntityState.Modified;
-        await _dataContext.SaveChangesAsync();
+        // Tìm entity hiện có trong database
+        var existingEntity = await _dataContext.DsSoTietKiem
+            .FindAsync(soTietKiem.MaSoTietKiem);
+
+        if (existingEntity == null)
+        {
+            throw new Exception("Không tìm thấy sổ tiết kiệm.");
+        }
+
+        // Sao chép giá trị từ tham số vào entity đã tải
+        _dataContext.Entry(existingEntity).CurrentValues.SetValues(soTietKiem);
+
+        try
+        {
+            await _dataContext.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException ex)
+        {
+            // Xử lý xung đột concurrency
+            var entry = ex.Entries.Single();
+            await entry.ReloadAsync(); // Tải lại giá trị mới từ database
+            throw new Exception("Dữ liệu đã bị thay đổi. Vui lòng thử lại.");
+        }
+    }
+    
+    public async Task<IEnumerable<SoTietKiem>> Search(string? maLoaiTietKiem, string? searchText)
+    {
+        var query = _dataContext.DsSoTietKiem.AsQueryable();
+
+        if (!string.IsNullOrEmpty(maLoaiTietKiem))
+        {
+            query = query.Where(stk => stk.MaLoaiTietKiem == maLoaiTietKiem);
+        }
+
+        if (!string.IsNullOrEmpty(searchText))
+        {
+            query = query.Where(stk =>
+                stk.MaSoTietKiem.ToString().Contains(searchText) ||
+                stk.KhachHang.TenKhachHang.Contains(searchText));
+        }
+
+        return await query.Include(stk => stk.KhachHang).ToListAsync();
     }
 }

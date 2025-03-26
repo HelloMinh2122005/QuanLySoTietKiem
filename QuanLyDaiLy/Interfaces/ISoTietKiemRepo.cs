@@ -9,4 +9,6 @@ public interface ISoTietKiemRepo
     Task Create(SoTietKiem soTietKiem);
     Task Update(SoTietKiem soTietKiem);
     Task Delete(string id);
+    Task<IEnumerable<SoTietKiem>> Search(string? maLoaiTietKiem, string? searchText);
 }
+

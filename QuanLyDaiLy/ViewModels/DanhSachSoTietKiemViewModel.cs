@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using QuanLyDaiLy.Views;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -78,9 +78,12 @@ namespace QuanLyDaiLy.ViewModels
             get => _selectedLoaiTietKiem;
             set
             {
-                _selectedLoaiTietKiem = value;
-                OnPropertyChanged();
-                FilterByLoaiTietKiem();
+                if (SelectedLoaiTietKiem != value)
+                {
+                    _selectedLoaiTietKiem = value;
+                    OnPropertyChanged();
+                    FilterByLoaiTietKiem();
+                }
             }
         }
 
@@ -90,8 +93,12 @@ namespace QuanLyDaiLy.ViewModels
             get => _searchText;
             set
             {
-                _searchText = value;
-                OnPropertyChanged();
+                if (_searchText != value)
+                {
+                    _searchText = value;
+                    OnPropertyChanged();
+                    FilterByLoaiTietKiem();
+                }
             }
         }
 
@@ -127,7 +134,15 @@ namespace QuanLyDaiLy.ViewModels
 
         private async Task LoadDataForSelectedType()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var danhSachSoTietKiem = await _soTietKiemRepo.Search(SelectedLoaiTietKiem.MaLoaiTietKiem, SearchText);
+                DanhSachSoTietKiem = [.. danhSachSoTietKiem];
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải dữ liệu: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         public void OpenThemSoTietKiem()
@@ -139,7 +154,25 @@ namespace QuanLyDaiLy.ViewModels
 
         public void CapNhatSoTietKiem()
         {
-            throw new NotImplementedException();
+            if (SelectedSoTietKiem == null)
+            {
+                MessageBox.Show("Vui lòng chọn một sổ tiết kiệm để cập nhật!");
+                return;
+            }
+     
+            
+            var capNhatSoTietKiemViewModel = _serviceProvider.GetRequiredService<CapNhatSoTietKiemViewModel>();
+            capNhatSoTietKiemViewModel.SetData(SelectedSoTietKiem);
+            
+                   
+            capNhatSoTietKiemViewModel.CapNhatEvent += (sender, soTietKiem) =>
+            {
+                LoadData();
+            };
+            
+            var capnhatSoTietKiem = new CapNhatSoTietKiem(capNhatSoTietKiemViewModel);
+            
+            capnhatSoTietKiem.Show();
         }
 
         public async void XoaSoTietKiem()
@@ -177,4 +210,4 @@ namespace QuanLyDaiLy.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
-}
+} 

@@ -139,7 +139,8 @@
                                      FontSize="14"
                                      Foreground="#9A000000"
                                      TextAlignment="Left"
-                                     BorderThickness="1" />
+                                     BorderThickness="1" 
+                                     Text="{Binding MaSoTietKiem, UpdateSourceTrigger=PropertyChanged}"/>
                         </Grid>
 
                         <!-- CMND -->
@@ -173,7 +174,8 @@
                                     FontSize="14"
                                     Foreground="#9A000000"
                                     TextAlignment="Left"
-                                    BorderThickness="1" />
+                                    BorderThickness="1" 
+                                    Text="{Binding Cmnd, UpdateSourceTrigger=PropertyChanged}"/>
                         </Grid>
 
                         <!-- Tên khách hàng -->
@@ -208,7 +210,9 @@
                                      FontSize="14"
                                      Foreground="#9A000000"
                                      TextAlignment="Left"
-                                     BorderThickness="1" />
+                                     BorderThickness="1" 
+                                     Text="{Binding TenKhachHang, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                     />
                         </Grid>
                     </Grid>
 
@@ -253,15 +257,17 @@
                                      FontSize="14"
                                      Foreground="#9A000000"
                                      TextAlignment="Left"
-                                     BorderThickness="1" />
-                            <TextBlock Text="Tối thiểu 100.000đ"
-                                       Grid.Row="1"
-                                    Foreground="Gray"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Left"
-                                    Margin="5,0,0,0"
-                                    IsHitTestVisible="False"
-                                    Visibility="Visible"/>
+                                     BorderThickness="1" 
+                                     Text="{Binding SoTienGui, UpdateSourceTrigger=PropertyChanged}"
+                                     />
+                            <!-- <TextBlock Text="Tối thiểu 100.000đ" -->
+                            <!--            Grid.Row="1" -->
+                            <!--         Foreground="Gray" -->
+                            <!--         VerticalAlignment="Center" -->
+                            <!--         HorizontalAlignment="Left" -->
+                            <!--         Margin="5,0,0,0" -->
+                            <!--         IsHitTestVisible="False" -->
+                            <!--         Visibility="Visible"/> -->
                         </Grid>
 
                         <!-- Loại tiết kiệm -->
@@ -294,11 +300,11 @@
                                         FontWeight="Normal"
                                         FontSize="14"
                                         Foreground="#9A000000"
-                                        BorderThickness="1">
-                                <ComboBoxItem Content="Không kỳ hạn" IsSelected="True"/>
-                                <ComboBoxItem Content="3 tháng"/>
-                                <ComboBoxItem Content="6 tháng"/>
-                            </ComboBox>
+                                        BorderThickness="1"
+                                ItemsSource="{Binding DsLoaiTietKiem}"
+                                DisplayMemberPath="TenLoaiTietKiem" 
+                                SelectedItem="{Binding LoaiTietKiemDuocChon, Mode=TwoWay}"
+                                SelectedValuePath="MaLoaiTietKiem"/>
                         </Grid>
 
                         <!-- Ngày mở sổ -->
@@ -385,7 +391,10 @@
                                  FontSize="14"
                                  Foreground="#9A000000"
                                  TextAlignment="Left"
-                                 BorderThickness="1" />
+                                 BorderThickness="1" 
+                                 Text="{Binding DiaChi, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+
+                                 />
                     </Grid>
                 </Grid>
 
@@ -397,7 +406,7 @@
             <Grid Grid.Row="1" Background="#E6F0F0F0" VerticalAlignment="Center" Height="80">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                     
-                    <Button Width="120" Height="35" Background="#FFB498" Margin="0,0,20,0">
+                    <Button Width="120" Height="35" Background="#FFB498" Margin="0,0,20,0" Command="{Binding CapNhatCommand}">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border x:Name="buttonBorder" Background="{TemplateBinding Background}" 

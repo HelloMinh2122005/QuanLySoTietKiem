@@ -24,6 +24,5 @@ namespace QuanLyDaiLy.Views
         {
             e.Row.Header = (e.Row.GetIndex() + 1).ToString();
         }
-
     }
 }
