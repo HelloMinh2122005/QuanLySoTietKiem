@@ -89,8 +89,8 @@ namespace QuanLyDaiLy.ViewModels
                 }
             }
         }
-
-        private string _searchText = "";
+         
+        private string _searchText = " ";
         public string SearchText
         {
             get => _searchText;
