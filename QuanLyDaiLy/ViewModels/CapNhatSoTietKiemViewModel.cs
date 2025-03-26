@@ -25,7 +25,7 @@ namespace QuanLyDaiLy.ViewModels
         private readonly ISoTietKiemRepo _soTietKiemRepo;
         private readonly IThamSoRepo _thamSoRepo;
 
-        private ObservableCollection<LoaiTietKiem> _dsLoaiTietKiem;
+        private ObservableCollection<LoaiTietKiem> _dsLoaiTietKiem = [];
         public ObservableCollection<LoaiTietKiem> DsLoaiTietKiem
         {
             get => _dsLoaiTietKiem;
@@ -39,7 +39,7 @@ namespace QuanLyDaiLy.ViewModels
             }
         }
 
-        private LoaiTietKiem? _loaiTietKiemDuocChon;
+        private LoaiTietKiem? _loaiTietKiemDuocChon = new();
         public LoaiTietKiem? LoaiTietKiemDuocChon
         {
             get => _loaiTietKiemDuocChon;
@@ -49,11 +49,10 @@ namespace QuanLyDaiLy.ViewModels
                 {
                     _loaiTietKiemDuocChon = value;
                     OnPropertyChanged();
-
                 }
             }
         }
-        private string _diaChi;
+        private string _diaChi = "";
         public string DiaChi
         {
             get => _diaChi;
@@ -67,7 +66,7 @@ namespace QuanLyDaiLy.ViewModels
             }
         }
         
-        private string _tenKhachHang;
+        private string _tenKhachHang = "";
         public string TenKhachHang
         {
             get => _tenKhachHang;
@@ -80,7 +79,7 @@ namespace QuanLyDaiLy.ViewModels
                 }
             }
         }
-        private string _cmnd;
+        private string _cmnd = "";
         public string Cmnd
         {
             get => _cmnd;
@@ -90,11 +89,11 @@ namespace QuanLyDaiLy.ViewModels
                 {
                     _cmnd = value;
                     OnPropertyChanged();
-                    TimKiemKhachHangAsync(value);
+                    _ = TimKiemKhachHangAsync(value);
                 }
             }
         }
-        private decimal _soTienGui;
+        private decimal _soTienGui = 0;
         public decimal SoTienGui
         {
             get => _soTienGui;
@@ -108,7 +107,7 @@ namespace QuanLyDaiLy.ViewModels
             }
         }
         
-        private string _maSoTietKiem;
+        private string _maSoTietKiem = "";
         public string MaSoTietKiem
         {
             get => _maSoTietKiem;
@@ -122,7 +121,7 @@ namespace QuanLyDaiLy.ViewModels
             }
         }
         
-        private DateTime _ngayMoSo;
+        private DateTime _ngayMoSo = DateTime.Now;
         public DateTime NgayMoSo
         {
             get => _ngayMoSo;
@@ -159,7 +158,6 @@ namespace QuanLyDaiLy.ViewModels
             _loaiTietKiemRepo = LoaiTietKiemRepo;
             _soTietKiemRepo = SoTietKiemRepo;
             _thamSoRepo = ThamSoRepo;
-
             
             LoadLoaiTietKiem();
 
@@ -176,7 +174,7 @@ namespace QuanLyDaiLy.ViewModels
         private async void LoadLoaiTietKiem()
         {
             var danhSach = await _loaiTietKiemRepo.GetAll();
-            DsLoaiTietKiem = new ObservableCollection<LoaiTietKiem>(danhSach);
+            DsLoaiTietKiem = [.. danhSach];
         }
 
         private void ExecuteClose()
@@ -191,6 +189,12 @@ namespace QuanLyDaiLy.ViewModels
             if (!string.IsNullOrEmpty(validationError))
             {
                 MessageBox.Show(validationError, "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (LoaiTietKiemDuocChon == null)
+            {
+                MessageBox.Show("Vui lòng chọn loại tiết kiệm.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -216,12 +220,10 @@ namespace QuanLyDaiLy.ViewModels
                 CapNhatEvent?.Invoke(this, soTietKiem);
                 ExecuteClose();
             }
-            catch (Exception e)
+            catch
             {
                 MessageBox.Show("Cập nhật sổ tiết kiệm thất bại. Vui lòng thử lại.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
-                       
         }
         
         private async Task<string> ValidateFields()
@@ -260,11 +262,11 @@ namespace QuanLyDaiLy.ViewModels
             }
 
             // Nếu tất cả đều hợp lệ, trả về null
-            return null;
+            return null!;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
