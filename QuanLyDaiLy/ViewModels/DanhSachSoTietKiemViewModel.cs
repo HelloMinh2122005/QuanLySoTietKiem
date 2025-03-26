@@ -16,6 +16,8 @@ namespace QuanLyDaiLy.ViewModels
         public ICommand ThemSoTietKiemCommand { get; }
         public ICommand CapNhatSoTietKiemCommand { get; }
         public ICommand XoaSoTietKiemCommand { get; }
+        public ICommand ResetSoTietKiemCommand { get; }
+
         private readonly IServiceProvider _serviceProvider;
         private readonly ISoTietKiemRepo _soTietKiemRepo;
         private readonly ILoaiTietKiemRepo _loaiTietKiemRepo;
@@ -37,6 +39,7 @@ namespace QuanLyDaiLy.ViewModels
             ThemSoTietKiemCommand = new RelayCommand(OpenThemSoTietKiem);
             CapNhatSoTietKiemCommand = new RelayCommand(CapNhatSoTietKiem);
             XoaSoTietKiemCommand = new RelayCommand(XoaSoTietKiem);
+            ResetSoTietKiemCommand = new RelayCommand(async () => await LoadData());
         }
 
         private SoTietKiem _selectedSoTietKiem;
