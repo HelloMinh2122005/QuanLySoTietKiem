@@ -5,6 +5,8 @@ using QuanLyDaiLy.Repositories;
 using QuanLyDaiLy.Services;
 using QuanLyDaiLy.ViewModels;
 using QuanLyDaiLy.Views;
+using QuanLyDaiLy.Views.DashboardViews;
+using QuanLyDaiLy.Views.KhachHangViews;
 
 namespace QuanLyDaiLy.Extensions;
 
@@ -29,16 +31,16 @@ public static class ApplicationServiceExtensions
         services.AddScoped<ISoTietKiemRepo, SoTietKiemRepository>();
 
         // Register ViewModels
-        services.AddTransient<DashboardViewModel>();
         services.AddTransient<ThemSoTietKiemViewModel>();
         services.AddTransient<DanhSachSoTietKiemViewModel>();
         services.AddTransient<CapNhatSoTietKiemViewModel>();
 
         // Register Views
-        services.AddTransient<Dashboard>();
         services.AddTransient<ThemSoTietKiem>();
         services.AddTransient<DanhSachSoTietKiem>();
         services.AddTransient<CapNhatSoTietKiem>();
+        services.AddTransient<DashboardPage>();
+        services.AddTransient<KhachHangPage>();
 
         // Register the main window (if needed)
         services.AddSingleton<MainWindow>();

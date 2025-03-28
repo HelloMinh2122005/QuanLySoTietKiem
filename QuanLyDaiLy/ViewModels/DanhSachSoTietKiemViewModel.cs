@@ -33,16 +33,13 @@ namespace QuanLyDaiLy.ViewModels
             _loaiTietKiemRepo = loaiTietKiemRepo;
             _ = LoadData();
 
-            _selectedLoaiTietKiem = new();
-            _selectedSoTietKiem = new();
-
             ThemSoTietKiemCommand = new RelayCommand(OpenThemSoTietKiem);
             CapNhatSoTietKiemCommand = new RelayCommand(CapNhatSoTietKiem);
             XoaSoTietKiemCommand = new RelayCommand(XoaSoTietKiem);
             ResetSoTietKiemCommand = new RelayCommand(async () => await LoadData());
         }
 
-        private SoTietKiem _selectedSoTietKiem;
+        private SoTietKiem _selectedSoTietKiem = new();
         public SoTietKiem SelectedSoTietKiem
         {
             get => _selectedSoTietKiem;
@@ -75,7 +72,7 @@ namespace QuanLyDaiLy.ViewModels
             }
         }
 
-        private LoaiTietKiem _selectedLoaiTietKiem;
+        private LoaiTietKiem _selectedLoaiTietKiem = new();
         public LoaiTietKiem SelectedLoaiTietKiem
         {
             get => _selectedLoaiTietKiem;
@@ -90,7 +87,7 @@ namespace QuanLyDaiLy.ViewModels
             }
         }
          
-        private string _searchText = " ";
+        private string _searchText = "";
         public string SearchText
         {
             get => _searchText;
@@ -157,7 +154,7 @@ namespace QuanLyDaiLy.ViewModels
 
         public void CapNhatSoTietKiem()
         {
-            if (SelectedSoTietKiem == null)
+            if (string.IsNullOrEmpty(SelectedSoTietKiem.CMND))
             {
                 MessageBox.Show("Vui lòng chọn một sổ tiết kiệm để cập nhật!");
                 return;
@@ -170,7 +167,7 @@ namespace QuanLyDaiLy.ViewModels
                    
             capNhatSoTietKiemViewModel.CapNhatEvent += (sender, soTietKiem) =>
             {
-                LoadData();
+                _ = LoadData();
             };
             
             var capnhatSoTietKiem = new CapNhatSoTietKiem(capNhatSoTietKiemViewModel);
@@ -180,7 +177,7 @@ namespace QuanLyDaiLy.ViewModels
 
         public async void XoaSoTietKiem()
         {
-            if (SelectedSoTietKiem == null)
+            if (string.IsNullOrEmpty(SelectedSoTietKiem.CMND))
             {
                 MessageBox.Show("Vui lòng chọn sổ tiết kiệm để xóa", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
