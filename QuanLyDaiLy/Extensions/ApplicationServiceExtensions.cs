@@ -29,11 +29,13 @@ public static class ApplicationServiceExtensions
         services.AddScoped<ILoaiTietKiemRepo, LoaiTietKiemRepository>();
         services.AddScoped<IThamSoRepo, ThamSoRepository>();
         services.AddScoped<ISoTietKiemRepo, SoTietKiemRepository>();
+        services.AddTransient<KhachHangViewModel>();
 
         // Register ViewModels
         services.AddTransient<ThemSoTietKiemViewModel>();
         services.AddTransient<DanhSachSoTietKiemViewModel>();
         services.AddTransient<CapNhatSoTietKiemViewModel>();
+
 
         // Register Views
         services.AddTransient<ThemSoTietKiem>();
@@ -41,6 +43,8 @@ public static class ApplicationServiceExtensions
         services.AddTransient<CapNhatSoTietKiem>();
         services.AddTransient<DashboardPage>();
         services.AddTransient<KhachHangPage>();
+        services.AddTransient<ThemKhachHang>();
+        services.AddTransient<CapNhatKhachHang>();
 
         // Register the main window (if needed)
         services.AddSingleton<MainWindow>();
