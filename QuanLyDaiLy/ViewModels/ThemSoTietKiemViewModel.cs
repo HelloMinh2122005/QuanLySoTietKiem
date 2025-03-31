@@ -198,10 +198,6 @@ namespace QuanLyDaiLy.ViewModels
                        
         }
         
-        
-
-
-
         private async Task<string> ValidateFields()
         {
             // Kiểm tra CMND
