@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using QuanLyDaiLy.Views.CustomAnimation;
 using QuanLyDaiLy.Views.DashboardViews;
 using QuanLyDaiLy.Views.KhachHangViews;
+using QuanLyDaiLy.Views.PhieuGoiTienViews;
 
 namespace QuanLyDaiLy.Views
 {
@@ -103,6 +104,10 @@ namespace QuanLyDaiLy.Views
                 case "Dashboard":
                     var dashboardPage = _serviceProvider.GetRequiredService<DashboardPage>();
                     MainContent.Navigate(dashboardPage);
+                    break;
+                case "LoaiTietKiem":
+                    var DsPhieuGoiTien = _serviceProvider.GetRequiredService<DsPhieuGoiTien>();
+                    MainContent.Navigate(DsPhieuGoiTien);
                     break;
                 default:
                     break;
