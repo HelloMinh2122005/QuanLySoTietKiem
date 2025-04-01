@@ -297,6 +297,12 @@
                     GroupName="NavGroup"
                     Style="{StaticResource NavButtonStyle}"
                     Tag="KhachHang" />
+                <RadioButton
+                    Checked="RadioButton_Checked"
+                    Content=" 💰 Loại tiết kiệm"
+                    GroupName="NavGroup"
+                    Style="{StaticResource NavButtonStyle}"
+                    Tag="LoaiTietKiem" />  
             </StackPanel>
 
             <Border
