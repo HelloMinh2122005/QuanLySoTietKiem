@@ -20,7 +20,7 @@ namespace QuanLyDaiLy.Views.KhachHangViews
     /// </summary>
     public partial class ThemKhachHang : Window
     {
-        public ThemKhachHang(KhachHangViewModel viewModel)
+        public ThemKhachHang(ThemKhachHangViewModel viewModel)
         {
             InitializeComponent();
             DataContext = viewModel;

@@ -610,7 +610,7 @@
 
                     <DataGridTextColumn
                         Width="210"
-                        Binding="{Binding MaSoTietKiem}"
+                        Binding="{Binding CMND}"
                         Header="CMND">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
@@ -633,7 +633,7 @@
 
                     <DataGridTextColumn
                         Width="300"
-                        Binding="{Binding LoaiTietKiem.TenLoaiTietKiem}"
+                        Binding="{Binding TenKhachHang}"
                         Header="Tên khách hàng">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
@@ -656,7 +656,7 @@
 
                     <DataGridTextColumn
                         Width="300"
-                        Binding="{Binding NgayMoSo, StringFormat='{}{0:dd/MM/yyyy}'}"
+                        Binding="{Binding KhachHang.DiaChi}"
                         Header="Địa chỉ">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
