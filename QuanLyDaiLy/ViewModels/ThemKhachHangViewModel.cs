@@ -73,13 +73,6 @@ namespace QuanLyDaiLy.ViewModels
 
         }
 
-        private void ResetFields()
-        {
-            cmnd = string.Empty;
-            tenKhachHang = string.Empty;
-            diachi = string.Empty;
-        }
-
         public async void LapPhieu()
         {
             // Kiểm tra các trường
@@ -88,7 +81,7 @@ namespace QuanLyDaiLy.ViewModels
                 MessageBox.Show("validationError", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            
+
 
             var khachHang = new KhachHang
             {
@@ -107,11 +100,19 @@ namespace QuanLyDaiLy.ViewModels
             }
             catch (Exception e)
             {
-                MessageBox.Show("Lập phieu KH thất bại. Vui lòng thử lại.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                // Log the exception details
+                Console.WriteLine($"Exception: {e.Message}");
+                Console.WriteLine($"Stack Trace: {e.StackTrace}");
+                MessageBox.Show($"Lap phieu KH thất bại. Vui lòng thử lại. Error: {e.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }
-
+        private void ResetFields()
+        {
+            cmnd = string.Empty;
+            tenKhachHang = string.Empty;
+            diachi = string.Empty;
+        }
         private void ExecuteClose()
         {
             Window parentWindow = Application.Current.Windows

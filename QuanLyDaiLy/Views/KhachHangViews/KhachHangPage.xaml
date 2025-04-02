@@ -6,6 +6,7 @@
     xmlns:helpers="clr-namespace:QuanLyDaiLy.Helpers"
     xmlns:local="clr-namespace:QuanLyDaiLy.Views.KhachHangViews"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:QuanLyDaiLy.ViewModels"
     Title="KhachHangPage"
     d:DesignHeight="930"
     d:DesignWidth="1580"
@@ -382,7 +383,7 @@
                     Height="35"
                     Margin="0,0,10,0"
                     Background="#E65F2B"
-                    Command="{Binding XoaSoTietKiemCommand}"
+                    Command="{Binding XoaKhachHangCommand}"
                     Foreground="White">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
@@ -487,9 +488,9 @@
                 GridLinesVisibility="None"
                 HeadersVisibility="Column"
                 IsReadOnly="True"
-                ItemsSource="{Binding DanhSachSoTietKiem}"
+                ItemsSource="{Binding DanhSachKhachHang}"
                 LoadingRow="DataGrid_LoadingRow"
-                SelectedItem="{Binding SelectedSoTietKiem, Mode=TwoWay}">
+                SelectedItem="{Binding SelectedkhachHang, Mode=TwoWay}">
                 <DataGrid.Resources>
                     <!--  Cell style (kept unchanged)  -->
                     <Style TargetType="DataGridCell">
@@ -655,8 +656,8 @@
                     </DataGridTextColumn>
 
                     <DataGridTextColumn
-                        Width="300"
-                        Binding="{Binding KhachHang.DiaChi}"
+                        Width="500"
+                        Binding="{Binding DiaChi}"
                         Header="Địa chỉ">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">

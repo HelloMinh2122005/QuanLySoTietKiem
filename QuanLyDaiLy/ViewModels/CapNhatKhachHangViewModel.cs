@@ -63,7 +63,7 @@ namespace QuanLyDaiLy.ViewModels
         {
             //command
             CloseCommand = new RelayCommand(ExecuteClose);
-            UpdateCommand = new RelayCommand(CapNhat);
+            UpdateCommand = new RelayCommand(async () => await CapNhat());
 
             //repo
             _khachHangRepo = khachHangRepo;
@@ -76,7 +76,7 @@ namespace QuanLyDaiLy.ViewModels
             tenKhachHang = khachHang.TenKhachHang;
         }
 
-        private async void CapNhat()
+        private async Task CapNhat()
         {
             // Kiểm tra các trường
             if (string.IsNullOrEmpty(cmnd) || string.IsNullOrEmpty(diachi) || string.IsNullOrEmpty(tenKhachHang))
@@ -95,14 +95,24 @@ namespace QuanLyDaiLy.ViewModels
             // Gọi repository để lưu vào CSDL
             try
             {
+                // Check if the entity is already being tracked
+                var existingEntity = await _khachHangRepo.GetById(cmnd);
+                if (existingEntity != null)
+                {
+                    // Detach the existing entity
+                    _khachHangRepo.Detach(existingEntity);
+                }
+
                 await _khachHangRepo.Update(khachHang);
-                MessageBox.Show("Lập sổ tiết kiệm thành công!", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Update KH thành công!", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
                 CapNhatEvent?.Invoke(this, khachHang);
-                cmnd = khachHang.CMND;
             }
             catch (Exception e)
             {
-                MessageBox.Show("Lập phieu KH thất bại. Vui lòng thử lại.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                // Log the exception details
+                Console.WriteLine($"Exception: {e.Message}");
+                Console.WriteLine($"Stack Trace: {e.StackTrace}");
+                MessageBox.Show($"Update KH thất bại. Vui lòng thử lại. Error: {e.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -119,38 +129,6 @@ namespace QuanLyDaiLy.ViewModels
             cmnd = string.Empty;
             tenKhachHang = string.Empty;
             diachi = string.Empty;
-        }
-
-        public async void LapPhieu()
-        {
-            // Kiểm tra các trường
-            if (string.IsNullOrEmpty(cmnd) || string.IsNullOrEmpty(diachi) || string.IsNullOrEmpty(tenKhachHang))
-            {
-                MessageBox.Show("validationError", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-
-            var khachHang = new KhachHang
-            {
-                CMND = cmnd,
-                TenKhachHang = tenKhachHang,
-                DiaChi = diachi,
-            };
-
-            // Gọi repository để lưu vào CSDL
-            try
-            {
-                await _khachHangRepo.Create(khachHang);
-                MessageBox.Show("Lập sổ tiết kiệm thành công!", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
-                CapNhatEvent?.Invoke(this, khachHang);
-                cmnd = khachHang.CMND;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Lập phieu KH thất bại. Vui lòng thử lại.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
         }
 
 

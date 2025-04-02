@@ -9,4 +9,5 @@ public interface IKhachHangRepo
     Task Create(KhachHang khachHang);
     Task Update(KhachHang khachHang);
     Task Delete(string id);
+    void Detach(KhachHang existingEntity);
 }
