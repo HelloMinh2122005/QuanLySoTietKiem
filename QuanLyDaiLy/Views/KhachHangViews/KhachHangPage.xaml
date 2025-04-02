@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:helpers="clr-namespace:QuanLyDaiLy.Helpers"
     xmlns:local="clr-namespace:QuanLyDaiLy.Views.KhachHangViews"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodels="clr-namespace:QuanLyDaiLy.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:KhachHangViewModel}"
     Title="KhachHangPage"
     d:DesignHeight="930"
     d:DesignWidth="1580"
@@ -487,9 +487,9 @@
                 GridLinesVisibility="None"
                 HeadersVisibility="Column"
                 IsReadOnly="True"
-                ItemsSource="{Binding DanhSachSoTietKiem}"
+                ItemsSource="{Binding DanhSachKhachHang}"
                 LoadingRow="DataGrid_LoadingRow"
-                SelectedItem="{Binding SelectedSoTietKiem, Mode=TwoWay}">
+                SelectedItem="{Binding SelectedkhachHang, Mode=TwoWay}">
                 <DataGrid.Resources>
                     <!--  Cell style (kept unchanged)  -->
                     <Style TargetType="DataGridCell">
@@ -655,8 +655,8 @@
                     </DataGridTextColumn>
 
                     <DataGridTextColumn
-                        Width="300"
-                        Binding="{Binding KhachHang.DiaChi}"
+                        Width="350"
+                        Binding="{Binding DiaChi}"
                         Header="Địa chỉ">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
@@ -677,7 +677,7 @@
 
                     <DataGridTextColumn
                         Width="300"
-                        Binding="{Binding SoTienGui, StringFormat='{}{0:N0} VNĐ'}"
+                        Binding="{Binding , StringFormat='{}{0:N0} VNĐ'}"
                         Header="Số dư">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">

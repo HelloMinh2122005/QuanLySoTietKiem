@@ -74,6 +74,13 @@ namespace QuanLyDaiLy.ViewModels
             }
         }
 
+        public decimal SoTienGui
+        {
+            get
+            {
+                return _khachHangRepo.
+            }
+        }
 
         private async Task LoadData()
         {
@@ -82,7 +89,7 @@ namespace QuanLyDaiLy.ViewModels
                 var danhSachKhachHang = await _khachHangRepo.GetAll();
 
                 DanhSachKhachHang.Clear();
-                DanhSachKhachHang = [.. danhSachKhachHang];
+                DanhSachKhachHang = [.. danhSachKhachHang]; 
                 
             }
             catch (Exception ex)
