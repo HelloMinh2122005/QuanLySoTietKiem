@@ -156,7 +156,6 @@
                             <TextBox   Grid.Row="1"
                                          Height="30"
                                          Background="Transparent"
-                                         IsReadOnly="True"
                                          BorderBrush="#33000000"
                                          HorizontalAlignment="Stretch"
                                          VerticalAlignment="Center"
@@ -193,8 +192,7 @@
                                    Margin="0,0,0,0"/>
                         <TextBox Grid.Row="1"
                                  Background="Transparent"
-                                 Height="30" 
-                                 IsReadOnly="True"
+                                 Height="30"
                                  BorderBrush="#33000000"
                                  HorizontalAlignment="Stretch"
                                  VerticalAlignment="Center"
