@@ -94,7 +94,7 @@ namespace QuanLyDaiLy.ViewModels
             try
             {
                 await _khachHangRepo.Create(khachHang);
-                MessageBox.Show("Lập sổ tiết kiệm thành công!", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Thêm khách hàng thành công!", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
                 LapPhieuEvent?.Invoke(this, khachHang);
                 cmnd = khachHang.CMND;
             }
