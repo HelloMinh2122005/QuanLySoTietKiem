@@ -35,6 +35,7 @@ namespace QuanLyDaiLy.ViewModels
             ThemKhachHangCommand = new RelayCommand(OpenThemKhachHang);
             CapNhatKhachHangCommand = new RelayCommand(OpenCapNhatKhachHang);
             CloseCommand = new RelayCommand(ExecuteClose);
+            XoaKhachHangCommand = new RelayCommand(async () => await XoaKhachHang());
         }
 
         private KhachHang _selectedkhachHang = new();

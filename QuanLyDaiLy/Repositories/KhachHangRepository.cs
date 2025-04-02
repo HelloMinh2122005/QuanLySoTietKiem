@@ -50,4 +50,8 @@ public class KhachHangRepository : IKhachHangRepo
         dataContext.Entry(khachHang).State = EntityState.Modified;
         await dataContext.SaveChangesAsync();
     }
+    public void Detach(KhachHang khachHang)
+    {
+        dataContext.Entry(khachHang).State = EntityState.Detached;
+    }
 }
