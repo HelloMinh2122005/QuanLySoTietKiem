@@ -1,21 +1,24 @@
-﻿<Page x:Class="QuanLyDaiLy.Views.PhieuGoiTienViews.DsPhieuGoiTien"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:QuanLyDaiLy.Views.PhieuGoiTienViews" xmlns:helpers="clr-namespace:QuanLyDaiLy.Helpers"
-      mc:Ignorable="d" 
-      d:DesignHeight="930" d:DesignWidth="1580"
-      Background="#EBDFD7"
-      Title="DsPhieuGoiTien">
+﻿<Page
+    x:Class="QuanLyDaiLy.Views.PhieuGoiTienViews.DsPhieuGoiTien"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:helpers="clr-namespace:QuanLyDaiLy.Helpers"
+    xmlns:local="clr-namespace:QuanLyDaiLy.Views.PhieuGoiTienViews"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="DsPhieuGoiTien"
+    d:DesignHeight="930"
+    d:DesignWidth="1580"
+    Background="#EBDFD7"
+    mc:Ignorable="d">
 
     <Page.Resources>
         <DropShadowEffect
-        x:Key="DropShadowEffect"
-        BlurRadius="10"
-        Opacity="0.5"
-        ShadowDepth="0"
-        Color="Black" />
+            x:Key="DropShadowEffect"
+            BlurRadius="10"
+            Opacity="0.5"
+            ShadowDepth="0"
+            Color="Black" />
         <helpers:ComboBoxItemConverter x:Key="ComboBoxItemConverter" />
 
         <!--  ComboBox Style  -->
@@ -45,19 +48,19 @@
                     <ControlTemplate TargetType="{x:Type ComboBox}">
                         <Grid>
                             <Border
-                            x:Name="mainBorder"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="10">
+                                x:Name="mainBorder"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="10">
                                 <Grid>
                                     <ToggleButton
-                                    x:Name="toggleButton"
-                                    Background="Transparent"
-                                    BorderBrush="Transparent"
-                                    ClickMode="Press"
-                                    Focusable="false"
-                                    IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+                                        x:Name="toggleButton"
+                                        Background="Transparent"
+                                        BorderBrush="Transparent"
+                                        ClickMode="Press"
+                                        Focusable="false"
+                                        IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
                                         <ToggleButton.Template>
                                             <ControlTemplate TargetType="ToggleButton">
                                                 <Grid Background="Transparent">
@@ -67,15 +70,15 @@
                                                     </Grid.ColumnDefinitions>
                                                     <Border Grid.ColumnSpan="2" Background="Transparent" />
                                                     <Path
-                                                    x:Name="arrow"
-                                                    Grid.Column="1"
-                                                    Width="12"
-                                                    Height="12"
-                                                    HorizontalAlignment="Center"
-                                                    VerticalAlignment="Center"
-                                                    Data="M7 10l5 5 5-5z"
-                                                    Fill="#9A000000"
-                                                    Stretch="Fill" />
+                                                        x:Name="arrow"
+                                                        Grid.Column="1"
+                                                        Width="12"
+                                                        Height="12"
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"
+                                                        Data="M7 10l5 5 5-5z"
+                                                        Fill="#9A000000"
+                                                        Stretch="Fill" />
                                                 </Grid>
                                                 <ControlTemplate.Triggers>
                                                     <Trigger Property="IsMouseOver" Value="true">
@@ -90,30 +93,30 @@
                                     </ToggleButton>
 
                                     <TextBlock
-                                    x:Name="contentText"
-                                    Margin="10,0,30,0"
-                                    VerticalAlignment="Center"
-                                    Text="{TemplateBinding SelectionBoxItem,
-                                                           Converter={StaticResource ComboBoxItemConverter}}" />
+                                        x:Name="contentText"
+                                        Margin="10,0,30,0"
+                                        VerticalAlignment="Center"
+                                        Text="{TemplateBinding SelectionBoxItem,
+                                                               Converter={StaticResource ComboBoxItemConverter}}" />
                                 </Grid>
                             </Border>
 
                             <Popup
-                            x:Name="PART_Popup"
-                            AllowsTransparency="True"
-                            Focusable="False"
-                            IsOpen="{Binding IsChecked, ElementName=toggleButton}"
-                            Placement="Bottom"
-                            PopupAnimation="Slide">
+                                x:Name="PART_Popup"
+                                AllowsTransparency="True"
+                                Focusable="False"
+                                IsOpen="{Binding IsChecked, ElementName=toggleButton}"
+                                Placement="Bottom"
+                                PopupAnimation="Slide">
                                 <Border
-                                x:Name="dropDownBorder"
-                                MinWidth="{TemplateBinding ActualWidth}"
-                                Margin="0,1,0,0"
-                                Background="#FFFFFF"
-                                BorderBrush="#33000000"
-                                BorderThickness="1"
-                                CornerRadius="8"
-                                Effect="{StaticResource DropShadowEffect}">
+                                    x:Name="dropDownBorder"
+                                    MinWidth="{TemplateBinding ActualWidth}"
+                                    Margin="0,1,0,0"
+                                    Background="#FFFFFF"
+                                    BorderBrush="#33000000"
+                                    BorderThickness="1"
+                                    CornerRadius="8"
+                                    Effect="{StaticResource DropShadowEffect}">
                                     <ScrollViewer MaxHeight="200" SnapsToDevicePixels="True">
                                         <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained" />
                                     </ScrollViewer>
@@ -143,11 +146,11 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ComboBoxItem}">
                         <Border
-                        x:Name="ItemBorder"
-                        Margin="2,1"
-                        Padding="{TemplateBinding Padding}"
-                        Background="Transparent"
-                        CornerRadius="5">
+                            x:Name="ItemBorder"
+                            Margin="2,1"
+                            Padding="{TemplateBinding Padding}"
+                            Background="Transparent"
+                            CornerRadius="5">
                             <ContentPresenter />
                         </Border>
                         <ControlTemplate.Triggers>
@@ -171,84 +174,84 @@
             <!--  Tiêu đề  -->
             <RowDefinition Height="Auto" />
             <!--  Thanh công cụ  -->
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
             <!--  DataGrid  -->
         </Grid.RowDefinitions>
 
         <!--  Header  -->
         <Grid
-        Grid.Row="0"
-        Margin="0,30,0,0"
-        HorizontalAlignment="Stretch"
-        VerticalAlignment="Stretch">
+            Grid.Row="0"
+            Margin="0,30,0,0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50*" />
                 <ColumnDefinition Width="50*" />
             </Grid.ColumnDefinitions>
 
             <TextBlock
-            Height="36"
-            Margin="30,0,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            FontFamily="Arial"
-            FontSize="32"
-            FontStyle="Normal"
-            FontWeight="Normal"
-            Foreground="#060606"
-            LineHeight="37"
-            Text="Phiếu gửi tiền"
-            TextAlignment="Center" />
+                Height="36"
+                Margin="30,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontFamily="Arial"
+                FontSize="32"
+                FontStyle="Normal"
+                FontWeight="Normal"
+                Foreground="#060606"
+                LineHeight="37"
+                Text="Phiếu gửi tiền"
+                TextAlignment="Center" />
 
             <!--  Search bar  -->
             <Border
-            Grid.Column="1"
-            Margin="0,0,30,0"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
-            Background="#FFFFFF"
-            BorderBrush="#060606"
-            BorderThickness="0.5"
-            CornerRadius="22">
+                Grid.Column="1"
+                Margin="0,0,30,0"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Background="#FFFFFF"
+                BorderBrush="#060606"
+                BorderThickness="0.5"
+                CornerRadius="22">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Image
-                    Width="24"
-                    Height="24"
-                    Margin="24,0,0,0"
-                    VerticalAlignment="Center"
-                    Source="pack://application:,,,/QuanLyDaiLy;component/Resources/searchicon.png" />
+                        Width="24"
+                        Height="24"
+                        Margin="24,0,0,0"
+                        VerticalAlignment="Center"
+                        Source="pack://application:,,,/QuanLyDaiLy;component/Resources/searchicon.png" />
                     <TextBox
-                    Grid.Column="1"
-                    Padding="13"
-                    HorizontalContentAlignment="Left"
-                    VerticalContentAlignment="Center"
-                    Background="Transparent"
-                    BorderThickness="0"
-                    FontFamily="Arial"
-                    FontSize="16"
-                    Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+                        Grid.Column="1"
+                        Padding="13"
+                        HorizontalContentAlignment="Left"
+                        VerticalContentAlignment="Center"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        FontFamily="Arial"
+                        FontSize="16"
+                        Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
                 </Grid>
             </Border>
         </Grid>
 
         <!--  Line  -->
         <Border
-        Grid.Row="1"
-        Margin="30,10,30,0"
-        HorizontalAlignment="Stretch"
-        BorderBrush="#33000000"
-        BorderThickness="1" />
+            Grid.Row="1"
+            Margin="30,10,30,0"
+            HorizontalAlignment="Stretch"
+            BorderBrush="#33000000"
+            BorderThickness="1" />
 
         <!--  Overview  -->
         <Grid
-        Grid.Row="2"
-        Margin="30,20,30,0"
-        HorizontalAlignment="Right"
-        VerticalAlignment="Stretch">
+            Grid.Row="2"
+            Margin="30,20,30,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
@@ -256,17 +259,17 @@
 
             <StackPanel>
                 <Button
-        Height="35"
-        Background="#E65F2B"
-        Command="{Binding LapPhieuGoiTienCommand}"
-        Foreground="White">
+                    Height="35"
+                    Background="#E65F2B"
+                    Command="{Binding LapPhieuGoiTienCommand}"
+                    Foreground="White">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border
-                    x:Name="buttonBorder"
-                    Padding="5,5,5,7"
-                    Background="{TemplateBinding Background}"
-                    CornerRadius="10">
+                                x:Name="buttonBorder"
+                                Padding="5,5,5,7"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="10">
                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Border>
                             <ControlTemplate.Triggers>
@@ -275,10 +278,10 @@
                                     <Setter TargetName="buttonBorder" Property="Effect">
                                         <Setter.Value>
                                             <DropShadowEffect
-                                    BlurRadius="5"
-                                    Opacity="0.3"
-                                    ShadowDepth="1"
-                                    Color="#555555" />
+                                                BlurRadius="5"
+                                                Opacity="0.3"
+                                                ShadowDepth="1"
+                                                Color="#555555" />
                                         </Setter.Value>
                                     </Setter>
                                 </Trigger>
@@ -289,13 +292,13 @@
                         </ControlTemplate>
                     </Button.Template>
                     <TextBlock
-            Width="200"
-            Height="34"
-            FontFamily="Segoe UI Variable"
-            FontSize="18"
-            FontWeight="SemiBold"
-            Text="+ Thêm phiếu gửi tiền"
-            TextAlignment="Center" />
+                        Width="200"
+                        Height="34"
+                        FontFamily="Segoe UI Variable"
+                        FontSize="18"
+                        FontWeight="SemiBold"
+                        Text="+ Thêm phiếu gửi tiền"
+                        TextAlignment="Center" />
                 </Button>
             </StackPanel>
 
@@ -303,26 +306,25 @@
 
         <!--  DataGrid  -->
         <Border
-        Grid.Row="3"
-        Height="710"
-        Margin="30,18,30,0"
-        Padding="30"
-        VerticalAlignment="Stretch"
-        Background="#F2EAE5"
-        CornerRadius="17"
-        Effect="{StaticResource DropShadowEffect}">
-            <DataGrid
+            Grid.Row="3"
+            Margin="30,18,30,20"
+            Padding="30"
             VerticalAlignment="Stretch"
-            AutoGenerateColumns="False"
-            Background="Transparent"
-            BorderThickness="0"
-            CanUserAddRows="False"
-            GridLinesVisibility="None"
-            HeadersVisibility="Column"
-            IsReadOnly="True"
-            ItemsSource="{Binding DanhSachSoTietKiem}"
-            LoadingRow="DataGrid_LoadingRow"
-            SelectedItem="{Binding SelectedSoTietKiem, Mode=TwoWay}">
+            Background="#F2EAE5"
+            CornerRadius="17"
+            Effect="{StaticResource DropShadowEffect}">
+            <DataGrid
+                VerticalAlignment="Stretch"
+                AutoGenerateColumns="False"
+                Background="Transparent"
+                BorderThickness="0"
+                CanUserAddRows="False"
+                GridLinesVisibility="None"
+                HeadersVisibility="Column"
+                IsReadOnly="True"
+                ItemsSource="{Binding DanhSachSoTietKiem}"
+                LoadingRow="DataGrid_LoadingRow"
+                SelectedItem="{Binding SelectedSoTietKiem, Mode=TwoWay}">
                 <DataGrid.Resources>
                     <!--  Cell style (kept unchanged)  -->
                     <Style TargetType="DataGridCell">
@@ -333,14 +335,14 @@
                             <Setter.Value>
                                 <ControlTemplate TargetType="DataGridCell">
                                     <Border
-                                    Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    SnapsToDevicePixels="True">
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        SnapsToDevicePixels="True">
                                         <ContentPresenter
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -359,10 +361,10 @@
                                 <Setter Property="Effect">
                                     <Setter.Value>
                                         <DropShadowEffect
-                                        BlurRadius="3"
-                                        Opacity="0.2"
-                                        ShadowDepth="0"
-                                        Color="Black" />
+                                            BlurRadius="3"
+                                            Opacity="0.2"
+                                            ShadowDepth="0"
+                                            Color="Black" />
                                     </Setter.Value>
                                 </Setter>
                             </Trigger>
@@ -371,10 +373,10 @@
                                 <Setter Property="Effect">
                                     <Setter.Value>
                                         <DropShadowEffect
-                                        BlurRadius="5"
-                                        Opacity="0.3"
-                                        ShadowDepth="0"
-                                        Color="Black" />
+                                            BlurRadius="5"
+                                            Opacity="0.3"
+                                            ShadowDepth="0"
+                                            Color="Black" />
                                     </Setter.Value>
                                 </Setter>
                             </Trigger>
@@ -402,10 +404,10 @@
                                 <ControlTemplate TargetType="DataGridColumnHeader">
                                     <Grid>
                                         <Border
-                                        Padding="5,0,5,0"
-                                        Background="{TemplateBinding Background}"
-                                        BorderBrush="{TemplateBinding BorderBrush}"
-                                        BorderThickness="{TemplateBinding BorderThickness}">
+                                            Padding="5,0,5,0"
+                                            Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}">
                                             <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="Center" />
                                         </Border>
                                     </Grid>
@@ -417,15 +419,15 @@
 
                 <!--  Columns (unchanged)  -->
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn Width="80" Header="STT">
+                    <DataGridTemplateColumn Width="Auto" Header="STT">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="20"
-                    Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}}, Path=Header}"
-                    TextAlignment="Center">
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontSize="20"
+                                    Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}}, Path=Header}"
+                                    TextAlignment="Center">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Style.Triggers>
@@ -441,11 +443,11 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <!-- Mã phiếu Column -->
+                    <!--  Mã phiếu Column  -->
                     <DataGridTextColumn
-        Width="150"
-        Binding="{Binding MaPhieu}"
-        Header="Mã phiếu">
+                        Width="*"
+                        Binding="{Binding MaPhieu}"
+                        Header="Mã phiếu">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
                                 <Setter Property="VerticalAlignment" Value="Center" />
@@ -465,11 +467,11 @@
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
 
-                    <!-- Mã sổ Column -->
+                    <!--  Mã sổ Column  -->
                     <DataGridTextColumn
-        Width="150"
-        Binding="{Binding MaSoTietKiem}"
-        Header="Mã sổ">
+                        Width="*"
+                        Binding="{Binding MaSoTietKiem}"
+                        Header="Mã sổ">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
                                 <Setter Property="VerticalAlignment" Value="Center" />
@@ -489,11 +491,11 @@
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
 
-                    <!-- Loại tiết kiệm Column -->
+                    <!--  Loại tiết kiệm Column  -->
                     <DataGridTextColumn
-        Width="200"
-        Binding="{Binding LoaiTietKiem.TenLoaiTietKiem}"
-        Header="Loại tiết kiệm">
+                        Width="*"
+                        Binding="{Binding LoaiTietKiem.TenLoaiTietKiem}"
+                        Header="Loại tiết kiệm">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
                                 <Setter Property="VerticalAlignment" Value="Center" />
@@ -513,11 +515,11 @@
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
 
-                    <!-- Tên khách hàng Column -->
+                    <!--  Tên khách hàng Column  -->
                     <DataGridTextColumn
-        Width="250"
-        Binding="{Binding KhachHang.TenKhachHang}"
-        Header="Tên khách hàng">
+                        Width="*"
+                        Binding="{Binding KhachHang.TenKhachHang}"
+                        Header="Tên khách hàng">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
                                 <Setter Property="VerticalAlignment" Value="Center" />
@@ -537,11 +539,11 @@
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
 
-                    <!-- Ngày gửi Column -->
+                    <!--  Ngày gửi Column  -->
                     <DataGridTextColumn
-        Width="150"
-        Binding="{Binding NgayMoSo, StringFormat='{}{0:dd/MM/yyyy}'}"
-        Header="Ngày gửi">
+                        Width="*"
+                        Binding="{Binding NgayMoSo, StringFormat='{}{0:dd/MM/yyyy}'}"
+                        Header="Ngày gửi">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
                                 <Setter Property="VerticalAlignment" Value="Center" />
@@ -559,11 +561,11 @@
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
 
-                    <!-- Số tiền gửi Column -->
+                    <!--  Số tiền gửi Column  -->
                     <DataGridTextColumn
-        Width="200"
-        Binding="{Binding SoTienGui, StringFormat='{}{0:N0} VNĐ'}"
-        Header="Số tiền gửi">
+                        Width="*"
+                        Binding="{Binding SoTienGui, StringFormat='{}{0:N0} VNĐ'}"
+                        Header="Số tiền gửi">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
                                 <Setter Property="VerticalAlignment" Value="Center" />

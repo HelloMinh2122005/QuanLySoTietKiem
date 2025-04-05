@@ -302,7 +302,7 @@
                     Content=" 💰 Loại tiết kiệm"
                     GroupName="NavGroup"
                     Style="{StaticResource NavButtonStyle}"
-                    Tag="LoaiTietKiem" />  
+                    Tag="LoaiTietKiem" />
             </StackPanel>
 
             <Border
@@ -359,11 +359,8 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <!--  Tiêu đề  -->
                 <RowDefinition Height="Auto" />
-                <!--  Thanh công cụ  -->
-                <RowDefinition Height="Auto" />
-                <!--  DataGrid  -->
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <!--  Header  -->
@@ -659,8 +656,7 @@
             <!--  DataGrid  -->
             <Border
                 Grid.Row="3"
-                Height="710"
-                Margin="30,18,30,0"
+                Margin="30,18,30,20"
                 Padding="30"
                 VerticalAlignment="Stretch"
                 Background="#F2EAE5"
@@ -772,7 +768,7 @@
 
                     <!--  Columns (unchanged)  -->
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn Width="80" Header="STT">
+                        <DataGridTemplateColumn Width="Auto" Header="STT">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock
@@ -797,7 +793,7 @@
                         </DataGridTemplateColumn>
 
                         <DataGridTextColumn
-                            Width="210"
+                            Width="*"
                             Binding="{Binding MaSoTietKiem}"
                             Header="Mã sổ">
                             <DataGridTextColumn.ElementStyle>
@@ -820,7 +816,7 @@
                         </DataGridTextColumn>
 
                         <DataGridTextColumn
-                            Width="170"
+                            Width="*"
                             Binding="{Binding LoaiTietKiem.TenLoaiTietKiem}"
                             Header="Loại tiết kiệm">
                             <DataGridTextColumn.ElementStyle>
@@ -843,7 +839,7 @@
                         </DataGridTextColumn>
 
                         <DataGridTextColumn
-                            Width="300"
+                            Width="*"
                             Binding="{Binding NgayMoSo, StringFormat='{}{0:dd/MM/yyyy}'}"
                             Header="Ngày mở sổ">
                             <DataGridTextColumn.ElementStyle>
@@ -864,7 +860,7 @@
                         </DataGridTextColumn>
 
                         <DataGridTextColumn
-                            Width="290"
+                            Width="*"
                             Binding="{Binding KhachHang.TenKhachHang}"
                             Header="Khách hàng">
                             <DataGridTextColumn.ElementStyle>
@@ -885,7 +881,7 @@
                         </DataGridTextColumn>
 
                         <DataGridTextColumn
-                            Width="300"
+                            Width="*"
                             Binding="{Binding SoTienGui, StringFormat='{}{0:N0} VNĐ'}"
                             Header="Số dư">
                             <DataGridTextColumn.ElementStyle>

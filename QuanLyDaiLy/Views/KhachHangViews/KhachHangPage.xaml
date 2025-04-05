@@ -4,9 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:helpers="clr-namespace:QuanLyDaiLy.Helpers"
-    xmlns:local="clr-namespace:QuanLyDaiLy.Views.KhachHangViews"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewmodels="clr-namespace:QuanLyDaiLy.ViewModels"
     Title="KhachHangPage"
     d:DesignHeight="930"
     d:DesignWidth="1580"
@@ -175,7 +173,7 @@
             <!--  Tiêu đề  -->
             <RowDefinition Height="Auto" />
             <!--  Thanh công cụ  -->
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
             <!--  DataGrid  -->
         </Grid.RowDefinitions>
 
@@ -288,7 +286,7 @@
                     Height="35"
                     Margin="10,0,10,0"
                     Background="#E65F2B"
-                    Command="{Binding ResetSoTietKiemCommand}"
+                    Command="{Binding ResetKhachHangCommand}"
                     Foreground="White">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
@@ -472,8 +470,7 @@
         <!--  DataGrid  -->
         <Border
             Grid.Row="3"
-            Height="710"
-            Margin="30,18,30,0"
+            Margin="30,18,30,20"
             Padding="30"
             VerticalAlignment="Stretch"
             Background="#F2EAE5"
@@ -488,9 +485,9 @@
                 GridLinesVisibility="None"
                 HeadersVisibility="Column"
                 IsReadOnly="True"
-                ItemsSource="{Binding DanhSachKhachHang}"
+                ItemsSource="{Binding DanhSachKhachHangDto}"
                 LoadingRow="DataGrid_LoadingRow"
-                SelectedItem="{Binding SelectedkhachHang, Mode=TwoWay}">
+                SelectedItem="{Binding SelectedKhachHangDto, Mode=TwoWay}">
                 <DataGrid.Resources>
                     <!--  Cell style (kept unchanged)  -->
                     <Style TargetType="DataGridCell">
@@ -585,7 +582,7 @@
 
                 <!--  Columns (unchanged)  -->
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn Width="80" Header="STT">
+                    <DataGridTemplateColumn Width="Auto" Header="STT">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock
@@ -610,8 +607,8 @@
                     </DataGridTemplateColumn>
 
                     <DataGridTextColumn
-                        Width="210"
-                        Binding="{Binding CMND}"
+                        Width="*"
+                        Binding="{Binding KhachHang.CMND}"
                         Header="CMND">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
@@ -633,8 +630,8 @@
                     </DataGridTextColumn>
 
                     <DataGridTextColumn
-                        Width="300"
-                        Binding="{Binding TenKhachHang}"
+                        Width="*"
+                        Binding="{Binding KhachHang.TenKhachHang}"
                         Header="Tên khách hàng">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
@@ -656,8 +653,8 @@
                     </DataGridTextColumn>
 
                     <DataGridTextColumn
-                        Width="500"
-                        Binding="{Binding DiaChi}"
+                        Width="*"
+                        Binding="{Binding KhachHang.DiaChi}"
                         Header="Địa chỉ">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
@@ -677,8 +674,8 @@
                     </DataGridTextColumn>
 
                     <DataGridTextColumn
-                        Width="300"
-                        Binding="{Binding SoTienGui, StringFormat='{}{0:N0} VNĐ'}"
+                        Width="*"
+                        Binding="{Binding SoDu, StringFormat='{}{0:N0} VNĐ'}"
                         Header="Số dư">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
