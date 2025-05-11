@@ -10,6 +10,7 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
     public DbSet<LoaiTietKiem> DsLoaiTietKiem { get; set; } = null!;
     public DbSet<KhachHang> DsKhachHang { get; set; } = null!;
     public DbSet<ThamSo> ThamSo { get; set; } = null!;
+    public DbSet<PhieuGoiTien> DsPhieuGoiTien { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -27,6 +28,12 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
             .WithMany(ltk => ltk.DsSoTietKiem)
             .HasForeignKey(stk => stk.MaLoaiTietKiem)
             .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<PhieuGoiTien>()
+            .HasOne(pgt => pgt.SoTietKiem)
+            .WithMany(stk => stk.DsPhieuGoiTien)
+            .HasForeignKey(pgt => pgt.MaSoTietKiem)
+            .OnDelete(DeleteBehavior.Cascade);
 
         // Seed the database
         DatabaseSeeder.SeedDatabase(modelBuilder);

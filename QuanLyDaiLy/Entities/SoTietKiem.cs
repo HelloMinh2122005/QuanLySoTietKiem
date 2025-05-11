@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using QuanLyDaiLy.Views.PhieuGoiTienViews;
+using System.ComponentModel.DataAnnotations;
 
 namespace QuanLyDaiLy.Entities;
 
@@ -11,6 +12,7 @@ public class SoTietKiem
     public decimal SoTienGui { get; set; } = 0;
     public DateTime NgayMoSo { get; set; } = DateTime.Now;
 
+    public ICollection<PhieuGoiTien> DsPhieuGoiTien { get; set; } = [];
     // Navigation properties
     public KhachHang KhachHang { get; set; } = new();
     public LoaiTietKiem LoaiTietKiem { get; set; } = new();

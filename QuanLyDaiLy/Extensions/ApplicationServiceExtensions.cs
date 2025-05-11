@@ -38,7 +38,7 @@ public static class ApplicationServiceExtensions
         services.AddTransient<CapNhatSoTietKiemViewModel>();
 
         services.AddTransient<LoaiTietKiemViewModel>();
-      services.AddTransient<ThemKhachHangViewModel>();
+        services.AddTransient<ThemKhachHangViewModel>();
         services.AddTransient<CapNhatKhachHangViewModel>();
         services.AddTransient<KhachHangViewModel>();
 
