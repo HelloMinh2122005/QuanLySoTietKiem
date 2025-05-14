@@ -322,9 +322,9 @@
                 GridLinesVisibility="None"
                 HeadersVisibility="Column"
                 IsReadOnly="True"
-                ItemsSource="{Binding DanhSachSoTietKiem}"
+                ItemsSource="{Binding DanhSachPhieuGoiTien}"
                 LoadingRow="DataGrid_LoadingRow"
-                SelectedItem="{Binding SelectedSoTietKiem, Mode=TwoWay}">
+                SelectedItem="{Binding SelectedPhieuGoiTien, Mode=TwoWay}">
                 <DataGrid.Resources>
                     <!--  Cell style (kept unchanged)  -->
                     <Style TargetType="DataGridCell">
@@ -446,7 +446,7 @@
                     <!--  Mã phiếu Column  -->
                     <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding MaPhieu}"
+                        Binding="{Binding MaPhieuGoiTien}"
                         Header="Mã phiếu">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
@@ -494,7 +494,7 @@
                     <!--  Loại tiết kiệm Column  -->
                     <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding LoaiTietKiem.TenLoaiTietKiem}"
+                        Binding="{Binding LoaiTietKiem}"
                         Header="Loại tiết kiệm">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
@@ -518,7 +518,7 @@
                     <!--  Tên khách hàng Column  -->
                     <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding KhachHang.TenKhachHang}"
+                        Binding="{Binding TenKhachHang}"
                         Header="Tên khách hàng">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
@@ -542,7 +542,7 @@
                     <!--  Ngày gửi Column  -->
                     <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding NgayMoSo, StringFormat='{}{0:dd/MM/yyyy}'}"
+                        Binding="{Binding NgayGoi, StringFormat='{}{0:dd/MM/yyyy}'}"
                         Header="Ngày gửi">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">

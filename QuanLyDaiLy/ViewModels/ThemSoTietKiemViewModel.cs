@@ -220,7 +220,7 @@ namespace QuanLyDaiLy.ViewModels
 
             var thamSo = await _thamSoRepo.Get();
             // Kiểm tra số tiền gửi
-            if (SoTienGui < thamSo.SoTienGoiToiThieu)
+            if (SoTienGui < thamSo.SoTienGoiToiThieu && thamSo.ApDungSoTienGuiToiThieu == true)
             {
                 Console.WriteLine(SoTienGui);
 

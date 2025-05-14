@@ -30,17 +30,18 @@ public static class ApplicationServiceExtensions
         services.AddScoped<ILoaiTietKiemRepo, LoaiTietKiemRepository>();
         services.AddScoped<IThamSoRepo, ThamSoRepository>();
         services.AddScoped<ISoTietKiemRepo, SoTietKiemRepository>();
-        services.AddTransient<KhachHangViewModel>();
+        services.AddScoped<IPhieuGoiTienRepo, PhieuGoiTienRepository>();
 
         // Register ViewModels
         services.AddTransient<ThemSoTietKiemViewModel>();
         services.AddTransient<DanhSachSoTietKiemViewModel>();
         services.AddTransient<CapNhatSoTietKiemViewModel>();
 
-        services.AddTransient<LoaiTietKiemViewModel>();
+        services.AddTransient<PhieuGoiTienViewModel>();
         services.AddTransient<ThemKhachHangViewModel>();
         services.AddTransient<CapNhatKhachHangViewModel>();
         services.AddTransient<KhachHangViewModel>();
+        services.AddTransient<ThemPhieuGoiTienViewModel>();
 
         // Register Views
         services.AddTransient<ThemSoTietKiem>();

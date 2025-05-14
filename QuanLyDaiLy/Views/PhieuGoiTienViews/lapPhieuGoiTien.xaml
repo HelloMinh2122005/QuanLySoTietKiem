@@ -122,7 +122,8 @@
                                FontWeight="Normal"
                                FontSize="14"
                                Foreground="#000000"
-                               Margin="0,0,0,0"/>
+                               Margin="0,0,0,0"
+                                />
                             <TextBox Grid.Row="1"
                                  Width="152"
                                  Background="Transparent"
@@ -140,7 +141,8 @@
                                  Foreground="#9A000000"
                                  TextAlignment="Left"
                                  BorderThickness="1" 
-                                 Text="{Binding MaPhieu, Mode=OneWay}"/>
+                                 IsEnabled="{Binding IsFieldsEnabled}"    
+                                 Text="{Binding MaPhieuGuiTien, Mode=OneWay}"/>
                         </Grid>
 
                         <!-- Mã sổ -->
@@ -194,7 +196,7 @@
                                        FontSize="14"
                                        Foreground="#000000"
                                        Margin="0,0,0,0"/>
-                            <ComboBox   Grid.Row="1"
+                            <!--<ComboBox   Grid.Row="1"
                                         Width="152"
                                         Height="30"
                                         Background="#FFFFFF" 
@@ -212,7 +214,7 @@
                                         ItemsSource="{Binding DsLoaiTietKiem}"
                                         DisplayMemberPath="TenLoaiTietKiem" 
                                         SelectedItem="{Binding LoaiTietKiemDuocChon, Mode=TwoWay}"
-                                        SelectedValuePath="MaLoaiTietKiem"/>    
+                                        SelectedValuePath="MaLoaiTietKiem"/>-->    
 
                         </Grid>
                     </Grid>
@@ -256,6 +258,7 @@
                                  Foreground="#9A000000"
                                  TextAlignment="Left"
                                  BorderThickness="1" 
+                                 IsEnabled="{Binding IsFieldsEnabled}"
                                  Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged}" />
 
                             <!-- <TextBlock Text="Tối thiểu 100.000đ" -->
@@ -298,7 +301,7 @@
                                 Foreground="#9A000000"
                                 BorderThickness="1"
                                 Padding="22,3,3,3"
-                                SelectedDate="{Binding NgayMoSo}">
+                                SelectedDate="{Binding NgayGoi}">
                                     <DatePicker.Resources>
                                         <Style TargetType="DatePickerTextBox">
                                             <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -356,7 +359,8 @@
                                         Foreground="#9A000000"
                                         BorderThickness="1"
                                         Padding="22,3,3,3"
-                                        SelectedDate="{Binding NgayGui}">
+                                        IsEnabled="{Binding IsFieldsEnabled}"
+                                        SelectedDate="{Binding NgayGoi}">
                                     <DatePicker.Resources>
                                         <Style TargetType="DatePickerTextBox">
                                             <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -405,16 +409,36 @@
                                      Foreground="#9A000000"
                                      TextAlignment="Left"
                                      BorderThickness="1" 
+                                     Name="SoTienGuiTb"
+                                      IsEnabled="{Binding IsFieldsEnabled}"
                                      Text="{Binding SoTienGui, UpdateSourceTrigger=PropertyChanged}" />
 
-                            <TextBlock Text="Tối thiểu 100.000đ"
+                            <!--<TextBlock Text="   Tối thiểu 100.000đ"
                                        Grid.Row="1"
+                                       Name="moneyTb"
                                        Foreground="Gray"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Left"
                                        Margin="5,0,0,0"
                                        IsHitTestVisible="False"
-                                       Visibility="Visible"/>
+                                       Visibility="Visible">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=SoTienGuiTb}" Value="">
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Text, ElementName=SoTienGuiTb}" Value="{x:Null}">
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Text, ElementName=SoTienGuiTb}">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>-->
                         </Grid>
                     </Grid>
                 </Grid>
@@ -426,7 +450,7 @@
             <!-- List Nude -->
             <Grid Grid.Row="1" Background="#E6F0F0F0" VerticalAlignment="Center" Height="80">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Button Command="{Binding LapSoCommand}" Width="120" Height="35" Background="#FFB498" Margin="0,0,20,0">     
+                    <Button Command="{Binding LapPhieuCommand}" Width="120" Height="35" Background="#FFB498" Margin="0,0,20,0">     
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border x:Name="buttonBorder" Background="{TemplateBinding Background}" 
@@ -451,7 +475,7 @@
                         <TextBlock Text="Lập phiếu" FontFamily="Segoe UI Variable" FontSize="18" FontWeight="Normal" 
                                 TextAlignment="Center" Height="34" Foreground="#92492D"/>
                     </Button>
-                    <Button  Height="35" Background="#FFB498" Margin="0,0,20,0" Command="{Binding ThemSoCommand}">
+                    <Button  Height="35" Background="#FFB498" Margin="0,0,20,0" Command="{Binding LapPhieuCommand}">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border x:Name="buttonBorder" Background="{TemplateBinding Background}" 
