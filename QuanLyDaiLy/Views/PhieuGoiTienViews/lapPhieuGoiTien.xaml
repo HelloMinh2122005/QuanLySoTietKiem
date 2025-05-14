@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyDaiLy.Views"
         mc:Ignorable="d"
-        Title="lapPhieuGoiTien" Height="388" Width="555" Background="Transparent"
+        Title="lapPhieuGoiTien" Height="480" Width="462" Background="Transparent"
         WindowStyle="None" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         AllowsTransparency="True">
-    
+
     <Window.Resources>
         <!-- 6% black stroke -->
         <SolidColorBrush x:Key="ControlStrokeDefaultBrush" Color="#0F000000" />
@@ -26,17 +26,17 @@
         <Grid Background="{StaticResource LayerOnMicaBaseAltDefaultBrush}">
             <!-- Apply clip to ensure the content doesn't overflow the rounded corners -->
             <Grid.Clip>
-                <RectangleGeometry Rect="0,0,553,388" RadiusX="12" RadiusY="12"/>
+                <RectangleGeometry Rect="0,0,462,480" RadiusX="12" RadiusY="12"/>
             </Grid.Clip>
             <Grid.RowDefinitions>
-                <RowDefinition Height="308"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="80"/>
             </Grid.RowDefinitions>
 
             <!-- Content Wrapper -->
             <Grid Grid.Row="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="307"/>
+                    <RowDefinition Height="*"/>
                     <RowDefinition Height="1"/>
                 </Grid.RowDefinitions>
 
@@ -52,7 +52,10 @@
                         <RowDefinition Height="60"/>
                         <RowDefinition Height="12"/>
                         <RowDefinition Height="60"/>
+                        <RowDefinition Height="12"/>
+                        <RowDefinition Height="60"/>
                     </Grid.RowDefinitions>
+
 
                     <!-- Frame 3 -->
                     <Grid Grid.Row="0">
@@ -100,11 +103,10 @@
                     <!-- Line 1 -->
                     <Grid Grid.Row="4">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="156"/>
+                            <!-- 2 cột chính, ngăn cách bởi khoảng 12px -->
+                            <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="12"/>
-                            <ColumnDefinition Width="156"/>
-                            <ColumnDefinition Width="12"/>
-                            <ColumnDefinition Width="156"/>
+                            <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
 
                         <!-- Mã phiếu -->
@@ -113,111 +115,71 @@
                                 <RowDefinition Height="24"/>
                                 <RowDefinition Height="36"/>
                             </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" 
-                               Text="Mã phiếu" 
-                               VerticalAlignment="Center" 
-                               HorizontalAlignment="Left"
-                               FontFamily="Segoe UI Variable"
-                               FontStyle="Normal"
-                               FontWeight="Normal"
-                               FontSize="14"
-                               Foreground="#000000"
-                               Margin="0,0,0,0"
-                                />
+                            <TextBlock Grid.Row="0"
+                                       Text="Mã phiếu"
+                                       FontFamily="Segoe UI Variable"
+                                       FontSize="14"
+                                       Foreground="#000000"
+                                       VerticalAlignment="Center"/>
                             <TextBox Grid.Row="1"
-                                 Width="152"
-                                 Background="Transparent"
-                                 Height="30" 
-                                 IsReadOnly="True"
-                                 BorderBrush="#33000000"
-                                 HorizontalAlignment="Left"
-                                 VerticalAlignment="Center"
-                                 VerticalContentAlignment="Center"
-                                 Margin="0,0,0,0"
-                                 FontFamily="Segoe UI Variable"
-                                 FontStyle="Normal"
-                                 FontWeight="Normal"
-                                 FontSize="14"
-                                 Foreground="#9A000000"
-                                 TextAlignment="Left"
-                                 BorderThickness="1" 
-                                 IsEnabled="{Binding IsFieldsEnabled}"    
-                                 Text="{Binding MaPhieuGuiTien, Mode=OneWay}"/>
+                                     Height="30"
+                                     Background="Transparent"
+                                     BorderBrush="#33000000"
+                                     BorderThickness="1"
+                                     VerticalContentAlignment="Center"
+                                     FontFamily="Segoe UI Variable"
+                                     FontSize="14"
+                                     Foreground="#9A000000"
+                                     TextAlignment="Left"
+                                    Text="{Binding MaPhieu, Mode=OneWay}"/>
                         </Grid>
 
-                        <!-- Mã sổ -->
+                        <!-- Ngày gởi tiền -->
                         <Grid Grid.Column="2">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="24"/>
                                 <RowDefinition Height="36"/>
                             </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" 
-                               Text="Mã sổ" 
-                               VerticalAlignment="Center" 
-                               HorizontalAlignment="Left"
-                               FontFamily="Segoe UI Variable"
-                               FontStyle="Normal"
-                               FontWeight="Normal"
-                               FontSize="14"
-                               Foreground="#000000"
-                               Margin="0,0,0,0"/>
-                            <TextBox Grid.Row="1"
-                                Width="152"
-                                Height="30"
-                                Background="#FFFFFF" 
-                                BorderBrush="#33000000"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center"
-                                VerticalContentAlignment="Center"
-                                Margin="0,0,0,0"
-                                FontFamily="Segoe UI Variable"
-                                FontStyle="Normal"
-                                FontWeight="Normal"
-                                FontSize="14"
-                                Foreground="#9A000000"
-                                TextAlignment="Left"
-                                BorderThickness="1" 
-                                Text="{Binding MaSoTietKiem, UpdateSourceTrigger=PropertyChanged}"/>
-                        </Grid>
-
-                        <!-- Loại tiết kiệm -->
-                        <Grid Grid.Column="4">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="24"/>
-                                <RowDefinition Height="36"/>
-                            </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" 
-                                       Text="Loại tiết kiệm" 
-                                       VerticalAlignment="Center" 
-                                       HorizontalAlignment="Left"
+                            <TextBlock Grid.Row="0"
+                                       Text="Ngày gởi tiền"
                                        FontFamily="Segoe UI Variable"
-                                       FontStyle="Normal"
-                                       FontWeight="Normal"
                                        FontSize="14"
                                        Foreground="#000000"
-                                       Margin="0,0,0,0"/>
-                            <!--<ComboBox   Grid.Row="1"
-                                        Width="152"
+                                       VerticalAlignment="Center"/>
+                            <Grid Grid.Row="1">
+                                <DatePicker
                                         Height="30"
                                         Background="#FFFFFF" 
                                         BorderBrush="#33000000"
-                                        HorizontalAlignment="Left"
+                                        HorizontalAlignment="Stretch"
                                         VerticalAlignment="Center"
-                                        VerticalContentAlignment="Center"
-                                        Margin="0,0,0,0"
                                         FontFamily="Segoe UI Variable"
                                         FontStyle="Normal"
                                         FontWeight="Normal"
                                         FontSize="14"
                                         Foreground="#9A000000"
                                         BorderThickness="1"
-                                        ItemsSource="{Binding DsLoaiTietKiem}"
-                                        DisplayMemberPath="TenLoaiTietKiem" 
-                                        SelectedItem="{Binding LoaiTietKiemDuocChon, Mode=TwoWay}"
-                                        SelectedValuePath="MaLoaiTietKiem"/>-->    
-
+                                        Padding="22,3,3,3"
+                                        SelectedDate="{Binding NgayGui}">
+                                    <DatePicker.Resources>
+                                        <Style TargetType="DatePickerTextBox">
+                                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                        </Style>
+                                    </DatePicker.Resources>
+                                </DatePicker>
+                                <TextBlock 
+                                        Text="&#xE787;" 
+                                        FontFamily="Segoe MDL2 Assets"
+                                        Foreground="#9A000000"
+                                        HorizontalAlignment="Left" 
+                                        VerticalAlignment="Center"
+                                        Margin="6,0,0,0"
+                                        FontSize="14"
+                                        IsHitTestVisible="False"/>
+                            </Grid>
                         </Grid>
                     </Grid>
+
 
                     <!-- Line 2 -->
                     <Grid Grid.Row="6">
@@ -227,14 +189,14 @@
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
 
-                        <!-- Tên khách hàng -->
+                        <!-- Mã tiết kiệm -->
                         <Grid Grid.Column="0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="24"/>
                                 <RowDefinition Height="36"/>
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" 
-                               Text="Tên khách hàng" 
+                               Text="Mã tiết kiệm" 
                                VerticalAlignment="Center" 
                                HorizontalAlignment="Left"
                                FontFamily="Segoe UI Variable"
@@ -258,7 +220,6 @@
                                  Foreground="#9A000000"
                                  TextAlignment="Left"
                                  BorderThickness="1" 
-                                 IsEnabled="{Binding IsFieldsEnabled}"
                                  Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged}" />
 
                             <!-- <TextBlock Text="Tối thiểu 100.000đ" -->
@@ -271,14 +232,14 @@
                             <!--         Visibility="Visible"/> -->
                         </Grid>
 
-                        <!-- Ngày mở sổ -->
-                        <Grid Grid.Column="4">
+                        <!-- Tên loại sổ -->
+                        <Grid Grid.Column="2">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="24"/>
                                 <RowDefinition Height="36"/>
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" 
-                                   Text="Ngày mở sổ" 
+                                   Text="Tên loại sổ tiết kiệm" 
                                    VerticalAlignment="Center" 
                                    HorizontalAlignment="Left"
                                    FontFamily="Segoe UI Variable"
@@ -287,37 +248,22 @@
                                    FontSize="14"
                                    Foreground="#000000"
                                    Margin="0,0,0,0"/>
-                            <Grid Grid.Row="1">
-                                <DatePicker
-                                Height="30"
-                                Background="#FFFFFF" 
-                                BorderBrush="#33000000"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Center"
-                                FontFamily="Segoe UI Variable"
-                                FontStyle="Normal"
-                                FontWeight="Normal"
-                                FontSize="14"
-                                Foreground="#9A000000"
-                                BorderThickness="1"
-                                Padding="22,3,3,3"
-                                SelectedDate="{Binding NgayGoi}">
-                                    <DatePicker.Resources>
-                                        <Style TargetType="DatePickerTextBox">
-                                            <Setter Property="VerticalContentAlignment" Value="Center"/>
-                                        </Style>
-                                    </DatePicker.Resources>
-                                </DatePicker>
-                                <TextBlock 
-                                    Text="&#xE787;" 
-                                    FontFamily="Segoe MDL2 Assets"
-                                    Foreground="#9A000000"
-                                    HorizontalAlignment="Left" 
-                                    VerticalAlignment="Center"
-                                    Margin="6,0,0,0"
-                                    FontSize="14"
-                                    IsHitTestVisible="False"/>
-                            </Grid>
+                            <TextBox Grid.Row="1"                                
+                                     Height="30"
+                                     Background="#FFFFFF" 
+                                     BorderBrush="#33000000"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Center"
+                                     VerticalContentAlignment="Center"
+                                     Margin="0,0,0,0"
+                                     FontFamily="Segoe UI Variable"
+                                     FontStyle="Normal"
+                                     FontWeight="Normal"
+                                     FontSize="14"
+                                     Foreground="#9A000000"
+                                     TextAlignment="Left"
+                                     BorderThickness="1" 
+                                     Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged}" />
                         </Grid>
                     </Grid>
 
@@ -329,14 +275,14 @@
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
 
-                        
+                        <!-- Họ tên khách hàng -->
                         <Grid Grid.Column="0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="24"/>
                                 <RowDefinition Height="36"/>
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" 
-                                       Text="Ngày gởi" 
+                                       Text="Họ tên khách hàng" 
                                        VerticalAlignment="Center" 
                                        HorizontalAlignment="Left"
                                        FontFamily="Segoe UI Variable"
@@ -345,38 +291,22 @@
                                        FontSize="14"
                                        Foreground="#000000"
                                        Margin="0,0,0,0"/>
-                            <Grid Grid.Row="1">
-                                <DatePicker
-                                        Height="30"
-                                        Background="#FFFFFF" 
-                                        BorderBrush="#33000000"
-                                        HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Center"
-                                        FontFamily="Segoe UI Variable"
-                                        FontStyle="Normal"
-                                        FontWeight="Normal"
-                                        FontSize="14"
-                                        Foreground="#9A000000"
-                                        BorderThickness="1"
-                                        Padding="22,3,3,3"
-                                        IsEnabled="{Binding IsFieldsEnabled}"
-                                        SelectedDate="{Binding NgayGoi}">
-                                    <DatePicker.Resources>
-                                        <Style TargetType="DatePickerTextBox">
-                                            <Setter Property="VerticalContentAlignment" Value="Center"/>
-                                        </Style>
-                                    </DatePicker.Resources>
-                                </DatePicker>
-                                <TextBlock 
-                                        Text="&#xE787;" 
-                                        FontFamily="Segoe MDL2 Assets"
-                                        Foreground="#9A000000"
-                                        HorizontalAlignment="Left" 
-                                        VerticalAlignment="Center"
-                                        Margin="6,0,0,0"
-                                        FontSize="14"
-                                        IsHitTestVisible="False"/>
-                            </Grid>
+                            <TextBox Grid.Row="1"                                
+                                     Height="30"
+                                     Background="#FFFFFF" 
+                                     BorderBrush="#33000000"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Center"
+                                     VerticalContentAlignment="Center"
+                                     Margin="0,0,0,0"
+                                     FontFamily="Segoe UI Variable"
+                                     FontStyle="Normal"
+                                     FontWeight="Normal"
+                                     FontSize="14"
+                                     Foreground="#9A000000"
+                                     TextAlignment="Left"
+                                     BorderThickness="1" 
+                                     Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged}" />
                         </Grid>
 
                         <Grid Grid.Column="2">
@@ -385,7 +315,7 @@
                                 <RowDefinition Height="36"/>
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" 
-                                       Text="Số tiền gởi" 
+                                       Text="Nhận tiền gởi thêm" 
                                        VerticalAlignment="Center" 
                                        HorizontalAlignment="Left"
                                        FontFamily="Segoe UI Variable"
@@ -409,36 +339,101 @@
                                      Foreground="#9A000000"
                                      TextAlignment="Left"
                                      BorderThickness="1" 
-                                     Name="SoTienGuiTb"
-                                      IsEnabled="{Binding IsFieldsEnabled}"
                                      Text="{Binding SoTienGui, UpdateSourceTrigger=PropertyChanged}" />
 
-                            <!--<TextBlock Text="   Tối thiểu 100.000đ"
+                            <TextBlock Text="Đang áp dụng"
                                        Grid.Row="1"
-                                       Name="moneyTb"
                                        Foreground="Gray"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Left"
                                        Margin="5,0,0,0"
                                        IsHitTestVisible="False"
-                                       Visibility="Visible">
-                                <TextBlock.Style>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="Visibility" Value="Visible" />
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Text, ElementName=SoTienGuiTb}" Value="">
-                                                <Setter Property="Visibility" Value="Visible" />
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding Text, ElementName=SoTienGuiTb}" Value="{x:Null}">
-                                                <Setter Property="Visibility" Value="Visible" />
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding Text, ElementName=SoTienGuiTb}">
-                                                <Setter Property="Visibility" Value="Collapsed" />
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </TextBlock.Style>
-                            </TextBlock>-->
+                                       Visibility="Visible"/>
+                        </Grid>
+                    </Grid>
+
+                    <!-- Line 4 -->
+                    <Grid Grid.Row="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="12"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Số tiền gởi thêm -->
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="24"/>
+                                <RowDefinition Height="36"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" 
+                                       Text="Số tiền gởi thêm" 
+                                       VerticalAlignment="Center" 
+                                       HorizontalAlignment="Left"
+                                       FontFamily="Segoe UI Variable"
+                                       FontStyle="Normal"
+                                       FontWeight="Normal"
+                                       FontSize="14"
+                                       Foreground="#000000"
+                                       Margin="0,0,0,0"/>
+                            <TextBox Grid.Row="1"                                
+                                     Height="30"
+                                     Background="#FFFFFF" 
+                                     BorderBrush="#33000000"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Center"
+                                     VerticalContentAlignment="Center"
+                                     Margin="0,0,0,0"
+                                     FontFamily="Segoe UI Variable"
+                                     FontStyle="Normal"
+                                     FontWeight="Normal"
+                                     FontSize="14"
+                                     Foreground="#9A000000"
+                                     TextAlignment="Left"
+                                     BorderThickness="1" 
+                                     Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged}" />
+                        </Grid>
+
+                        <Grid Grid.Column="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="24"/>
+                                <RowDefinition Height="36"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" 
+                                       Text="Số tiền gởi thêm tối thiểu" 
+                                       VerticalAlignment="Center" 
+                                       HorizontalAlignment="Left"
+                                       FontFamily="Segoe UI Variable"
+                                       FontStyle="Normal"
+                                       FontWeight="Normal"
+                                       FontSize="14"
+                                       Foreground="#000000"
+                                       Margin="0,0,0,0"/>
+                            <TextBox  Grid.Row="1" 
+                                        Height="30"
+                                        Background="#FFFFFF" 
+                                        BorderBrush="#33000000"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Center"
+                                        VerticalContentAlignment="Center"
+                                        Margin="0,0,0,0"
+                                        FontFamily="Segoe UI Variable"
+                                        FontStyle="Normal"
+                                        FontWeight="Normal"
+                                        FontSize="14"
+                                        Foreground="#9A000000"
+                                        TextAlignment="Left"
+                                        BorderThickness="1" 
+                                        Text="{Binding SoTienGui, UpdateSourceTrigger=PropertyChanged}" />
+
+                            <TextBlock Text="Đang áp dụng"
+                                       Grid.Row="1"
+                                       Foreground="Gray"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="5,0,0,0"
+                                       IsHitTestVisible="False"
+                                       Visibility="Visible"/>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -450,7 +445,7 @@
             <!-- List Nude -->
             <Grid Grid.Row="1" Background="#E6F0F0F0" VerticalAlignment="Center" Height="80">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Button Command="{Binding LapPhieuCommand}" Width="120" Height="35" Background="#FFB498" Margin="0,0,20,0">     
+                    <Button Command="{Binding LapSoCommand}" Width="120" Height="35" Background="#FFB498" Margin="0,0,20,0">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border x:Name="buttonBorder" Background="{TemplateBinding Background}" 
@@ -475,7 +470,7 @@
                         <TextBlock Text="Lập phiếu" FontFamily="Segoe UI Variable" FontSize="18" FontWeight="Normal" 
                                 TextAlignment="Center" Height="34" Foreground="#92492D"/>
                     </Button>
-                    <Button  Height="35" Background="#FFB498" Margin="0,0,20,0" Command="{Binding LapPhieuCommand}">
+                    <Button  Height="35" Background="#FFB498" Margin="0,0,20,0" Command="{Binding ThemSoCommand}">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border x:Name="buttonBorder" Background="{TemplateBinding Background}" 
@@ -497,7 +492,7 @@
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Button.Template>
-                        <TextBlock Text="Thêm phiếu mới" FontFamily="Segoe UI Variable" FontSize="18" FontWeight="Normal" 
+                        <TextBlock Text="Tra cứu sổ tiết kiệm" FontFamily="Segoe UI Variable" FontSize="18" FontWeight="Normal" 
                                 TextAlignment="Center" Height="34" Foreground="#92492D"/>
                     </Button>
                     <Button Width="120" Height="35" Background="#FFB498" Command="{Binding CloseCommand}">
