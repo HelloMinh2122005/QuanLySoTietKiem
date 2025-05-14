@@ -322,7 +322,7 @@
                 GridLinesVisibility="None"
                 HeadersVisibility="Column"
                 IsReadOnly="True"
-                ItemsSource="{Binding DanhSachPhieuGoiTien}"
+                ItemsSource="{Binding FilteredDanhSachPhieuGoiTien}"
                 LoadingRow="DataGrid_LoadingRow"
                 SelectedItem="{Binding SelectedPhieuGoiTien, Mode=TwoWay}">
                 <DataGrid.Resources>

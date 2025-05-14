@@ -59,6 +59,17 @@ namespace QuanLyDaiLy.ViewModels
             }
         }
 
+        private ObservableCollection<PhieuGoiTienDTO> _filteredDanhSachPhieuGoiTien = new();
+        public ObservableCollection<PhieuGoiTienDTO> FilteredDanhSachPhieuGoiTien
+        {
+            get => _filteredDanhSachPhieuGoiTien;
+            set
+            {
+                _filteredDanhSachPhieuGoiTien = value;
+                OnPropertyChanged();
+            }
+        }
+
         private PhieuGoiTienDTO _selectedPhieuGoiTien = new();
         public PhieuGoiTienDTO SelectedPhieuGoiTien
         {
@@ -80,11 +91,29 @@ namespace QuanLyDaiLy.ViewModels
                 {
                     _searchText = value;
                     OnPropertyChanged();
-    //                FilterByLoaiTietKiem();
+                    FilterDanhSachPhieuGoiTien();
                 }
             }
         }
+        private void FilterDanhSachPhieuGoiTien()
+        {
+            if (string.IsNullOrWhiteSpace(SearchText))
+            {
+                // If the search text is empty, show the full list
+                FilteredDanhSachPhieuGoiTien = new ObservableCollection<PhieuGoiTienDTO>(DanhSachPhieuGoiTien);
+            }
+            else
+            {
+                // Filter the list based on TenKhachHang or MaPhieuGoiTien
+                var lowerSearchText = SearchText.ToLower();
+                var filteredList = DanhSachPhieuGoiTien.Where(phieu =>
+                    (phieu.TenKhachHang?.ToLower().Contains(lowerSearchText) ?? false) ||
+                    (phieu.MaPhieuGoiTien?.ToLower().Contains(lowerSearchText) ?? false)
+                );
 
+                FilteredDanhSachPhieuGoiTien = new ObservableCollection<PhieuGoiTienDTO>(filteredList);
+            }
+        }
 
         private async Task LoadData()
         {
@@ -112,7 +141,8 @@ namespace QuanLyDaiLy.ViewModels
                     };
                 });
 
-                DanhSachPhieuGoiTien = new ObservableCollection<PhieuGoiTienDTO>(danhSachPhieuGoiTienDTO); 
+                DanhSachPhieuGoiTien = new ObservableCollection<PhieuGoiTienDTO>(danhSachPhieuGoiTienDTO);
+                FilteredDanhSachPhieuGoiTien = new ObservableCollection<PhieuGoiTienDTO>(danhSachPhieuGoiTienDTO);
             }
             catch (Exception ex)
             {
