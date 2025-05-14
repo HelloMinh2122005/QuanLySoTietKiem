@@ -22,9 +22,9 @@ namespace QuanLyDaiLy.Views.PhieuGoiTienViews
     /// </summary>
     public partial class DsPhieuGoiTien : Page
     {
-        private readonly LoaiTietKiemViewModel _viewModel;
+        private readonly PhieuGoiTienViewModel _viewModel;
         private readonly IServiceProvider _serviceProvider;
-        public DsPhieuGoiTien(LoaiTietKiemViewModel viewModel, IServiceProvider serviceProvider)
+        public DsPhieuGoiTien(PhieuGoiTienViewModel viewModel, IServiceProvider serviceProvider)
         {
             InitializeComponent();
             _viewModel = viewModel;

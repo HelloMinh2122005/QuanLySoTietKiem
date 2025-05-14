@@ -6,6 +6,12 @@ namespace QuanLyDaiLy.Commands
     {
         private readonly Action _execute;
         private readonly Func<bool>? _canExecute;
+        private ICommand? lapPhieuCommand;
+
+        public RelayCommand(ICommand? lapPhieuCommand)
+        {
+            this.lapPhieuCommand = lapPhieuCommand;
+        }
 
         public RelayCommand(Action execute, Func<bool>? canExecute = null)
         {

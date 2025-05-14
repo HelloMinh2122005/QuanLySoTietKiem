@@ -11,22 +11,23 @@ namespace QuanLyDaiLy.Helpers
             SeedLoaiTietKiem(modelBuilder);
             SeedKhachHang(modelBuilder);
             SeedSoTietKiem(modelBuilder);
+            SeedPhieuGoiTien(modelBuilder);
         }
 
         private static void SeedThamSo(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ThamSo>().HasData(
-                new ThamSo { Id = "1", SoTienGoiToiThieu = 100000 }
+                new ThamSo { Id = "1", SoTienGoiToiThieu = 100000, ApDungSoTienGuiToiThieu = true, SoTienGuiThemToiThieu = 100000 }
             );
         }
 
         private static void SeedLoaiTietKiem(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<LoaiTietKiem>().HasData(
-                new { MaLoaiTietKiem = "LTK0830010523001", TenLoaiTietKiem = "Không kỳ hạn" },
-                new { MaLoaiTietKiem = "LTK0831010523002", TenLoaiTietKiem = "3 tháng" },
-                new { MaLoaiTietKiem = "LTK0832010523003", TenLoaiTietKiem = "6 tháng" },
-                new { MaLoaiTietKiem = "LTK0833010523004", TenLoaiTietKiem = "12 tháng" }
+                new { MaLoaiTietKiem = "LTK0830010523001", TenLoaiTietKiem = "Không kỳ hạn", NhanTienGoiThem = true, ApDungSoTienGuiThemToiThieu = true },
+                new { MaLoaiTietKiem = "LTK0831010523002", TenLoaiTietKiem = "3 tháng", NhanTienGoiThem = true, ApDungSoTienGuiThemToiThieu = true },
+                new { MaLoaiTietKiem = "LTK0832010523003", TenLoaiTietKiem = "6 tháng", NhanTienGoiThem = true, ApDungSoTienGuiThemToiThieu = true },
+                new { MaLoaiTietKiem = "LTK0833010523004", TenLoaiTietKiem = "12 tháng", NhanTienGoiThem = true, ApDungSoTienGuiThemToiThieu = true }
             );
         }
 
@@ -110,6 +111,27 @@ namespace QuanLyDaiLy.Helpers
                     SoTienGui = 8000000m,
                     NgayMoSo = baseDate.AddDays(-50)
                 }
+            );
+        }
+
+        private static void SeedPhieuGoiTien(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<PhieuGoiTien>().HasData(
+                new
+                {
+                    MaPhieuGoiTien = "PGT0830010523001",
+                    MaSoTietKiem = "STK0830010523001",
+                    NgayGoi = new DateTime(2023, 2, 1),
+                    SoTienGui = 100000m
+                },
+                new
+                {
+                    MaPhieuGoiTien = "PGT0830010523002",
+                    MaSoTietKiem = "STK0836010523007",
+                    NgayGoi = new DateTime(2023, 3, 1),
+                    SoTienGui = 200000m
+                }
+                
             );
         }
     }

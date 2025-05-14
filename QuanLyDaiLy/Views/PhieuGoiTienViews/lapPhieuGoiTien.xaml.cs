@@ -20,10 +20,10 @@ namespace QuanLyDaiLy.Views
     /// </summary>
     public partial class lapPhieuGoiTien : Window
     {
-        public lapPhieuGoiTien(LoaiTietKiemViewModel viewModel)
+        public lapPhieuGoiTien(ThemPhieuGoiTienViewModel viewModel)
         {
             InitializeComponent();
-            DataContext = viewModel;
+            DataContext = viewModel;          
         }
     }
 }
