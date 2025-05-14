@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyDaiLy.Views"
         mc:Ignorable="d"
-        Title="lapPhieuGoiTien" Height="475" Width="462" Background="Transparent"
+        Title="lapPhieuGoiTien" Height="480" Width="462" Background="Transparent"
         WindowStyle="None" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         AllowsTransparency="True">
@@ -26,7 +26,7 @@
         <Grid Background="{StaticResource LayerOnMicaBaseAltDefaultBrush}">
             <!-- Apply clip to ensure the content doesn't overflow the rounded corners -->
             <Grid.Clip>
-                <RectangleGeometry Rect="0,0,462,475" RadiusX="12" RadiusY="12"/>
+                <RectangleGeometry Rect="0,0,462,480" RadiusX="12" RadiusY="12"/>
             </Grid.Clip>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
