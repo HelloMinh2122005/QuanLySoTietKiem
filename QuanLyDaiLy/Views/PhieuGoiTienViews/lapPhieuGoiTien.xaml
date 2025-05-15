@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyDaiLy.Views"
         mc:Ignorable="d"
-        Title="lapPhieuGoiTien" Height="480" Width="462" Background="Transparent"
+        Title="lapPhieuGoiTien" Height="480" Width="600" Background="Transparent"
         WindowStyle="None" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         AllowsTransparency="True">
@@ -26,7 +26,7 @@
         <Grid Background="{StaticResource LayerOnMicaBaseAltDefaultBrush}">
             <!-- Apply clip to ensure the content doesn't overflow the rounded corners -->
             <Grid.Clip>
-                <RectangleGeometry Rect="0,0,462,480" RadiusX="12" RadiusY="12"/>
+                <RectangleGeometry Rect="0,0,600,480" RadiusX="12" RadiusY="12"/>
             </Grid.Clip>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -116,7 +116,7 @@
                                 <RowDefinition Height="36"/>
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0"
-                                       Text="Mã phiếu"
+                                       Text="Mã phiếu gửi tiền"
                                        FontFamily="Segoe UI Variable"
                                        FontSize="14"
                                        Foreground="#000000"
@@ -170,21 +170,13 @@
                                         BorderThickness="1"
                                         Padding="22,3,3,3"
                                         SelectedDate="{Binding NgayGui}">
+
                                     <DatePicker.Resources>
-                                        <Style TargetType="DatePickerTextBox">
-                                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                        <Style TargetType="Button" x:Key="HideCalendarButton">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
                                         </Style>
                                     </DatePicker.Resources>
                                 </DatePicker>
-                                <TextBlock 
-                                        Text="&#xE787;" 
-                                        FontFamily="Segoe MDL2 Assets"
-                                        Foreground="#9A000000"
-                                        HorizontalAlignment="Left" 
-                                        VerticalAlignment="Center"
-                                        Margin="6,0,0,0"
-                                        FontSize="14"
-                                        IsHitTestVisible="False"/>
                             </Grid>
                         </Grid>
                     </Grid>
@@ -350,15 +342,6 @@
                                      TextAlignment="Left"
                                      BorderThickness="1" 
                                      Text="{Binding SoTienGui, UpdateSourceTrigger=PropertyChanged}" />
-
-                            <TextBlock Text="Đang áp dụng"
-                                       Grid.Row="1"
-                                       Foreground="#000000"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"
-                                       Margin="5,0,0,0"
-                                       IsHitTestVisible="False"
-                                       Visibility="Visible"/>
                         </Grid>
                     </Grid>
 
@@ -387,9 +370,8 @@
                                        Foreground="#000000"
                                        Margin="0,0,0,0"/>
                             <TextBox Grid.Row="1"
-                                     IsReadOnly="True"
                                      Height="30"
-                                     Background="#CBC7C4" 
+                                     Background="#FFFFFF"  
                                      BorderBrush="#33000000"
                                      HorizontalAlignment="Stretch"
                                      VerticalAlignment="Center"
@@ -437,15 +419,6 @@
                                         TextAlignment="Left"
                                         BorderThickness="1" 
                                         Text="{Binding SoTienGui, UpdateSourceTrigger=PropertyChanged}" />
-
-                            <TextBlock Text="Đang áp dụng"
-                                       Grid.Row="1"
-                                       Foreground="#000000"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"
-                                       Margin="5,0,0,0"
-                                       IsHitTestVisible="False"
-                                       Visibility="Visible"/>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -456,7 +429,7 @@
 
             <!-- List Nude -->
             <Grid Grid.Row="1" Background="#EBDFD7" VerticalAlignment="Center" Height="80">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                     <Button Command="{Binding LapSoCommand}" Width="120" Height="35" Background="#FFB498" Margin="0,0,20,0">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
@@ -507,7 +480,7 @@
                         <TextBlock Text="Tra cứu sổ tiết kiệm" FontFamily="Segoe UI Variable" FontSize="18" FontWeight="Normal" 
                                 TextAlignment="Center" Height="34" Foreground="#92492D"/>
                     </Button>
-                    <Button Width="120" Height="35" Background="#FFB498" Command="{Binding CloseCommand}">
+                    <Button Width="120" Height="35" Background="#FFB498" Margin="0,0,20,0" Command="{Binding CloseCommand}">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border x:Name="buttonBorder" Background="{TemplateBinding Background}" 
