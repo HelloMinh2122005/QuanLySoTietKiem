@@ -123,7 +123,8 @@
                                        VerticalAlignment="Center"/>
                             <TextBox Grid.Row="1"
                                      Height="30"
-                                     Background="Transparent"
+                                     IsReadOnly="True"
+                                     Background="#CBC7C4"
                                      BorderBrush="#33000000"
                                      BorderThickness="1"
                                      VerticalContentAlignment="Center"
@@ -131,7 +132,15 @@
                                      FontSize="14"
                                      Foreground="#9A000000"
                                      TextAlignment="Left"
-                                    Text="{Binding MaPhieu, Mode=OneWay}"/>
+                                     Text="{Binding MaPhieu, Mode=OneWay}"/>
+                            <TextBlock Text="Giá trị phát sinh"
+                                       Grid.Row="1"
+                                       Foreground="#000000"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="5,0,0,0"
+                                       IsHitTestVisible="False"
+                                       Visibility="Visible"/>
                         </Grid>
 
                         <!-- Ngày gởi tiền -->
@@ -325,8 +334,9 @@
                                        Foreground="#000000"
                                        Margin="0,0,0,0"/>
                             <TextBox  Grid.Row="1" 
+                                     IsReadOnly="True"
                                      Height="30"
-                                     Background="#FFFFFF" 
+                                     Background="#CBC7C4" 
                                      BorderBrush="#33000000"
                                      HorizontalAlignment="Stretch"
                                      VerticalAlignment="Center"
@@ -343,7 +353,7 @@
 
                             <TextBlock Text="Đang áp dụng"
                                        Grid.Row="1"
-                                       Foreground="Gray"
+                                       Foreground="#000000"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Left"
                                        Margin="5,0,0,0"
@@ -376,9 +386,10 @@
                                        FontSize="14"
                                        Foreground="#000000"
                                        Margin="0,0,0,0"/>
-                            <TextBox Grid.Row="1"                                
+                            <TextBox Grid.Row="1"
+                                     IsReadOnly="True"
                                      Height="30"
-                                     Background="#FFFFFF" 
+                                     Background="#CBC7C4" 
                                      BorderBrush="#33000000"
                                      HorizontalAlignment="Stretch"
                                      VerticalAlignment="Center"
@@ -409,9 +420,10 @@
                                        FontSize="14"
                                        Foreground="#000000"
                                        Margin="0,0,0,0"/>
-                            <TextBox  Grid.Row="1" 
+                            <TextBox  Grid.Row="1"
+                                        IsReadOnly="True"
                                         Height="30"
-                                        Background="#FFFFFF" 
+                                        Background="#CBC7C4" 
                                         BorderBrush="#33000000"
                                         HorizontalAlignment="Stretch"
                                         VerticalAlignment="Center"
@@ -428,7 +440,7 @@
 
                             <TextBlock Text="Đang áp dụng"
                                        Grid.Row="1"
-                                       Foreground="Gray"
+                                       Foreground="#000000"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Left"
                                        Margin="5,0,0,0"
@@ -443,7 +455,7 @@
             </Grid>
 
             <!-- List Nude -->
-            <Grid Grid.Row="1" Background="#E6F0F0F0" VerticalAlignment="Center" Height="80">
+            <Grid Grid.Row="1" Background="#EBDFD7" VerticalAlignment="Center" Height="80">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Button Command="{Binding LapSoCommand}" Width="120" Height="35" Background="#FFB498" Margin="0,0,20,0">
                         <Button.Template>
@@ -470,7 +482,7 @@
                         <TextBlock Text="Lập phiếu" FontFamily="Segoe UI Variable" FontSize="18" FontWeight="Normal" 
                                 TextAlignment="Center" Height="34" Foreground="#92492D"/>
                     </Button>
-                    <Button  Height="35" Background="#FFB498" Margin="0,0,20,0" Command="{Binding ThemSoCommand}">
+                    <Button  Height="35" Background="#FFB498" Margin="0,0,20,0" Command="{Binding LapPhieuCommand}">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border x:Name="buttonBorder" Background="{TemplateBinding Background}" 

@@ -299,7 +299,7 @@
                     Tag="KhachHang" />
                 <RadioButton
                     Checked="RadioButton_Checked"
-                    Content=" 💰 Loại tiết kiệm"
+                    Content=" 💰 Phiếu gửi tiền"
                     GroupName="NavGroup"
                     Style="{StaticResource NavButtonStyle}"
                     Tag="LoaiTietKiem" />
