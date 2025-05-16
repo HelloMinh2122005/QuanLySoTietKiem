@@ -25,5 +25,6 @@ namespace QuanLyDaiLy.Views
             InitializeComponent();
             DataContext = viewModel;          
         }
+
     }
 }
