@@ -33,13 +33,25 @@ public class BaoCaoDoanhSoViewModel: INotifyPropertyChanged
         }
     }
     
-    private ObservableCollection<BaoCaoDoanhSo> _baoCaoDoanhSo;
-    public ObservableCollection<BaoCaoDoanhSo> BaoCaoDoanhSo
+    private Decimal _tongDoanhSo;
+    
+    public Decimal TongDoanhSo
     {
-        get => _baoCaoDoanhSo;
+        get => _tongDoanhSo;
         set
         {
-            _baoCaoDoanhSo = value;
+            _tongDoanhSo = value;
+            OnPropertyChanged(nameof(TongDoanhSo));
+        }
+    }
+    
+    private ObservableCollection<BaoCaoDoanhSo> _dsBaoCaoDoanhSo;
+    public ObservableCollection<BaoCaoDoanhSo> DSBaoCaoDoanhSo
+    {
+        get => _dsBaoCaoDoanhSo;
+        set
+        {
+            _dsBaoCaoDoanhSo = value;
             OnPropertyChanged(nameof(BaoCaoDoanhSo));
         }
     }
@@ -68,8 +80,8 @@ public class BaoCaoDoanhSoViewModel: INotifyPropertyChanged
                 TongChi = tongChi
             };
         }).ToList();
-
-        BaoCaoDoanhSo = new ObservableCollection<BaoCaoDoanhSo>(baoCaoList);
+        DSBaoCaoDoanhSo = new ObservableCollection<BaoCaoDoanhSo>(baoCaoList);
+        TongDoanhSo = DSBaoCaoDoanhSo.Sum(b => b.ChenhLech);
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -84,4 +96,5 @@ public class BaoCaoDoanhSo
     public string LoaiTietKiem { get; set; }
     public decimal TongThu { get; set; }
     public decimal TongChi { get; set; }
+    public decimal ChenhLech => TongThu - TongChi;
 }
