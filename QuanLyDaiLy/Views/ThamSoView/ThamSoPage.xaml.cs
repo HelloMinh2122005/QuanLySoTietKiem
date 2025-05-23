@@ -13,21 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace QuanLyDaiLy.Views.PhieuRutTienViews
+namespace QuanLyDaiLy.Views.ThamSoView
 {
     /// <summary>
-    /// Interaction logic for DsPhieuRutTienPage.xaml
+    /// Interaction logic for ThamSoPage.xaml
     /// </summary>
-    public partial class DsPhieuRutTienPage : Page
+    public partial class ThamSoPage : Page
     {
-        public DsPhieuRutTienPage()
+        public ThamSoPage()
         {
             InitializeComponent();
-        }
-
-        private void DataGrid_LoadingRow(object sender, DataGridRowEventArgs e)
-        {
-            e.Row.Header = (e.Row.GetIndex() + 1).ToString();
         }
     }
 }

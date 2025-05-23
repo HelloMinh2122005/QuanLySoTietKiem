@@ -1,0 +1,395 @@
+﻿<Page
+    x:Class="QuanLyDaiLy.Views.BaoCaoDoanhSoViews.BaoCaoDoanhSoPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="DsPhieuGoiTien"
+    d:DesignHeight="930"
+    d:DesignWidth="1580"
+    Background="#EBDFD7"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <DropShadowEffect
+            x:Key="DropShadowEffect"
+            BlurRadius="10"
+            Opacity="0.5"
+            ShadowDepth="0"
+            Color="Black" />
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <!--  Tiêu đề  -->
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <!--  Thanh công cụ  -->
+            <RowDefinition Height="*" />
+            <!--  DataGrid  -->
+        </Grid.RowDefinitions>
+
+        <!--  Header  -->
+        <Grid
+            Grid.Row="0"
+            Margin="0,30,0,0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*" />
+                <ColumnDefinition Width="50*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock
+                Height="36"
+                Margin="30,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontFamily="Arial"
+                FontSize="32"
+                FontStyle="Normal"
+                FontWeight="Normal"
+                Foreground="#060606"
+                LineHeight="37"
+                Text="Lập báo cáo doanh số trong ngày"
+                TextAlignment="Center" />
+        </Grid>
+
+        <!--  Line  -->
+        <Border
+            Grid.Row="1"
+            Margin="30,10,30,0"
+            HorizontalAlignment="Stretch"
+            BorderBrush="#33000000"
+            BorderThickness="1" />
+
+        <!--  Overview  -->
+        <Grid
+            Grid.Row="2"
+            Margin="30,20,30,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="46" />
+            </Grid.RowDefinitions>
+            <TextBlock
+                Grid.Row="0"
+                Margin="0,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                FontFamily="Segoe UI Variable"
+                FontSize="20"
+                FontStyle="Normal"
+                FontWeight="SemiBold"
+                Foreground="#000000"
+                Text="Ngày lập báo cáo" />
+            <Border
+                Grid.Row="1"
+                Width="300"
+                Height="33"
+                Padding="2"
+                VerticalAlignment="Center"
+                Background="#FFFFFF"
+                BorderBrush="#33000000"
+                BorderThickness="1"
+                CornerRadius="4">
+                <DatePicker
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Background="#FFFFFF"
+                    BorderThickness="0"
+                    FontFamily="Segoe UI Variable"
+                    FontSize="14"
+                    FontStyle="Normal"
+                    FontWeight="Normal"
+                    Foreground="#9A000000"
+                    SelectedDate="{Binding NgayMoSo}">
+                    <DatePicker.Resources>
+                        <Style x:Key="HideCalendarButton" TargetType="Button">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </Style>
+                    </DatePicker.Resources>
+                </DatePicker>
+            </Border>
+        </Grid>
+
+        <Border
+            Grid.Row="3"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Stretch">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock
+                    VerticalAlignment="Center"
+                    FontFamily="Segoe UI Variable"
+                    FontSize="20"
+                    FontWeight="SemiBold"
+                    Foreground="#000000"
+                    Text="Tổng doanh số trong ngày của tất cả Sổ tiết kiệm  " />
+                <Border
+                    Width="300"
+                    Height="40"
+                    Margin="0,0,15,0"
+                    Padding="3"
+                    VerticalAlignment="Center"
+                    Background="#CBC7C4"
+                    CornerRadius="4">
+                    <TextBox
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        VerticalContentAlignment="Center"
+                        Background="#CBC7C4"
+                        BorderThickness="0"
+                        FontFamily="Segoe UI Variable"
+                        FontSize="14"
+                        FontStyle="Normal"
+                        FontWeight="Normal"
+                        Foreground="#9A000000"
+                        IsReadOnly="True"
+                        Text="{Binding KhachHang.DiaChi, UpdateSourceTrigger=PropertyChanged}"
+                        TextAlignment="Left" />
+                </Border>
+            </StackPanel>
+        </Border>
+
+        <!--  DataGrid  -->
+        <Border
+            Grid.Row="4"
+            Margin="30,18,30,20"
+            Padding="30"
+            VerticalAlignment="Stretch"
+            Background="#F2EAE5"
+            CornerRadius="17"
+            Effect="{StaticResource DropShadowEffect}">
+            <DataGrid
+                VerticalAlignment="Stretch"
+                AutoGenerateColumns="False"
+                Background="Transparent"
+                BorderThickness="0"
+                CanUserAddRows="False"
+                GridLinesVisibility="None"
+                HeadersVisibility="Column"
+                IsReadOnly="True"
+                ItemsSource="{Binding FilteredDanhSachPhieuGoiTien}"
+                LoadingRow="DataGrid_LoadingRow"
+                SelectedItem="{Binding SelectedPhieuGoiTien, Mode=TwoWay}">
+                <DataGrid.Resources>
+                    <!--  Cell style (kept unchanged)  -->
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="BorderThickness" Value="0" />
+                        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                        <Setter Property="Padding" Value="10,0" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="DataGridCell">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        SnapsToDevicePixels="True">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DataGrid.Resources>
+
+                <!--  RowStyle with triggers that add effects without changing original colors  -->
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="BorderThickness" Value="0,0,0,1" />
+                        <Setter Property="BorderBrush" Value="#E0E0E0" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect
+                                            BlurRadius="3"
+                                            Opacity="0.2"
+                                            ShadowDepth="0"
+                                            Color="Black" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#F47346" />
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect
+                                            BlurRadius="5"
+                                            Opacity="0.3"
+                                            ShadowDepth="0"
+                                            Color="Black" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+
+                <!--  ColumnHeaderStyle kept as original  -->
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        <Setter Property="Background" Value="#F2EAE5" />
+                        <Setter Property="Foreground" Value="#060606" />
+                        <Setter Property="FontFamily" Value="Arial" />
+                        <Setter Property="FontStyle" Value="Normal" />
+                        <Setter Property="FontWeight" Value="Normal" />
+                        <Setter Property="FontSize" Value="24" />
+                        <Setter Property="Padding" Value="0,0,0,0" />
+                        <Setter Property="BorderThickness" Value="0,0,0,0.5" />
+                        <Setter Property="BorderBrush" Value="#060606" />
+                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                        <Setter Property="Height" Value="40" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="DataGridColumnHeader">
+                                    <Grid>
+                                        <Border
+                                            Padding="5,0,5,0"
+                                            Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}">
+                                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="Center" />
+                                        </Border>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+
+                <!--  Columns (unchanged)  -->
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Width="Auto" Header="STT">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontSize="20"
+                                    Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}}, Path=Header}"
+                                    TextAlignment="Center">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected}" Value="True">
+                                                    <Setter Property="Foreground" Value="White" />
+                                                    <Setter Property="FontWeight" Value="SemiBold" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <!--  Mã phiếu Column  -->
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding MaPhieuGoiTien}"
+                        Header="Loại tiết kiệm">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="TextAlignment" Value="Center" />
+                                <Setter Property="LineHeight" Value="23" />
+                                <Setter Property="Padding" Value="0" />
+                                <Setter Property="Margin" Value="0" />
+                                <Setter Property="FontSize" Value="20" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected}" Value="True">
+                                        <Setter Property="Foreground" Value="White" />
+                                        <Setter Property="FontWeight" Value="SemiBold" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <!--  Mã sổ Column  -->
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding MaSoTietKiem}"
+                        Header="Tổng thu">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="TextAlignment" Value="Center" />
+                                <Setter Property="LineHeight" Value="23" />
+                                <Setter Property="Padding" Value="0" />
+                                <Setter Property="Margin" Value="0" />
+                                <Setter Property="FontSize" Value="20" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected}" Value="True">
+                                        <Setter Property="Foreground" Value="White" />
+                                        <Setter Property="FontWeight" Value="SemiBold" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <!--  Loại tiết kiệm Column  -->
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding LoaiTietKiem}"
+                        Header="Tổng chi">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="TextAlignment" Value="Center" />
+                                <Setter Property="LineHeight" Value="23" />
+                                <Setter Property="Padding" Value="0" />
+                                <Setter Property="Margin" Value="0" />
+                                <Setter Property="FontSize" Value="20" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected}" Value="True">
+                                        <Setter Property="Foreground" Value="White" />
+                                        <Setter Property="FontWeight" Value="SemiBold" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <!--  Tên khách hàng Column  -->
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding TenKhachHang}"
+                        Header="Chênh lệch">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="TextAlignment" Value="Left" />
+                                <Setter Property="LineHeight" Value="23" />
+                                <Setter Property="Padding" Value="0" />
+                                <Setter Property="Margin" Value="0" />
+                                <Setter Property="FontSize" Value="20" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected}" Value="True">
+                                        <Setter Property="Foreground" Value="White" />
+                                        <Setter Property="FontWeight" Value="SemiBold" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+    </Grid>
+</Page>

@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace QuanLyDaiLy.Views.PhieuRutTienViews
+namespace QuanLyDaiLy.Views.BaoCaoDongMoViews
 {
     /// <summary>
-    /// Interaction logic for DsPhieuRutTienPage.xaml
+    /// Interaction logic for BaoCaoDongMoPage.xaml
     /// </summary>
-    public partial class DsPhieuRutTienPage : Page
+    public partial class BaoCaoDongMoPage : Page
     {
-        public DsPhieuRutTienPage()
+        public BaoCaoDongMoPage()
         {
             InitializeComponent();
         }
