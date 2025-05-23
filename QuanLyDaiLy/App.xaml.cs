@@ -5,6 +5,7 @@ using QuanLyDaiLy.Views;
 using System.Windows;
 using Microsoft.EntityFrameworkCore;
 using QuanLyDaiLy.Repositories;
+using QuanLyDaiLy.Views.BaoCaoDoanhSoViews;
 
 namespace QuanLyDaiLy;
 

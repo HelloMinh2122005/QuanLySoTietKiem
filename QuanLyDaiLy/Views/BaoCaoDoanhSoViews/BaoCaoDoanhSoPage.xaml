@@ -106,7 +106,7 @@
                     FontStyle="Normal"
                     FontWeight="Normal"
                     Foreground="#9A000000"
-                    SelectedDate="{Binding NgayMoSo}">
+                    SelectedDate="{Binding SelectedDate}">
                     <DatePicker.Resources>
                         <Style x:Key="HideCalendarButton" TargetType="Button">
                             <Setter Property="Visibility" Value="Collapsed" />
