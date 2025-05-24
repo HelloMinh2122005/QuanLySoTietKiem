@@ -302,7 +302,31 @@
                     Content=" 💰 Phiếu gửi tiền"
                     GroupName="NavGroup"
                     Style="{StaticResource NavButtonStyle}"
-                    Tag="LoaiTietKiem" />
+                    Tag="PhieuGoiTien" />
+                <RadioButton
+                    Checked="RadioButton_Checked"
+                    Content=" 💰 Phiếu rút tiền"
+                    GroupName="NavGroup"
+                    Style="{StaticResource NavButtonStyle}"
+                    Tag="PhieuRutTien" />
+                <RadioButton
+                    Checked="RadioButton_Checked"
+                    Content=" 💰 Báo cáo Doanh số"
+                    GroupName="NavGroup"
+                    Style="{StaticResource NavButtonStyle}"
+                    Tag="BaoCaoDoanhSo" />
+                <RadioButton
+                    Checked="RadioButton_Checked"
+                    Content=" 💰 Báo cáo Đóng mở"
+                    GroupName="NavGroup"
+                    Style="{StaticResource NavButtonStyle}"
+                    Tag="BaoCaoDongMo" />
+                <RadioButton
+                    Checked="RadioButton_Checked"
+                    Content=" 💰 Tham số"
+                    GroupName="NavGroup"
+                    Style="{StaticResource NavButtonStyle}"
+                    Tag="ThamSo" />
             </StackPanel>
 
             <Border

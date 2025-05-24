@@ -3,10 +3,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
+using QuanLyDaiLy.Views.BaoCaoDoanhSoViews;
+using QuanLyDaiLy.Views.BaoCaoDongMoViews;
 using QuanLyDaiLy.Views.CustomAnimation;
 using QuanLyDaiLy.Views.DashboardViews;
 using QuanLyDaiLy.Views.KhachHangViews;
 using QuanLyDaiLy.Views.PhieuGoiTienViews;
+using QuanLyDaiLy.Views.PhieuRutTienViews;
+using QuanLyDaiLy.Views.ThamSoView;
 
 namespace QuanLyDaiLy.Views
 {
@@ -105,9 +109,25 @@ namespace QuanLyDaiLy.Views
                     var dashboardPage = _serviceProvider.GetRequiredService<DashboardPage>();
                     MainContent.Navigate(dashboardPage);
                     break;
-                case "LoaiTietKiem":
+                case "PhieuGoiTien":
                     var DsPhieuGoiTien = _serviceProvider.GetRequiredService<DsPhieuGoiTien>();
                     MainContent.Navigate(DsPhieuGoiTien);
+                    break;
+                case "PhieuRutTien":
+                    var DsPhieuRutTien = _serviceProvider.GetRequiredService<DsPhieuRutTienPage>();
+                    MainContent.Navigate(DsPhieuRutTien);
+                    break;
+                case "BaoCaoDoanhSo":
+                    var baoCaoDoanhSoPage = _serviceProvider.GetRequiredService<BaoCaoDoanhSoPage>();
+                    MainContent.Navigate(baoCaoDoanhSoPage);
+                    break;
+                case "BaoCaoDongMo":
+                    var baoCaoDongMoPage = _serviceProvider.GetRequiredService<BaoCaoDongMoPage>();
+                    MainContent.Navigate(baoCaoDongMoPage);
+                    break;
+                case "ThamSo":
+                    var thamSoPage = _serviceProvider.GetRequiredService<ThamSoPage>();
+                    MainContent.Navigate(thamSoPage);
                     break;
                 default:
                     break;
