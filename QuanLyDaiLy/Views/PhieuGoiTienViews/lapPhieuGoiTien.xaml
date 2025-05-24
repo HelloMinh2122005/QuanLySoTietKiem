@@ -157,7 +157,7 @@
                                     FontWeight="Normal"
                                     Foreground="#9A000000"
                                     IsReadOnly="True"
-                                    Text="{Binding SoTienGui, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding MaPhieuGoiTien, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
                         </Grid>
@@ -193,7 +193,7 @@
                                     FontStyle="Normal"
                                     FontWeight="Normal"
                                     Foreground="#9A000000"
-                                    SelectedDate="{Binding NgayGui}">
+                                    SelectedDate="{Binding NgayGoi}">
                                     <DatePicker.Resources>
                                         <Style x:Key="HideCalendarButton" TargetType="Button">
                                             <Setter Property="Visibility" Value="Collapsed" />
@@ -247,7 +247,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     Foreground="#9A000000"
-                                    Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding MaSoTietKiem, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
                         </Grid>
@@ -286,7 +286,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     Foreground="#9A000000"
-                                    Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding TenLoaiTietKiem, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
                         </Grid>
@@ -374,7 +374,7 @@
                                     FontWeight="Normal"
                                     Foreground="#9A000000"
                                     IsReadOnly="True"
-                                    Text="{Binding SoTienGui, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding FieldStatusText, Mode=OneWay}"
                                     TextAlignment="Left" />
                             </Border>
                         </Grid>
@@ -422,7 +422,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     Foreground="#9A000000"
-                                    Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding SoTienGui, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
                         </Grid>
@@ -462,7 +462,7 @@
                                     FontWeight="Normal"
                                     Foreground="#9A000000"
                                     IsReadOnly="True"
-                                    Text="{Binding SoTienGui, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="Đang áp dụng"
                                     TextAlignment="Left" />
                             </Border>
                         </Grid>
@@ -493,7 +493,7 @@
                         Height="35"
                         Margin="0,0,20,0"
                         Background="#FFB498"
-                        Command="{Binding LapSoCommand}">
+                        Command="{Binding LapPhieuCommand}">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border
