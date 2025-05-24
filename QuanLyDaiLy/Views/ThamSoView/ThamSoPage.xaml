@@ -327,7 +327,7 @@
                                                         </MultiTrigger.Conditions>
                                                         <Setter TargetName="SwitchTrack" Property="Background">
                                                             <Setter.Value>
-                                                                <SolidColorBrush Opacity="0.9" Color="#2871DF" />
+                                                                <SolidColorBrush Opacity="0.9" Color="#D34816" />
                                                             </Setter.Value>
                                                         </Setter>
                                                     </MultiTrigger>
@@ -416,7 +416,7 @@
                                                         </MultiTrigger.Conditions>
                                                         <Setter TargetName="SwitchTrack" Property="Background">
                                                             <Setter.Value>
-                                                                <SolidColorBrush Opacity="0.9" Color="#2871DF" />
+                                                                <SolidColorBrush Opacity="0.9" Color="#D34816" />
                                                             </Setter.Value>
                                                         </Setter>
                                                     </MultiTrigger>
