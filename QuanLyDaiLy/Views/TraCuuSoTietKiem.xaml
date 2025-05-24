@@ -166,7 +166,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     Foreground="#9A000000"
-                                    Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding MaSoTietKiem, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
                         </Grid>
@@ -202,11 +202,11 @@
                                 FontStyle="Normal"
                                 FontWeight="Normal"
                                 Foreground="#000000"
-                                ItemsSource="{Binding LoaiDaiLies}"
-                                SelectedItem="{Binding SelectedLoaiDaiLy}">
+                                ItemsSource="{Binding DsLoaiTietKiem}"
+                                SelectedItem="{Binding LoaiTietKiemSelected}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding TenLoaiDaiLy}" />
+                                        <TextBlock Text="{Binding TenLoaiTietKiem}" />
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                                 <ComboBox.Template>
@@ -483,7 +483,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     Foreground="#9A000000"
-                                    Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding CMMND, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
                         </Grid>
@@ -554,7 +554,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     Foreground="#9A000000"
-                                    Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding LaiSuatTu, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
                             <TextBlock
@@ -581,7 +581,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     Foreground="#9A000000"
-                                    Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding LaiSuatDen, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
                         </StackPanel>
@@ -619,7 +619,7 @@
                                     FontStyle="Normal"
                                     FontWeight="Normal"
                                     Foreground="#9A000000"
-                                    SelectedDate="{Binding NgayGui}">
+                                    SelectedDate="{Binding NgayMoSoTu}">
                                     <DatePicker.Resources>
                                         <Style x:Key="HideCalendarButton" TargetType="Button">
                                             <Setter Property="Visibility" Value="Collapsed" />
@@ -651,7 +651,7 @@
                                     FontStyle="Normal"
                                     FontWeight="Normal"
                                     Foreground="#9A000000"
-                                    SelectedDate="{Binding NgayGui}">
+                                    SelectedDate="{Binding NgayMoSoDen}">
                                     <DatePicker.Resources>
                                         <Style x:Key="HideCalendarButton" TargetType="Button">
                                             <Setter Property="Visibility" Value="Collapsed" />
@@ -685,7 +685,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     Foreground="#9A000000"
-                                    Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding SoDuTu, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
                             <TextBlock
@@ -712,7 +712,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     Foreground="#9A000000"
-                                    Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding SoDuDen, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
                         </StackPanel>
@@ -750,7 +750,7 @@
                                     FontStyle="Normal"
                                     FontWeight="Normal"
                                     Foreground="#9A000000"
-                                    SelectedDate="{Binding NgayGui}">
+                                    SelectedDate="{Binding NgayGuiPhieuGuiTienTu}">
                                     <DatePicker.Resources>
                                         <Style x:Key="HideCalendarButton" TargetType="Button">
                                             <Setter Property="Visibility" Value="Collapsed" />
@@ -782,7 +782,7 @@
                                     FontStyle="Normal"
                                     FontWeight="Normal"
                                     Foreground="#9A000000"
-                                    SelectedDate="{Binding NgayGui}">
+                                    SelectedDate="{Binding NgayGuiPhieuGuiTienDen}">
                                     <DatePicker.Resources>
                                         <Style x:Key="HideCalendarButton" TargetType="Button">
                                             <Setter Property="Visibility" Value="Collapsed" />
@@ -889,7 +889,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     Foreground="#9A000000"
-                                    Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding SoTienGuiTu, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
                             <TextBlock
@@ -916,7 +916,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     Foreground="#9A000000"
-                                    Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding SoTienGuiDen, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
                         </StackPanel>
@@ -945,7 +945,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     Foreground="#9A000000"
-                                    Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding SoTienGuiTu, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
                             <TextBlock
@@ -972,7 +972,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     Foreground="#9A000000"
-                                    Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding SoTienGuiDen, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
                         </StackPanel>
@@ -1120,7 +1120,7 @@
                         Height="35"
                         Margin="0,0,20,0"
                         Background="#FFB498"
-                        Command="{Binding LapPhieuCommand}">
+                        Command="{Binding SearchCommand}">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border

@@ -91,4 +91,105 @@ public class SoTietKiemRepository : ISoTietKiemRepo
 
         return await query.Include(stk => stk.KhachHang).ToListAsync();
     }
+    
+    public async Task<IEnumerable<SoTietKiem>> SearchSoTietKiem(
+    string? maSoTietKiem,
+    LoaiTietKiem? loaiTietKiem,
+    string? cmnd,
+    string? tenKhachHang,
+    decimal? laiSuatTu,
+    decimal? laiSuatDen,
+    DateTime? ngayMoSoTu,
+    DateTime? ngayMoSoDen,
+    decimal? soDuTu,
+    decimal? soDuDen,
+    DateTime? ngayGuiPhieuGuiTienTu,
+    DateTime? ngayGuiPhieuGuiTienDen,
+    DateTime? ngayGuiPhieuRutTienTu,
+    DateTime? ngayGuiPhieuRutTienDen,
+    decimal? soTienGuiTu,
+    decimal? soTienGuiDen,
+    decimal? soTienRutTu,
+    decimal? soTienRutDen,
+    int? soLuongPhieuGuiTienTu,
+    int? soLuongPhieuGuiTienDen,
+    int? soLuongPhieuRutTienTu,
+    int? soLuongPhieuRutTienDen)
+{
+    var query = _dataContext.DsSoTietKiem
+        .Include(stk => stk.LoaiTietKiem)
+        .Include(stk => stk.KhachHang)
+        .Include(stk => stk.DsPhieuGoiTien)
+        // .Include(stk => stk.DsPhieuRutTien)
+        .AsQueryable();
+
+    if (!string.IsNullOrEmpty(maSoTietKiem))
+        query = query.Where(stk => stk.MaSoTietKiem.Contains(maSoTietKiem));
+
+    string tenLoaiTietKiem = loaiTietKiem?.TenLoaiTietKiem;
+    if (!string.IsNullOrEmpty(tenLoaiTietKiem))
+        query = query.Where(stk => stk.LoaiTietKiem.TenLoaiTietKiem.Contains(tenLoaiTietKiem));
+
+    if (!string.IsNullOrEmpty(cmnd))
+        query = query.Where(stk => stk.KhachHang.CMND.Contains(cmnd));
+
+    if (!string.IsNullOrEmpty(tenKhachHang))
+        query = query.Where(stk => stk.KhachHang.TenKhachHang.Contains(tenKhachHang));
+
+    if (laiSuatTu.HasValue)
+        query = query.Where(stk => stk.LoaiTietKiem.LaiSuat >= laiSuatTu.Value);
+
+    if (laiSuatDen.HasValue)
+        query = query.Where(stk => stk.LoaiTietKiem.LaiSuat <= laiSuatDen.Value);
+
+    if (ngayMoSoTu.HasValue)
+        query = query.Where(stk => stk.NgayMoSo >= ngayMoSoTu.Value);
+
+    if (ngayMoSoDen.HasValue)
+        query = query.Where(stk => stk.NgayMoSo <= ngayMoSoDen.Value);
+
+    if (soDuTu.HasValue)
+        query = query.Where(stk => stk.SoTienGui >= soDuTu.Value);
+
+    if (soDuDen.HasValue)
+        query = query.Where(stk => stk.SoTienGui <= soDuDen.Value);
+
+    if (ngayGuiPhieuGuiTienTu.HasValue)
+        query = query.Where(stk => stk.DsPhieuGoiTien.Any(pgt => pgt.NgayGoi >= ngayGuiPhieuGuiTienTu.Value));
+
+    if (ngayGuiPhieuGuiTienDen.HasValue)
+        query = query.Where(stk => stk.DsPhieuGoiTien.Any(pgt => pgt.NgayGoi <= ngayGuiPhieuGuiTienDen.Value));
+
+    // if (ngayGuiPhieuRutTienTu.HasValue)
+    //     query = query.Where(stk => stk.DsPhieuRutTien.Any(prt => prt.NgayLapPhieu >= ngayGuiPhieuRutTienTu.Value));
+    //
+    // if (ngayGuiPhieuRutTienDen.HasValue)
+    //     query = query.Where(stk => stk.DsPhieuRutTien.Any(prt => prt.NgayLapPhieu <= ngayGuiPhieuRutTienDen.Value));
+
+    if (soTienGuiTu.HasValue)
+        query = query.Where(stk => stk.DsPhieuGoiTien.Any(pgt => pgt.SoTienGui >= soTienGuiTu.Value));
+
+    if (soTienGuiDen.HasValue)
+        query = query.Where(stk => stk.DsPhieuGoiTien.Any(pgt => pgt.SoTienGui <= soTienGuiDen.Value));
+
+    // if (soTienRutTu.HasValue)
+    //     query = query.Where(stk => stk.DsPhieuRutTien.Any(prt => prt.SoTienRut >= soTienRutTu.Value));
+    //
+    // if (soTienRutDen.HasValue)
+    //     query = query.Where(stk => stk.DsPhieuRutTien.Any(prt => prt.SoTienRut <= soTienRutDen.Value));
+
+    if (soLuongPhieuGuiTienTu.HasValue)
+        query = query.Where(stk => stk.DsPhieuGoiTien.Count >= soLuongPhieuGuiTienTu.Value);
+
+    if (soLuongPhieuGuiTienDen.HasValue)
+        query = query.Where(stk => stk.DsPhieuGoiTien.Count <= soLuongPhieuGuiTienDen.Value);
+
+    // if (soLuongPhieuRutTienTu.HasValue)
+    //     query = query.Where(stk => stk.DsPhieuRutTien.Count >= soLuongPhieuRutTienTu.Value);
+    //
+    // if (soLuongPhieuRutTienDen.HasValue)
+    //     query = query.Where(stk => stk.DsPhieuRutTien.Count <= soLuongPhieuRutTienDen.Value);
+
+    return await query.ToListAsync();
+}
 }

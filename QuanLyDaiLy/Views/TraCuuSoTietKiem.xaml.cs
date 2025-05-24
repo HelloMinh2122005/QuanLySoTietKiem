@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using QuanLyDaiLy.ViewModels;
 
 namespace QuanLyDaiLy.Views
 {
@@ -19,9 +20,10 @@ namespace QuanLyDaiLy.Views
     /// </summary>
     public partial class TraCuuSoTietKiem : Window
     {
-        public TraCuuSoTietKiem()
+        public TraCuuSoTietKiem(TraCuuSoTietKiemViewModel viewModel)
         {
             InitializeComponent();
+            this.DataContext = viewModel; 
         }
     }
 }

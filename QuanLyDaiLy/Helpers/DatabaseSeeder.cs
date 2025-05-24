@@ -24,10 +24,10 @@ namespace QuanLyDaiLy.Helpers
         private static void SeedLoaiTietKiem(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<LoaiTietKiem>().HasData(
-                new { MaLoaiTietKiem = "LTK0830010523001", TenLoaiTietKiem = "Không kỳ hạn", NhanTienGoiThem = true, ApDungSoTienGuiThemToiThieu = true },
-                new { MaLoaiTietKiem = "LTK0831010523002", TenLoaiTietKiem = "3 tháng", NhanTienGoiThem = true, ApDungSoTienGuiThemToiThieu = true },
-                new { MaLoaiTietKiem = "LTK0832010523003", TenLoaiTietKiem = "6 tháng", NhanTienGoiThem = true, ApDungSoTienGuiThemToiThieu = true },
-                new { MaLoaiTietKiem = "LTK0833010523004", TenLoaiTietKiem = "12 tháng", NhanTienGoiThem = true, ApDungSoTienGuiThemToiThieu = true }
+                new { MaLoaiTietKiem = "LTK0830010523001", TenLoaiTietKiem = "Không kỳ hạn", NhanTienGoiThem = true, ApDungSoTienGuiThemToiThieu = true, LaiSuat = 0.05m },
+                new { MaLoaiTietKiem = "LTK0831010523002", TenLoaiTietKiem = "3 tháng", NhanTienGoiThem = true, ApDungSoTienGuiThemToiThieu = true,  LaiSuat = 0.075m},
+                new { MaLoaiTietKiem = "LTK0832010523003", TenLoaiTietKiem = "6 tháng", NhanTienGoiThem = true, ApDungSoTienGuiThemToiThieu = true, LaiSuat = 0.1m },
+                new { MaLoaiTietKiem = "LTK0833010523004", TenLoaiTietKiem = "12 tháng", NhanTienGoiThem = true, ApDungSoTienGuiThemToiThieu = true, LaiSuat = 0.12m }
             );
         }
 
