@@ -27,7 +27,7 @@ public class BaoCaoDoanhSoViewModel: INotifyPropertyChanged
             if (_selectedDate != value)
             {
                 _selectedDate = value;
-                Console.Out.WriteLine(value);
+                LapBaoCaoDoanhSo();
                 OnPropertyChanged(nameof(SelectedDate));
             }
         }
@@ -52,7 +52,7 @@ public class BaoCaoDoanhSoViewModel: INotifyPropertyChanged
         set
         {
             _dsBaoCaoDoanhSo = value;
-            OnPropertyChanged(nameof(BaoCaoDoanhSo));
+            OnPropertyChanged(nameof(DSBaoCaoDoanhSo));
         }
     }
 
