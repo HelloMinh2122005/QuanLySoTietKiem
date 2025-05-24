@@ -75,7 +75,7 @@ namespace QuanLyDaiLy.ViewModels
                 // Clear fields if MaSoTietKiem is empty
                 TenKhachHang = string.Empty;
                 TenLoaiTietKiem = string.Empty;
-                IsFieldsEnabled = true; // Enable fields for user input
+                IsFieldsEnabled = false; // Enable fields for user input
                 return;
             }
 
@@ -166,7 +166,7 @@ namespace QuanLyDaiLy.ViewModels
             }
         }
 
-        private bool _isFieldsEnabled = true;
+        private bool _isFieldsEnabled = false;
         public bool IsFieldsEnabled
         {
             get => _isFieldsEnabled;
@@ -176,8 +176,14 @@ namespace QuanLyDaiLy.ViewModels
                 {
                     _isFieldsEnabled = value;
                     OnPropertyChanged();
+                    OnPropertyChanged(nameof(FieldStatusText));
                 }
             }
+        }
+
+        public string FieldStatusText
+        {
+            get => IsFieldsEnabled ? "Đang áp dụng" : string.Empty;
         }
 
         public ThemPhieuGoiTienViewModel(IPhieuGoiTienRepo phieuGoiTienRepo, ISoTietKiemRepo soTietKiemRepo, IKhachHangRepo khachHangRepo, IThamSoRepo thamSoRepo, ILoaiTietKiemRepo loaitietkiemRepo)
