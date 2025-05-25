@@ -16,8 +16,6 @@ namespace QuanLyDaiLy.ViewModels
     {
         public ICommand CloseCommand { get; }
         public ICommand LapPhieuCommand { get;  } 
-        public ICommand LoadFieldsCommand { get; set; }
-
 
         public event EventHandler<PhieuGoiTien>? LapPhieuEvent;
         private readonly IPhieuGoiTienRepo _phieuGoiTienRepo;
@@ -64,11 +62,12 @@ namespace QuanLyDaiLy.ViewModels
                 {
                     _maSoTietKiem = value;
                     OnPropertyChanged();
+                    LoadFields(); // Load fields when MaSoTietKiem changes
                 }
             }
         }
 
-        private async Task LoadFields()
+        private async void LoadFields()
         {
             if (string.IsNullOrEmpty(MaSoTietKiem))
             {
@@ -197,7 +196,6 @@ namespace QuanLyDaiLy.ViewModels
             //command
             CloseCommand = new RelayCommand(ExecuteClose);
             LapPhieuCommand = new RelayCommand(LapPhieu);
-            LoadFieldsCommand = new RelayCommand(async () => await LoadFields());
             //load fields
             NgayGoi = DateTime.Now;
         }
@@ -251,6 +249,11 @@ namespace QuanLyDaiLy.ViewModels
 
         private async Task<string> ValidateFields()
         {
+            if (MaSoTietKiem == null || MaSoTietKiem.Trim() == "")
+            {
+                return "Vui lòng chọn sổ tiết kiệm.";
+            }
+
             var thamSo = await _thamSoRepo.Get();
             
             if (SoTienGui < thamSo.SoTienGuiThemToiThieu)

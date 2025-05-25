@@ -18,7 +18,6 @@ namespace QuanLyDaiLy.ViewModels
     {
         public ICommand CloseCommand { get; set; }
         public ICommand LapPhieuCommand { get; set; }
-        public ICommand LoadFieldsCommand { get; set; }
 
         public EventHandler<PhieuRutTien>? LapPhieuEvent;
         private readonly IPhieuRutTienRepo _phieuRutTienRepo;
@@ -65,11 +64,12 @@ namespace QuanLyDaiLy.ViewModels
                 {
                     _maSoTietKiem = value;
                     OnPropertyChanged();
+                    LoadFields(); //UI update
                 }
             }
         }
 
-        private async Task LoadFields()
+        private async void LoadFields()
         {
             if (string.IsNullOrEmpty(MaSoTietKiem))
             {
@@ -315,7 +315,6 @@ namespace QuanLyDaiLy.ViewModels
             //commands
             CloseCommand = new RelayCommand(ExecuteClose);
             LapPhieuCommand = new RelayCommand(LapPhieu);
-            LoadFieldsCommand = new RelayCommand(async() => await LoadFields());
 
             //load fields 
             NgayRut = DateTime.Now;
@@ -377,6 +376,11 @@ namespace QuanLyDaiLy.ViewModels
 
         private async Task<string> ValidateFields()
         {
+            if (MaSoTietKiem == null || MaSoTietKiem.Trim() == "")
+            {
+                return "Vui lòng chọn số tiết kiệm để rút tiền.";
+            }
+
             var soTietKiem = await _soTietKiemRepo.GetById(MaSoTietKiem);
             if (soTietKiem == null)
             {
@@ -385,11 +389,6 @@ namespace QuanLyDaiLy.ViewModels
             if (soTietKiem.DangMo == false)
             {
                 return "Số tiết kiệm đã đóng, không thể rút tiền.";
-            }
-
-            if (MaSoTietKiem == string.Empty)
-            {
-                return "Vui lòng chọn số tiết kiệm để rút tiền.";
             }
 
             var daysSinceOpened = (DateTime.Now - soTietKiem.NgayMoSo).TotalDays;
