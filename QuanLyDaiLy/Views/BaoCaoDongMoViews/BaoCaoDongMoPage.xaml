@@ -592,7 +592,7 @@
                 GridLinesVisibility="None"
                 HeadersVisibility="Column"
                 IsReadOnly="True"
-                ItemsSource="{Binding FilteredDanhSachPhieuGoiTien}"
+                ItemsSource="{Binding FilteredDanhSachBaoCao}"
                 LoadingRow="DataGrid_LoadingRow"
                 SelectedItem="{Binding SelectedPhieuGoiTien, Mode=TwoWay}">
                 <DataGrid.Resources>
@@ -713,10 +713,10 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <!--  Mã phiếu Column  -->
+                    <!--  Ngay mở đóng sổ Column  -->
                     <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding MaPhieuGoiTien}"
+                        Binding="{Binding NgayMoDongSo, StringFormat='dd/MM/yyyy'}"
                         Header="Ngày mở/đóng sổ">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
@@ -737,10 +737,10 @@
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
 
-                    <!--  Mã sổ Column  -->
+                    <!--  Số lượng sổ mở Column  -->
                     <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding MaSoTietKiem}"
+                        Binding="{Binding SoLuongSoMo}"
                         Header="Số lượng Sổ mở">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
@@ -761,10 +761,10 @@
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
 
-                    <!--  Loại tiết kiệm Column  -->
+                    <!--  Số lượng sổ đóng Column  -->
                     <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding LoaiTietKiem}"
+                        Binding="{Binding SoLuongSoDong}"
                         Header="Số lượng Sổ đóng">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
@@ -785,10 +785,10 @@
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
 
-                    <!--  Tên khách hàng Column  -->
+                    <!--  Chênh lệch Column  -->
                     <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding TenKhachHang}"
+                        Binding="{Binding ChenhLech}"
                         Header="Chênh lệch">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
