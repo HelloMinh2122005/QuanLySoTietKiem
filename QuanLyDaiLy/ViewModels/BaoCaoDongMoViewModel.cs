@@ -48,6 +48,7 @@ public class BaoCaoDongMoViewModel : INotifyPropertyChanged
         }
     }
 
+    public ObservableCollection<int> Months { get; } = new ObservableCollection<int>(Enumerable.Range(1, 12));
     private int _selectedMonth;
     public int SelectedMonth
     {
@@ -63,6 +64,34 @@ public class BaoCaoDongMoViewModel : INotifyPropertyChanged
         }
     }
 
+    private int _tongSoMo;
+    public int TongSoMo
+    {
+        get => _tongSoMo;
+        set
+        {
+            if (_tongSoMo != value)
+            {
+                _tongSoMo = value;
+                OnPropertyChanged(nameof(TongSoMo));
+            }
+        }
+    }
+    private int _tongSoDong;
+    public int TongSoDong
+    {
+        get => _tongSoDong;
+        set
+        {
+            if (_tongSoDong != value)
+            {
+                _tongSoDong = value;
+                OnPropertyChanged(nameof(TongSoDong));
+            }
+        }
+    }
+
+    public ObservableCollection<int> Years { get; } = new ObservableCollection<int>(Enumerable.Range(2020,DateTime.Now.Year-2020+1));
     private int _selectedYear;
     public int SelectedYear
     {
@@ -102,6 +131,8 @@ public class BaoCaoDongMoViewModel : INotifyPropertyChanged
             .ToList();
 
         var phieuRutTienList = (await _phieuRutTienRepo.GetAll()).ToList();
+        int tongMo = 0;
+        int tongDong = 0;
 
         int daysInMonth = DateTime.DaysInMonth(SelectedYear, SelectedMonth);
 
@@ -111,7 +142,7 @@ public class BaoCaoDongMoViewModel : INotifyPropertyChanged
 
             // Sổ mở trong ngày
             int soMo = soTietKiemList.Count(stk => stk.NgayMoSo.Date == date.Date);
-
+            tongMo += soMo;
             // Sổ đóng trong ngày
             int soDong = soTietKiemList.Count(stk =>
                 stk.DangMo == false &&
@@ -121,6 +152,7 @@ public class BaoCaoDongMoViewModel : INotifyPropertyChanged
                     .FirstOrDefault() is { } lastRutTien &&
                 lastRutTien.NgayRut.Date == date.Date
             );
+            tongDong += soDong;
 
             FilteredDanhSachBaoCao.Add(new BaoCaoDongMoItem
             {
@@ -130,6 +162,8 @@ public class BaoCaoDongMoViewModel : INotifyPropertyChanged
                 ChenhLech = Math.Abs(soMo - soDong)
             });
         }
+        TongSoMo = tongMo;
+        TongSoDong = tongDong;
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
