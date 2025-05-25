@@ -148,7 +148,7 @@
                         FontWeight="Normal"
                         Foreground="#9A000000"
                         IsReadOnly="True"
-                        Text="{Binding TongDoanhSo, StringFormat='{}{0:N0} VNĐ',qUpdateSourceTrigger=PropertyChanged}"
+                        Text="{Binding TongDoanhSo, StringFormat='{}{0:N0} VNĐ', UpdateSourceTrigger=PropertyChanged}"
                         TextAlignment="Left" />
                 </Border>
             </StackPanel>
