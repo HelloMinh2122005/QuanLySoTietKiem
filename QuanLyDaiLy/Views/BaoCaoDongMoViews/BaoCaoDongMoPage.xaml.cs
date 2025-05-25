@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using QuanLyDaiLy.Interfaces;
+using QuanLyDaiLy.ViewModels;
 
 namespace QuanLyDaiLy.Views.BaoCaoDongMoViews
 {
@@ -20,9 +22,13 @@ namespace QuanLyDaiLy.Views.BaoCaoDongMoViews
     /// </summary>
     public partial class BaoCaoDongMoPage : Page
     {
-        public BaoCaoDongMoPage()
+        public BaoCaoDongMoPage(
+            ISoTietKiemRepo soTietKiemRepo,
+            ILoaiTietKiemRepo loaiTietKiemRepo,
+            IPhieuRutTienRepo phieuRutTienRepo)
         {
             InitializeComponent();
+            DataContext = new BaoCaoDongMoViewModel(soTietKiemRepo, loaiTietKiemRepo, phieuRutTienRepo);
         }
 
         private void DataGrid_LoadingRow(object sender, DataGridRowEventArgs e)

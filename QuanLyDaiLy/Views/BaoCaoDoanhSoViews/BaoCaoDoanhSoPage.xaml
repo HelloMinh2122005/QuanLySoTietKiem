@@ -148,7 +148,7 @@
                         FontWeight="Normal"
                         Foreground="#9A000000"
                         IsReadOnly="True"
-                        Text="{Binding TongDoanhSo, UpdateSourceTrigger=PropertyChanged}"
+                        Text="{Binding TongDoanhSo, StringFormat='{}{0:N0} VNĐ', UpdateSourceTrigger=PropertyChanged}"
                         TextAlignment="Left" />
                 </Border>
             </StackPanel>
@@ -320,7 +320,7 @@
                     <!--  Mã sổ Column  -->
                     <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding TongThu}"
+                        Binding="{Binding TongThu, StringFormat='{}{0:N0} VNĐ'}"
                         Header="Tổng thu">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
@@ -344,7 +344,7 @@
                     <!--  Loại tiết kiệm Column  -->
                     <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding TongChi}"
+                        Binding="{Binding TongChi, StringFormat='{}{0:N0} VNĐ'}"
                         Header="Tổng chi">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
@@ -368,7 +368,7 @@
                     <!--  Tên khách hàng Column  -->
                     <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding ChenhLech}"
+                        Binding="{Binding ChenhLech, StringFormat='{}{0:N0} VNĐ'}"
                         Header="Chênh lệch">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">

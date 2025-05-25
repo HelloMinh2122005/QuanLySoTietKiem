@@ -342,11 +342,11 @@
                                 FontStyle="Normal"
                                 FontWeight="Normal"
                                 Foreground="#000000"
-                                ItemsSource="{Binding LoaiDaiLies}"
-                                SelectedItem="{Binding SelectedLoaiDaiLy}">
+                                ItemsSource="{Binding DsTinhTrangSo}"
+                                SelectedItem="{Binding  TinhTrangSoSelected}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding TenLoaiDaiLy}" />
+                                        <TextBlock Text="{Binding }" />
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                                 <ComboBox.Template>
@@ -816,7 +816,7 @@
                                     FontStyle="Normal"
                                     FontWeight="Normal"
                                     Foreground="#9A000000"
-                                    SelectedDate="{Binding NgayGui}">
+                                    SelectedDate="{Binding NgayGuiPhieuRutTienTu}">
                                     <DatePicker.Resources>
                                         <Style x:Key="HideCalendarButton" TargetType="Button">
                                             <Setter Property="Visibility" Value="Collapsed" />
@@ -848,7 +848,7 @@
                                     FontStyle="Normal"
                                     FontWeight="Normal"
                                     Foreground="#9A000000"
-                                    SelectedDate="{Binding NgayGui}">
+                                    SelectedDate="{Binding NgayGuiPhieuRutTienDen}">
                                     <DatePicker.Resources>
                                         <Style x:Key="HideCalendarButton" TargetType="Button">
                                             <Setter Property="Visibility" Value="Collapsed" />
@@ -945,7 +945,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     Foreground="#9A000000"
-                                    Text="{Binding SoTienGuiTu, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding SoTienRutTu, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
                             <TextBlock
@@ -972,7 +972,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     Foreground="#9A000000"
-                                    Text="{Binding SoTienGuiDen, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding SoTienRutDen, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
                         </StackPanel>
@@ -1004,7 +1004,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     Foreground="#9A000000"
-                                    Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding SoLuongPhieuGuiTienTu, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
                             <TextBlock
@@ -1031,7 +1031,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     Foreground="#9A000000"
-                                    Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding SoLuongPhieuGuiTienDen, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
                         </StackPanel>
@@ -1062,7 +1062,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     Foreground="#9A000000"
-                                    Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding SoLuongPhieuRutTienTu, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
                             <TextBlock
@@ -1089,7 +1089,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     Foreground="#9A000000"
-                                    Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding SoLuongPhieuRutTienDen, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
                         </StackPanel>

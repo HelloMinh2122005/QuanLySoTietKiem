@@ -33,5 +33,6 @@ public interface ISoTietKiemRepo
         int? soLuongPhieuGuiTienTu,
         int? soLuongPhieuGuiTienDen,
         int? soLuongPhieuRutTienTu,
-        int? soLuongPhieuRutTienDen);
+        int? soLuongPhieuRutTienDen,
+        bool? dangMo);
 }

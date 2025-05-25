@@ -19,14 +19,48 @@ public class TraCuuSoTietKiemViewModel : INotifyPropertyChanged
     public ICommand CloseCommand { get; }
     public ICommand SearchCommand { get; }
     
-
     public TraCuuSoTietKiemViewModel(ISoTietKiemRepo soTietKiemRepo, ILoaiTietKiemRepo loaiTietKiemRepo)
     {
         _soTietKiemRepo = soTietKiemRepo;
         _loaiTietKiemRepo = loaiTietKiemRepo;
         CloseCommand = new RelayCommand(ExecuteClose);
         SearchCommand = new RelayCommand(search);
+        DsTinhTrangSo  = new ObservableCollection<String>()
+        {
+            "Đang mở",
+            "Đã đóng"
+        };
         LoadLoaiTietKiem();
+    }
+
+    private ObservableCollection<String> _dsTinhTrangSo;
+    
+    public ObservableCollection<String> DsTinhTrangSo
+    {
+        get => _dsTinhTrangSo;
+        set
+        {
+            if (_dsTinhTrangSo != value)
+            {
+                _dsTinhTrangSo = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    
+    private String? _tinhTrangSoSelected;
+    
+    public String? TinhTrangSoSelected
+    {
+        get => _tinhTrangSoSelected;
+        set
+        {
+            if (_tinhTrangSoSelected != value)
+            {
+                _tinhTrangSoSelected = value;
+                OnPropertyChanged();
+            }
+        }
     }
 
 
@@ -408,16 +442,17 @@ public class TraCuuSoTietKiemViewModel : INotifyPropertyChanged
             SoDuDen,
             NgayGuiPhieuGuiTienTu,
             NgayGuiPhieuGuiTienDen,
-            null, // NgayGuiPhieuRutTienTu (not implemented in the repository)
-            null, // NgayGuiPhieuRutTienDen (not implemented in the repository)
+            NgayGuiPhieuRutTienTu, 
+            NgayGuiPhieuRutTienDen,
             SoTienGuiTu,
             SoTienGuiDen,
-            null, // SoTienRutTu (not implemented in the repository)
-            null, // SoTienRutDen (not implemented in the repository)
+            SoTienRutTu, 
+            SoTienRutDen,
             SoLuongPhieuGuiTienTu,
             SoLuongPhieuGuiTienDen,
-            null, // SoLuongPhieuRutTienTu (not implemented in the repository)
-            null // SoLuongPhieuRutTienDen (not implemented in the repository)
+            SoLuongPhieuRutTienTu, 
+            SoLuongPhieuRutTienDen,
+            TinhTrangSoSelected == "Đang mở" ? true : TinhTrangSoSelected == "Đã đóng" ? false : (bool?)null
         ).Result;
         
         SearchCompleted?.Invoke(tmp.ToList()); // 🔥 Trả kết quả về ViewModel cha
