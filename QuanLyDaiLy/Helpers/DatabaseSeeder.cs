@@ -17,7 +17,7 @@ namespace QuanLyDaiLy.Helpers
         private static void SeedThamSo(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ThamSo>().HasData(
-                new ThamSo { Id = "1", SoTienGoiToiThieu = 100000, ApDungSoTienGuiToiThieu = true, SoTienGuiThemToiThieu = 100000 }
+                new ThamSo { Id = "1", SoTienGoiToiThieu = 100000, ApDungSoTienGuiToiThieu = true, SoTienGuiThemToiThieu = 100000, SoNgayMoSoToiThieu = 1,SoNgayMoSoToiThieuDeCoLai = 15}
             );
         }
 

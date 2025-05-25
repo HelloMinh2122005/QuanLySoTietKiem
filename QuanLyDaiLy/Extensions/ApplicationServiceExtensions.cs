@@ -48,7 +48,9 @@ public static class ApplicationServiceExtensions
         services.AddTransient<ThemPhieuGoiTienViewModel>();
         services.AddTransient<BaoCaoDoanhSoViewModel>();
         services.AddTransient<TraCuuSoTietKiemViewModel>();
-
+        
+        services.AddTransient<ThamSoViewModel>();
+        
         // Register Views
         services.AddTransient<ThemSoTietKiem>();
         services.AddTransient<DanhSachSoTietKiem>();
