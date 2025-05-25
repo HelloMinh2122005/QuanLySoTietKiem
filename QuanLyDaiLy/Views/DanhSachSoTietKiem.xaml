@@ -493,7 +493,7 @@
                     <Button
                         Height="35"
                         Background="#FFB498"
-                        Command="{Binding CapNhatSoTietKiemCommand}"
+                        Command="{Binding MoTraCuuSoTietKiemCommand}"
                         Foreground="White">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">

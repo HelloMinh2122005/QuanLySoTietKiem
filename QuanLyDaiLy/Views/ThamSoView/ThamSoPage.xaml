@@ -259,7 +259,8 @@
                             HorizontalAlignment="Center"
                             VerticalContentAlignment="Center"
                             Cursor="Hand"
-                            IsChecked="{Binding QuyDinhSoLuongDaiLyToiDa}">
+                            IsChecked="{Binding ApDungSoTienGuiToiThieu, Mode=TwoWay}"
+                        >
                             <ToggleButton.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="30" />
@@ -363,7 +364,7 @@
                                 FontWeight="Normal"
                                 Foreground="#9A000000"
                                 IsReadOnly="False"
-                                Text="{Binding diachi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                Text="{Binding SoTienGoiToiThieu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 TextAlignment="Left" />
                         </Border>
                         <Border
@@ -387,7 +388,7 @@
                                 FontWeight="Normal"
                                 Foreground="#9A000000"
                                 IsReadOnly="False"
-                                Text="{Binding diachi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                Text="{Binding SoTienGuiThemToiThieu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 TextAlignment="Left" />
                         </Border>
                         <Border
@@ -411,7 +412,7 @@
                                 FontWeight="Normal"
                                 Foreground="#9A000000"
                                 IsReadOnly="False"
-                                Text="{Binding diachi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                Text="{Binding SoNgayMoSoToiThieu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 TextAlignment="Left" />
                         </Border>
                         <Border
@@ -435,7 +436,7 @@
                                 FontWeight="Normal"
                                 Foreground="#9A000000"
                                 IsReadOnly="False"
-                                Text="{Binding diachi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                Text="{Binding SoNgayMoSoToiThieuDeCoLai, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 TextAlignment="Left" />
                         </Border>
                     </StackPanel>

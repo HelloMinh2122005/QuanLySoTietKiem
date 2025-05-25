@@ -17,15 +17,17 @@ namespace QuanLyDaiLy.ViewModels
         public ICommand CapNhatSoTietKiemCommand { get; }
         public ICommand XoaSoTietKiemCommand { get; }
         public ICommand ResetSoTietKiemCommand { get; }
+        
+        public ICommand MoTraCuuSoTietKiemCommand { get; }
 
         private readonly IServiceProvider _serviceProvider;
         private readonly ISoTietKiemRepo _soTietKiemRepo;
         private readonly ILoaiTietKiemRepo _loaiTietKiemRepo;
-
         public DanhSachSoTietKiemViewModel(
             IServiceProvider serviceProvider,
             ISoTietKiemRepo soTietKiemRepo,
-            ILoaiTietKiemRepo loaiTietKiemRepo
+            ILoaiTietKiemRepo loaiTietKiemRepo,
+            TraCuuSoTietKiem traCuuSoTietKiemView
         )
         {
             _serviceProvider = serviceProvider;
@@ -37,6 +39,7 @@ namespace QuanLyDaiLy.ViewModels
             CapNhatSoTietKiemCommand = new RelayCommand(CapNhatSoTietKiem);
             XoaSoTietKiemCommand = new RelayCommand(XoaSoTietKiem);
             ResetSoTietKiemCommand = new RelayCommand(async () => await LoadData());
+            MoTraCuuSoTietKiemCommand = new RelayCommand(OpenSearchWindow);
         }
 
         private SoTietKiem _selectedSoTietKiem = new();
@@ -203,6 +206,26 @@ namespace QuanLyDaiLy.ViewModels
                 }
             }
         }
+        
+        private void OpenSearchWindow()
+        {
+            var traCuuViewModel = _serviceProvider.GetRequiredService<TraCuuSoTietKiemViewModel>();
+    
+            // Gán callback để nhận kết quả tìm kiếm
+            traCuuViewModel.SearchCompleted = (list) =>
+            {
+                DanhSachSoTietKiem = new ObservableCollection<SoTietKiem>(list);
+            };
+
+            // Tạo view và gán DataContext nếu cần
+            var traCuuView = new TraCuuSoTietKiem(traCuuViewModel);
+
+            traCuuView.Show();
+        }
+
+
+        
+        
 
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
