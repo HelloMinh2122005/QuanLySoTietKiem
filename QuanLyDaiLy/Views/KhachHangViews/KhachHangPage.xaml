@@ -380,9 +380,9 @@
                     Width="150"
                     Height="35"
                     Margin="0,0,10,0"
-                    Background="#E65F2B"
+                    Background="#FFB498"
                     Command="{Binding XoaKhachHangCommand}"
-                    Foreground="White">
+                    Foreground="#92492D">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border
@@ -424,9 +424,9 @@
                 <Button
                     Width="200"
                     Height="35"
-                    Background="#E65F2B"
+                    Background="#FFB498"
                     Command="{Binding CapNhatKhachHangCommand}"
-                    Foreground="White">
+                    Foreground="#92492D">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border

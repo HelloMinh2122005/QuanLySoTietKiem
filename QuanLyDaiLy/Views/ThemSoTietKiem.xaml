@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:QuanLyDaiLy.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:helpers="clr-namespace:QuanLyDaiLy.Helpers"
     Title="ThemSoTietKiem"
     Width="555"
     Height="388"
@@ -14,8 +15,11 @@
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d">
-
+    
+    
+ 
     <Window.Resources>
+        <helpers:ComboBoxItemConverter x:Key="ComboBoxItemConverter" />
         <!--  6% black stroke  -->
         <SolidColorBrush x:Key="ControlStrokeDefaultBrush" Color="#0F000000" />
 
@@ -390,7 +394,7 @@
                                                         Margin="10,0,30,0"
                                                         HorizontalAlignment="Left"
                                                         VerticalAlignment="Center"
-                                                        Content="{TemplateBinding SelectionBoxItem}"
+                                                        Content="{TemplateBinding SelectionBoxItem,  Converter={StaticResource ComboBoxItemConverter}}"
                                                         ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" />
                                                 </Grid>
                                             </Border>
