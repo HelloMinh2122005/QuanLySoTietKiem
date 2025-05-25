@@ -16,6 +16,8 @@ namespace QuanLyDaiLy.ViewModels
     {
         public ICommand CloseCommand { get; }
         public ICommand LapPhieuCommand { get;  } 
+        public ICommand LoadFieldsCommand { get; set; }
+
 
         public event EventHandler<PhieuGoiTien>? LapPhieuEvent;
         private readonly IPhieuGoiTienRepo _phieuGoiTienRepo;
@@ -62,12 +64,11 @@ namespace QuanLyDaiLy.ViewModels
                 {
                     _maSoTietKiem = value;
                     OnPropertyChanged();
-                    LoadFields(); //update UI
                 }
             }
         }
 
-        private async void LoadFields()
+        private async Task LoadFields()
         {
             if (string.IsNullOrEmpty(MaSoTietKiem))
             {
@@ -196,7 +197,7 @@ namespace QuanLyDaiLy.ViewModels
             //command
             CloseCommand = new RelayCommand(ExecuteClose);
             LapPhieuCommand = new RelayCommand(LapPhieu);
-
+            LoadFieldsCommand = new RelayCommand(async () => await LoadFields());
             //load fields
             NgayGoi = DateTime.Now;
         }
