@@ -117,9 +117,9 @@ public class BaoCaoDongMoViewModel : INotifyPropertyChanged
                 stk.DangMo == false &&
                 phieuRutTienList
                     .Where(prt => prt.MaSoTietKiem == stk.MaSoTietKiem)
-                    .OrderByDescending(prt => prt.NgayRutTien)
+                    .OrderByDescending(prt => prt.NgayRut)
                     .FirstOrDefault() is { } lastRutTien &&
-                lastRutTien.NgayRutTien.Date == date.Date
+                lastRutTien.NgayRut.Date == date.Date
             );
 
             FilteredDanhSachBaoCao.Add(new BaoCaoDongMoItem

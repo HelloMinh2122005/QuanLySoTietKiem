@@ -9,12 +9,15 @@ public class BaoCaoDoanhSoViewModel: INotifyPropertyChanged
     private readonly ISoTietKiemRepo _soTietKiemRepo;
     private readonly IPhieuGoiTienRepo _phieuGoiTienRepo;
     private readonly ILoaiTietKiemRepo _loaiTietKiemRepo;
+    private readonly IPhieuRutTienRepo _phieuRutTienRepo;
     
-    public BaoCaoDoanhSoViewModel(ISoTietKiemRepo soTietKiemRepo, IPhieuGoiTienRepo phieuGoiTienRepo, ILoaiTietKiemRepo loaiTietKiemRepo)
+    public BaoCaoDoanhSoViewModel(ISoTietKiemRepo soTietKiemRepo, 
+        IPhieuGoiTienRepo phieuGoiTienRepo, ILoaiTietKiemRepo loaiTietKiemRepo, IPhieuRutTienRepo phieuRutTienRepo)
     {
         _soTietKiemRepo = soTietKiemRepo;
         _phieuGoiTienRepo = phieuGoiTienRepo;
         _loaiTietKiemRepo = loaiTietKiemRepo;
+        _phieuRutTienRepo = phieuRutTienRepo;
     }
     
     private DateTime _selectedDate;
@@ -61,7 +64,7 @@ public class BaoCaoDoanhSoViewModel: INotifyPropertyChanged
         var loaiTietKiems = _loaiTietKiemRepo.GetAll().Result;
         var soTietKiems = _soTietKiemRepo.GetAll().Result;
         var phieuGoiTiens = _phieuGoiTienRepo.GetAll().Result.Where(pg => pg.NgayGoi.Date == SelectedDate.Date);            
-        var phieuRuts = _phieuGoiTienRepo.GetAll().Result.Where(pr => pr.NgayGoi.Date == SelectedDate.Date);
+        var phieuRuts = _phieuRutTienRepo.GetAll().Result.Where(pr => pr.NgayRut.Date == SelectedDate.Date);
 
         var baoCaoList = loaiTietKiems.Select(loaiTietKiem =>
         {
@@ -71,7 +74,7 @@ public class BaoCaoDoanhSoViewModel: INotifyPropertyChanged
                 .Sum(pg => pg.SoTienGui);
             var tongChi = phieuRuts
                 .Where(pr => soTietKiemCuaLoai.Any(stk => stk.MaSoTietKiem.Equals(pr.MaSoTietKiem)))
-                .Sum(pr => pr.SoTienGui);
+                .Sum(pr => pr.SoTienRut);
 
             return new BaoCaoDoanhSo
             {
