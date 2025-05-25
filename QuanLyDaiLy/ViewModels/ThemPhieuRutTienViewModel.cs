@@ -10,6 +10,7 @@ using QuanLyDaiLy.Entities;
 using QuanLyDaiLy.Helpers;
 using QuanLyDaiLy.Interfaces;
 using QuanLyDaiLy.Views.PhieuGoiTienViews;
+using QuanLyDaiLy.Views.PhieuRutTienViews;
 
 namespace QuanLyDaiLy.ViewModels
 {
@@ -382,6 +383,11 @@ namespace QuanLyDaiLy.ViewModels
                 return "Số tiết kiệm đã đóng, không thể rút tiền.";
             }
 
+            if (MaSoTietKiem == string.Empty)
+            {
+                return "Vui lòng chọn số tiết kiệm để rút tiền.";
+            }
+
             var daysSinceOpened = (DateTime.Now - soTietKiem.NgayMoSo).TotalDays;
 
             var thamSo = await _thamSoRepo.Get();
@@ -424,7 +430,7 @@ namespace QuanLyDaiLy.ViewModels
         }
         private void ExecuteClose()
         {
-            Application.Current.Windows.OfType<lapPhieuGoiTien>().FirstOrDefault()?.Close();
+            Application.Current.Windows.OfType<LapPhieuRutTienWindow>().FirstOrDefault()?.Close();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
