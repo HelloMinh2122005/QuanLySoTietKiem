@@ -31,6 +31,7 @@ public static class ApplicationServiceExtensions
         services.AddScoped<IThamSoRepo, ThamSoRepository>();
         services.AddScoped<ISoTietKiemRepo, SoTietKiemRepository>();
         services.AddScoped<IPhieuGoiTienRepo, PhieuGoiTienRepository>();
+        services.AddScoped<IPhieuRutTienRepo, PhieuRutTienRepository>();
 
         // Register ViewModels
         services.AddTransient<ThemSoTietKiemViewModel>();
@@ -42,6 +43,8 @@ public static class ApplicationServiceExtensions
         services.AddTransient<CapNhatKhachHangViewModel>();
         services.AddTransient<KhachHangViewModel>();
         services.AddTransient<ThemPhieuGoiTienViewModel>();
+        services.AddTransient<PhieuRutTienViewModel>();
+        services.AddTransient<ThemPhieuRutTienViewModel>();
 
         // Register Views
         services.AddTransient<ThemSoTietKiem>();
