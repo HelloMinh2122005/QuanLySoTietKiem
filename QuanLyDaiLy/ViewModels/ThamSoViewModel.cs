@@ -1,140 +1,126 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows.Input;
 using QuanLyDaiLy.Entities;
 using QuanLyDaiLy.Interfaces;
 
 namespace QuanLyDaiLy.ViewModels;
 
-public class ThamSoViewModel
-: INotifyPropertyChanged
+public class ThamSoViewModel : INotifyPropertyChanged
 {
-    private string _id;
-        private decimal _soTienGoiToiThieu = 100000;
-        private bool _apDungSoTienGuiToiThieu = true;
-        private decimal _soTienGuiThemToiThieu = 100000;
-        private int soNgayMoSoToiThieu { get; set; } = 1;
-    public int SoNgayMoSoToiThieu
-    {
-        get => soNgayMoSoToiThieu;
-        set
-        {
-            if (soNgayMoSoToiThieu != value)
-            {
-                soNgayMoSoToiThieu = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-    
     private readonly IThamSoRepo _thamSoRepo;
+    private readonly ThamSo _entity;
+
     public ThamSoViewModel(IThamSoRepo thamSoRepo)
     {
         _thamSoRepo = thamSoRepo;
+        _entity = _thamSoRepo.Get().Result ?? throw new Exception("Không tìm thấy ThamSo");
 
-        var thamso = thamSoRepo.Get().Result;
-        Id = thamso.Id;
-        SoTienGoiToiThieu = thamso.SoTienGoiToiThieu;
-        ApDungSoTienGuiToiThieu = thamso.ApDungSoTienGuiToiThieu;
-        SoTienGuiThemToiThieu = thamso.SoTienGuiThemToiThieu;
-        SoNgayMoSoToiThieu = thamso.SoNgayMoSoToiThieu;
-        SoNgayMoSoToiThieuDeCoLai = thamso.SoNgayMoSoToiThieuDeCoLai;
+        Id = _entity.Id;
+        SoTienGoiToiThieu = _entity.SoTienGoiToiThieu;
+        ApDungSoTienGuiToiThieu = _entity.ApDungSoTienGuiToiThieu;
+        SoTienGuiThemToiThieu = _entity.SoTienGuiThemToiThieu;
+        SoNgayMoSoToiThieu = _entity.SoNgayMoSoToiThieu;
+        SoNgayMoSoToiThieuDeCoLai = _entity.SoNgayMoSoToiThieuDeCoLai;
     }
 
+    public event PropertyChangedEventHandler? PropertyChanged;
 
-
-    private int soNgayMoSoToiThieuDeCoLai { get; set; } = 15;
-    
-    public int SoNgayMoSoToiThieuDeCoLai
+    protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {
-        get => soNgayMoSoToiThieuDeCoLai;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    private async Task CapNhatDatabase()
+    {
+        try
+        { await _thamSoRepo.Update(_entity);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Lỗi khi cập nhật CSDL: " + ex.Message);
+        }
+    }
+
+    // Các thuộc tính
+    public string Id { get; set; }
+
+    private decimal _soTienGoiToiThieu;
+    public decimal SoTienGoiToiThieu
+    {
+        get => _soTienGoiToiThieu;
         set
         {
-            if (soNgayMoSoToiThieuDeCoLai != value)
+            if (_soTienGoiToiThieu != value)
             {
-                soNgayMoSoToiThieuDeCoLai = value;
+                _soTienGoiToiThieu = value;
+                _entity.SoTienGoiToiThieu = value;
                 OnPropertyChanged();
+                _ = CapNhatDatabase();
             }
         }
     }
 
-        public string Id
+    private bool _apDungSoTienGuiToiThieu;
+    public bool ApDungSoTienGuiToiThieu
+    {
+        get => _apDungSoTienGuiToiThieu;
+        set
         {
-            get => _id;
-            set
+            if (_apDungSoTienGuiToiThieu != value)
             {
-                if (_id != value)
-                {
-                    _id = value;
-                    OnPropertyChanged();
-                }
+                _apDungSoTienGuiToiThieu = value;
+                _entity.ApDungSoTienGuiToiThieu = value;
+                OnPropertyChanged();
+                _ = CapNhatDatabase();
             }
-        }
-
-        public decimal SoTienGoiToiThieu
-        {
-            get => _soTienGoiToiThieu;
-            set
-            {
-                if (_soTienGoiToiThieu != value)
-                {
-                    _soTienGoiToiThieu = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public bool ApDungSoTienGuiToiThieu
-        {
-            get => _apDungSoTienGuiToiThieu;
-            set
-            {
-                if (_apDungSoTienGuiToiThieu != value)
-                {
-                    _apDungSoTienGuiToiThieu = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public decimal SoTienGuiThemToiThieu
-        {
-            get => _soTienGuiThemToiThieu;
-            set
-            {
-                if (_soTienGuiThemToiThieu != value)
-                {
-                    _soTienGuiThemToiThieu = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        // Constructor từ entity
-        public ThamSoViewModel(ThamSo entity)
-        {
-            Id = entity.Id;
-            SoTienGoiToiThieu = entity.SoTienGoiToiThieu;
-            ApDungSoTienGuiToiThieu = entity.ApDungSoTienGuiToiThieu;
-            SoTienGuiThemToiThieu = entity.SoTienGuiThemToiThieu;
-        }
-
-        // Convert lại về entity (khi lưu)
-        public ThamSo ToEntity()
-        {
-            return new ThamSo
-            {
-                Id = this.Id,
-                SoTienGoiToiThieu = this.SoTienGoiToiThieu,
-                ApDungSoTienGuiToiThieu = this.ApDungSoTienGuiToiThieu,
-                SoTienGuiThemToiThieu = this.SoTienGuiThemToiThieu
-            };
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
+
+    private decimal _soTienGuiThemToiThieu;
+    public decimal SoTienGuiThemToiThieu
+    {
+        get => _soTienGuiThemToiThieu;
+        set
+        {
+            if (_soTienGuiThemToiThieu != value)
+            {
+                _soTienGuiThemToiThieu = value;
+                _entity.SoTienGuiThemToiThieu = value;
+                OnPropertyChanged();
+                _ = CapNhatDatabase();
+            }
+        }
+    }
+
+    private int _soNgayMoSoToiThieu;
+    public int SoNgayMoSoToiThieu
+    {
+        get => _soNgayMoSoToiThieu;
+        set
+        {
+            if (_soNgayMoSoToiThieu != value)
+            {
+                _soNgayMoSoToiThieu = value;
+                _entity.SoNgayMoSoToiThieu = value;
+                OnPropertyChanged();
+                _ = CapNhatDatabase();
+            }
+        }
+    }
+
+    private int _soNgayMoSoToiThieuDeCoLai;
+    public int SoNgayMoSoToiThieuDeCoLai
+    {
+        get => _soNgayMoSoToiThieuDeCoLai;
+        set
+        {
+            if (_soNgayMoSoToiThieuDeCoLai != value)
+            {
+                _soNgayMoSoToiThieuDeCoLai = value;
+                _entity.SoNgayMoSoToiThieuDeCoLai = value;
+                OnPropertyChanged();
+                _ = CapNhatDatabase();
+            }
+        }
+    }
+}
