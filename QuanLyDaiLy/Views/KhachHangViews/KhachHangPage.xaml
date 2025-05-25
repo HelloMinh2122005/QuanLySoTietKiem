@@ -489,8 +489,14 @@
                 LoadingRow="DataGrid_LoadingRow"
                 SelectedItem="{Binding SelectedKhachHangDto, Mode=TwoWay}">
                 <DataGrid.Resources>
+                    <!-- Don't blow up to white on inactive -->
+                    <SolidColorBrush x:Key="{x:Static Member=SystemColors.InactiveSelectionHighlightBrushKey}"
+                        Color="#FFB498" />
                     <!--  Cell style (kept unchanged)  -->
                     <Style TargetType="DataGridCell">
+                        <Style.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FFB498" />
+                        </Style.Resources>
                         <Setter Property="BorderThickness" Value="0" />
                         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
                         <Setter Property="Padding" Value="10,0" />
@@ -521,25 +527,9 @@
                         <Setter Property="BorderBrush" Value="#E0E0E0" />
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Effect">
+                                <Setter Property="Background">
                                     <Setter.Value>
-                                        <DropShadowEffect
-                                            BlurRadius="3"
-                                            Opacity="0.2"
-                                            ShadowDepth="0"
-                                            Color="Black" />
-                                    </Setter.Value>
-                                </Setter>
-                            </Trigger>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="#F47346" />
-                                <Setter Property="Effect">
-                                    <Setter.Value>
-                                        <DropShadowEffect
-                                            BlurRadius="5"
-                                            Opacity="0.3"
-                                            ShadowDepth="0"
-                                            Color="Black" />
+                                        <SolidColorBrush Color="Wheat"/>
                                     </Setter.Value>
                                 </Setter>
                             </Trigger>
@@ -595,8 +585,7 @@
                                         <Style TargetType="TextBlock">
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected}" Value="True">
-                                                    <Setter Property="Foreground" Value="White" />
-                                                    <Setter Property="FontWeight" Value="SemiBold" />
+                                                    <Setter Property="Foreground" Value="Black" />
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
@@ -621,8 +610,7 @@
                                 <Setter Property="FontSize" Value="20" />
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected}" Value="True">
-                                        <Setter Property="Foreground" Value="White" />
-                                        <Setter Property="FontWeight" Value="SemiBold" />
+                                        <Setter Property="Foreground" Value="Black" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -644,8 +632,7 @@
                                 <Setter Property="FontSize" Value="20" />
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected}" Value="True">
-                                        <Setter Property="Foreground" Value="White" />
-                                        <Setter Property="FontWeight" Value="SemiBold" />
+                                        <Setter Property="Foreground" Value="Black" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -665,8 +652,7 @@
                                 <Setter Property="FontSize" Value="20" />
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected}" Value="True">
-                                        <Setter Property="Foreground" Value="White" />
-                                        <Setter Property="FontWeight" Value="SemiBold" />
+                                        <Setter Property="Foreground" Value="Black" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -686,8 +672,7 @@
                                 <Setter Property="FontSize" Value="20" />
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected}" Value="True">
-                                        <Setter Property="Foreground" Value="White" />
-                                        <Setter Property="FontWeight" Value="SemiBold" />
+                                        <Setter Property="Foreground" Value="Black" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
