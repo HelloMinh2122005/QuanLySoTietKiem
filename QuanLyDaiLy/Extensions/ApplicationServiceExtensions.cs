@@ -7,7 +7,6 @@ using QuanLyDaiLy.ViewModels;
 using QuanLyDaiLy.Views;
 using QuanLyDaiLy.Views.BaoCaoDoanhSoViews;
 using QuanLyDaiLy.Views.BaoCaoDongMoViews;
-using QuanLyDaiLy.Views.DashboardViews;
 using QuanLyDaiLy.Views.KhachHangViews;
 using QuanLyDaiLy.Views.PhieuGoiTienViews;
 using QuanLyDaiLy.Views.PhieuRutTienViews;
@@ -56,7 +55,6 @@ public static class ApplicationServiceExtensions
         services.AddTransient<ThemSoTietKiem>();
         services.AddTransient<DanhSachSoTietKiem>();
         services.AddTransient<CapNhatSoTietKiem>();
-        services.AddTransient<DashboardPage>();
         services.AddTransient<KhachHangPage>();
         services.AddTransient<ThemKhachHang>();
         services.AddTransient<CapNhatKhachHang>();
