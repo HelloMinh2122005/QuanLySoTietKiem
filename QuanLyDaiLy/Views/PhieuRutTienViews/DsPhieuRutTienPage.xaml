@@ -260,7 +260,7 @@
                 <Button
                     Height="35"
                     Background="#E65F2B"
-                    Command="{Binding LapPhieuGoiTienCommand}"
+                    Command="{Binding LapPhieuRutTienCommand}"
                     Foreground="White">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
@@ -320,9 +320,9 @@
                 GridLinesVisibility="None"
                 HeadersVisibility="Column"
                 IsReadOnly="True"
-                ItemsSource="{Binding FilteredDanhSachPhieuGoiTien}"
+                ItemsSource="{Binding DanhSachPhieuRutTien}"
                 LoadingRow="DataGrid_LoadingRow"
-                SelectedItem="{Binding SelectedPhieuGoiTien, Mode=TwoWay}">
+                SelectedItem="{Binding SelectedPhieuRutTien, Mode=TwoWay}">
                 <DataGrid.Resources>
                     <Style TargetType="DataGridCell">
                         <Setter Property="BorderThickness" Value="0" />
@@ -443,7 +443,7 @@
                     <!--  Mã phiếu Column  -->
                     <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding MaPhieuGoiTien}"
+                        Binding="{Binding MaPhieuRutTien}"
                         Header="Mã phiếu">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
@@ -539,7 +539,7 @@
                     <!--  Ngày gửi Column  -->
                     <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding NgayGoi, StringFormat='{}{0:dd/MM/yyyy}'}"
+                        Binding="{Binding NgayRut, StringFormat='{}{0:dd/MM/yyyy}'}"
                         Header="Ngày rút">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
@@ -561,7 +561,7 @@
                     <!--  Số tiền gửi Column  -->
                     <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding SoTienGui, StringFormat='{}{0:N0} VNĐ'}"
+                        Binding="{Binding SoTienRut, StringFormat='{}{0:N0} VNĐ'}"
                         Header="Số tiền rút">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">

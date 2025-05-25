@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyDaiLy.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,10 @@ namespace QuanLyDaiLy.Views.PhieuRutTienViews
     /// </summary>
     public partial class LapPhieuRutTienWindow : Window
     {
-        public LapPhieuRutTienWindow()
+        public LapPhieuRutTienWindow(ThemPhieuRutTienViewModel _viewmodel)
         {
             InitializeComponent();
+            DataContext = _viewmodel;
         }
     }
 }
