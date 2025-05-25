@@ -342,95 +342,30 @@
                                 </Style>
                             </ToggleButton.Style>
                         </ToggleButton>
-
-                        <ToggleButton
-                            Margin="0,85,0,0"
-                            HorizontalAlignment="Center"
-                            VerticalContentAlignment="Center"
-                            Cursor="Hand"
-                            IsChecked="{Binding QuyDinhTienThuTienNo}">
-                            <ToggleButton.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="30" />
-                                </Style>
-                            </ToggleButton.Resources>
-                            <ToggleButton.Style>
-                                <Style TargetType="{x:Type ToggleButton}">
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="{x:Type ToggleButton}">
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto" />
-                                                        <ColumnDefinition Width="*" />
-                                                    </Grid.ColumnDefinitions>
-
-                                                    <!--  Toggle Switch Background  -->
-                                                    <Border
-                                                        x:Name="SwitchTrack"
-                                                        Grid.Column="0"
-                                                        Width="90"
-                                                        Height="48"
-                                                        VerticalAlignment="Center"
-                                                        Background="#E0E0E0"
-                                                        CornerRadius="24">
-
-                                                        <!--  Switch Thumb/Knob  -->
-                                                        <Border
-                                                            x:Name="SwitchKnob"
-                                                            Width="40"
-                                                            Height="40"
-                                                            Margin="4,0,0,0"
-                                                            HorizontalAlignment="Left"
-                                                            Background="White"
-                                                            CornerRadius="20">
-                                                            <Border.Effect>
-                                                                <DropShadowEffect
-                                                                    BlurRadius="3"
-                                                                    Opacity="0.2"
-                                                                    ShadowDepth="1"
-                                                                    Color="#555555" />
-                                                            </Border.Effect>
-                                                        </Border>
-                                                    </Border>
-                                                </Grid>
-
-                                                <!--  Visual States  -->
-                                                <ControlTemplate.Triggers>
-                                                    <Trigger Property="IsChecked" Value="True">
-                                                        <Setter TargetName="SwitchTrack" Property="Background" Value="#D34816" />
-                                                        <Setter TargetName="SwitchKnob" Property="HorizontalAlignment" Value="Right" />
-                                                        <Setter TargetName="SwitchKnob" Property="Margin" Value="0,0,4,0" />
-                                                    </Trigger>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter TargetName="SwitchTrack" Property="Background">
-                                                            <Setter.Value>
-                                                                <SolidColorBrush Opacity="0.9" Color="#CCCCCC" />
-                                                            </Setter.Value>
-                                                        </Setter>
-                                                    </Trigger>
-                                                    <MultiTrigger>
-                                                        <MultiTrigger.Conditions>
-                                                            <Condition Property="IsMouseOver" Value="True" />
-                                                            <Condition Property="IsChecked" Value="True" />
-                                                        </MultiTrigger.Conditions>
-                                                        <Setter TargetName="SwitchTrack" Property="Background">
-                                                            <Setter.Value>
-                                                                <SolidColorBrush Opacity="0.9" Color="#D34816" />
-                                                            </Setter.Value>
-                                                        </Setter>
-                                                    </MultiTrigger>
-                                                    <Trigger Property="IsEnabled" Value="False">
-                                                        <Setter TargetName="SwitchTrack" Property="Background" Value="#E0E0E0" />
-                                                        <Setter TargetName="SwitchKnob" Property="Background" Value="#CCCCCC" />
-                                                    </Trigger>
-                                                </ControlTemplate.Triggers>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </ToggleButton.Style>
-                        </ToggleButton>
+                        <Border
+                            Height="60"
+                            Margin="20,55,20,0"
+                            Padding="3"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            BorderBrush="#33000000"
+                            BorderThickness="1"
+                            CornerRadius="4">
+                            <TextBox
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                VerticalContentAlignment="Center"
+                                Background="#FFFFFF"
+                                BorderThickness="0"
+                                FontFamily="Segoe UI Variable"
+                                FontSize="14"
+                                FontStyle="Normal"
+                                FontWeight="Normal"
+                                Foreground="#9A000000"
+                                IsReadOnly="False"
+                                Text="{Binding diachi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                TextAlignment="Left" />
+                        </Border>
                         <Border
                             Height="60"
                             Margin="20,30,20,0"
