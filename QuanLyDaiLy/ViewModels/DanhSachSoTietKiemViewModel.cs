@@ -207,7 +207,7 @@ namespace QuanLyDaiLy.ViewModels
             }
         }
         
-        private void OpenSearchWindow()
+        public void OpenSearchWindow()
         {
             var traCuuViewModel = _serviceProvider.GetRequiredService<TraCuuSoTietKiemViewModel>();
     

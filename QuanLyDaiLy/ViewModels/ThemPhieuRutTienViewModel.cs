@@ -11,6 +11,7 @@ using QuanLyDaiLy.Helpers;
 using QuanLyDaiLy.Interfaces;
 using QuanLyDaiLy.Views.PhieuGoiTienViews;
 using QuanLyDaiLy.Views.PhieuRutTienViews;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace QuanLyDaiLy.ViewModels
 {
@@ -18,6 +19,7 @@ namespace QuanLyDaiLy.ViewModels
     {
         public ICommand CloseCommand { get; set; }
         public ICommand LapPhieuCommand { get; set; }
+        public ICommand TraCuuSoCommand { get; }
 
         public EventHandler<PhieuRutTien>? LapPhieuEvent;
         private readonly IPhieuRutTienRepo _phieuRutTienRepo;
@@ -25,6 +27,7 @@ namespace QuanLyDaiLy.ViewModels
         private readonly IKhachHangRepo _khachHangRepo;
         private readonly IThamSoRepo _thamSoRepo;
         private readonly ILoaiTietKiemRepo _loaitietkiemRepo;
+        private readonly IServiceProvider _serviceProvider;
 
         private string _maPhieuRutTien;
         public string MaPhieuRutTien
@@ -303,7 +306,7 @@ namespace QuanLyDaiLy.ViewModels
             }
         }
 
-        public ThemPhieuRutTienViewModel(IPhieuRutTienRepo phieuRutTienRepo, ISoTietKiemRepo soTietKiemRepo, IKhachHangRepo khachHangRepo, IThamSoRepo thamSoRepo, ILoaiTietKiemRepo loaiTietKiemRepo)
+        public ThemPhieuRutTienViewModel(IPhieuRutTienRepo phieuRutTienRepo, ISoTietKiemRepo soTietKiemRepo, IKhachHangRepo khachHangRepo, IThamSoRepo thamSoRepo, ILoaiTietKiemRepo loaiTietKiemRepo, IServiceProvider serviceProvider)
         {
             //repo 
             _phieuRutTienRepo = phieuRutTienRepo;
@@ -311,15 +314,43 @@ namespace QuanLyDaiLy.ViewModels
             _khachHangRepo = khachHangRepo;
             _thamSoRepo = thamSoRepo;
             _loaitietkiemRepo = loaiTietKiemRepo;
+            
+            //service
+            _serviceProvider = serviceProvider;
 
             //commands
             CloseCommand = new RelayCommand(ExecuteClose);
             LapPhieuCommand = new RelayCommand(LapPhieu);
+            TraCuuSoCommand = new RelayCommand(ExecuteCloseAndNavigate);
 
             //load fields 
             NgayRut = DateTime.Now;
+            _serviceProvider = serviceProvider;
         }
 
+        private void ExecuteCloseAndNavigate()
+        {
+            // Close the current lapPhieuGoiTien window
+            var currentWindow = Application.Current.Windows.OfType<LapPhieuRutTienWindow>().FirstOrDefault();
+            currentWindow?.Close();
+
+            // Resolve the required dependencies
+            var viewModel = _serviceProvider.GetRequiredService<DanhSachSoTietKiemViewModel>();
+            var danhSachSoTietKiemWindow = new DanhSachSoTietKiem(viewModel, _serviceProvider);
+
+            //Navigate
+            var currentWindows = Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w.IsActive);
+            if (currentWindows != null)
+            {
+                currentWindows.Content = danhSachSoTietKiemWindow.Content;
+            }
+
+            // Call OpenTraCuuSoTietKiem function
+            if (viewModel is DanhSachSoTietKiemViewModel danhSachViewModel)
+            {
+                danhSachViewModel.OpenSearchWindow();
+            }
+        }
 
         private async void LapPhieu()
         {
