@@ -116,7 +116,7 @@ namespace QuanLyDaiLy.ViewModels
         {
             try
             {
-                if (string.IsNullOrEmpty(SearchText) && SelectedLoaiTietKiem == null)
+                if (string.IsNullOrEmpty(SearchText) && SelectedLoaiTietKiem.MaLoaiTietKiem == "")
                 {
                     DanhSachKhachHangDto.Clear();
                     foreach (var khachHang in _danhSachKhachHang)
@@ -132,7 +132,7 @@ namespace QuanLyDaiLy.ViewModels
                 {
                     var filteredList = _danhSachKhachHang.Where(kh =>
                         (string.IsNullOrEmpty(SearchText) || kh.TenKhachHang.Contains(SearchText)) &&
-                        (SelectedLoaiTietKiem == null || kh.DsSoTietKiem.Any(stk => stk.MaLoaiTietKiem == SelectedLoaiTietKiem.MaLoaiTietKiem))
+                        (SelectedLoaiTietKiem == null || SelectedLoaiTietKiem.MaLoaiTietKiem == "" || kh.DsSoTietKiem.Any(stk => stk.MaLoaiTietKiem == SelectedLoaiTietKiem.MaLoaiTietKiem))
                     ).ToList();
                     DanhSachKhachHangDto.Clear();
                     foreach (var khachHang in filteredList)
@@ -160,6 +160,7 @@ namespace QuanLyDaiLy.ViewModels
                 DanhSachLoaiTietKiem.Clear();
 
                 DanhSachLoaiTietKiem = [.. (await _loaiTietKiemRepo.GetAll())];
+                DanhSachLoaiTietKiem.Add(new LoaiTietKiem(){MaLoaiTietKiem = "", TenLoaiTietKiem = "Tất cả"});
 
                 _danhSachKhachHang = [.. (await _khachHangRepo.GetAll())];
                 foreach (var khachHang in _danhSachKhachHang)
