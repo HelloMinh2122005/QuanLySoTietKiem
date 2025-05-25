@@ -534,7 +534,7 @@
                         Height="35"
                         Margin="0,0,20,0"
                         Background="#FFB498"
-                        Command="{Binding LoadFieldsCommand}">
+                        Command="{Binding TraCuuSoCommand}">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border

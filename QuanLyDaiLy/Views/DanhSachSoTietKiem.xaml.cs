@@ -37,7 +37,7 @@ namespace QuanLyDaiLy.Views
 
             Loaded += (s, e) =>
             {
-                NavigateToPage("Dashboard");
+                NavigateToPage("SoTietKiem");
             };
         }
 
