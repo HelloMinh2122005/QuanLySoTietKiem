@@ -259,9 +259,9 @@
             <StackPanel>
                 <Button
                     Height="35"
-                    Background="#E65F2B"
+                    Background="#FFB498"
                     Command="{Binding LapPhieuRutTienCommand}"
-                    Foreground="White">
+                    Foreground="#92492D">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border

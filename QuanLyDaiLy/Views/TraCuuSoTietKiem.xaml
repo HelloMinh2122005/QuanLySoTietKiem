@@ -82,7 +82,7 @@
                             FontStyle="Normal"
                             FontWeight="SemiBold"
                             Foreground="#000000"
-                            Text="Lập phiếu rút tiền" />
+                            Text="Tra cứu sổ tiết kiệm" />
 
                         <!--  Close button  -->
                         <Button
