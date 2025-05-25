@@ -16,7 +16,6 @@ namespace QuanLyDaiLy.ViewModels
     {
         public ICommand CloseCommand { get; }
         public ICommand LapPhieuCommand { get;  } 
-        public ICommand ThemPhieuCommand { get; }
 
         public event EventHandler<PhieuGoiTien>? LapPhieuEvent;
         private readonly IPhieuGoiTienRepo _phieuGoiTienRepo;

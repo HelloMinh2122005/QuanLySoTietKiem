@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyDaiLy.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,14 @@ namespace QuanLyDaiLy.Views.PhieuRutTienViews
     /// </summary>
     public partial class DsPhieuRutTienPage : Page
     {
-        public DsPhieuRutTienPage()
+        private readonly PhieuRutTienViewModel _viewModel;
+        private readonly IServiceProvider _serviceProvider;
+        public DsPhieuRutTienPage(PhieuRutTienViewModel viewmodel, IServiceProvider serviceProvider)
         {
             InitializeComponent();
+            _viewModel = viewmodel;
+            _serviceProvider = serviceProvider;
+            DataContext = _viewModel;
         }
 
         private void DataGrid_LoadingRow(object sender, DataGridRowEventArgs e)

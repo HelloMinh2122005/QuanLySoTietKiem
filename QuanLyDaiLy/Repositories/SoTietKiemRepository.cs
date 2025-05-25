@@ -137,10 +137,10 @@ public class SoTietKiemRepository : ISoTietKiemRepo
         query = query.Where(stk => stk.KhachHang.TenKhachHang.Contains(tenKhachHang));
 
     if (laiSuatTu.HasValue)
-        query = query.Where(stk => stk.LoaiTietKiem.LaiSuat >= laiSuatTu.Value);
+        query = query.Where(stk => stk.LoaiTietKiem.LaiSuatQuyDinh >= laiSuatTu.Value);
 
     if (laiSuatDen.HasValue)
-        query = query.Where(stk => stk.LoaiTietKiem.LaiSuat <= laiSuatDen.Value);
+        query = query.Where(stk => stk.LoaiTietKiem.LaiSuatQuyDinh <= laiSuatDen.Value);
 
     if (ngayMoSoTu.HasValue)
         query = query.Where(stk => stk.NgayMoSo >= ngayMoSoTu.Value);
