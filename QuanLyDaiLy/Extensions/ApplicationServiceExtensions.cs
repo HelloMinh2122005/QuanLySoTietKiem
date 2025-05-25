@@ -5,9 +5,13 @@ using QuanLyDaiLy.Repositories;
 using QuanLyDaiLy.Services;
 using QuanLyDaiLy.ViewModels;
 using QuanLyDaiLy.Views;
+using QuanLyDaiLy.Views.BaoCaoDoanhSoViews;
+using QuanLyDaiLy.Views.BaoCaoDongMoViews;
 using QuanLyDaiLy.Views.DashboardViews;
 using QuanLyDaiLy.Views.KhachHangViews;
 using QuanLyDaiLy.Views.PhieuGoiTienViews;
+using QuanLyDaiLy.Views.PhieuRutTienViews;
+using QuanLyDaiLy.Views.ThamSoView;
 
 namespace QuanLyDaiLy.Extensions;
 
@@ -53,6 +57,12 @@ public static class ApplicationServiceExtensions
         services.AddTransient<CapNhatKhachHang>();
         services.AddTransient<DsPhieuGoiTien>();
         services.AddTransient<lapPhieuGoiTien>();
+        services.AddTransient<BaoCaoDoanhSoPage>();
+        services.AddTransient<BaoCaoDongMoPage>();
+        services.AddTransient<DsPhieuRutTienPage>();
+        services.AddTransient<LapPhieuRutTienWindow>();
+        services.AddTransient<ThamSoPage>();
+        services.AddTransient<TraCuuSoTietKiem>();
 
         // Register the main window (if needed)
         services.AddSingleton<MainWindow>();
