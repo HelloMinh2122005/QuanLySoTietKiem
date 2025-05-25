@@ -343,6 +343,7 @@ namespace QuanLyDaiLy.ViewModels
                 NgayRut = NgayRut,
                 SoTienRut = SoTienRut,
                 MaSoTietKiem = MaSoTietKiem,
+                SoTietKiem = soTietKiem
             };
 
             //save to db
@@ -352,7 +353,7 @@ namespace QuanLyDaiLy.ViewModels
 
                 //update SoTietKiem
                 soTietKiem.SoTienGui -= SoTienRut;
-                if (soTietKiem.SoTienGui == 0 )
+                if (soTietKiem.SoTienGui <= 0 )
                 {
                     soTietKiem.DangMo = false; //đóng sổ tiết kiệm nếu rút hết tiền
                 }
@@ -361,6 +362,7 @@ namespace QuanLyDaiLy.ViewModels
                 MessageBox.Show("Lập phiếu rút tiền thành công!", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
                 LapPhieuEvent?.Invoke(this, phieuRutTien);
                 MaPhieuRutTien = phieuRutTien.MaPhieuRutTien;
+
                 //reset fields
                 SoTienRut = 0;
                 MaSoTietKiem = string.Empty;
