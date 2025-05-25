@@ -81,7 +81,7 @@
                             FontStyle="Normal"
                             FontWeight="SemiBold"
                             Foreground="#000000"
-                            Text="Lập phiếu gởi tiền" />
+                            Text="Lập phiếu gửi tiền" />
 
                         <!--  Close button  -->
                         <Button
@@ -274,16 +274,16 @@
                                 Height="30"
                                 Padding="3"
                                 VerticalAlignment="Center"
-                                BorderBrush="#33000000"
-                                BorderThickness="1"
+                                Background="#CBC7C4"
                                 CornerRadius="4">
                                 <TextBox
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
-                                    Background="#FFFFFF"
+                                    Background="#CBC7C4"
                                     BorderThickness="0"
                                     FontFamily="Segoe UI Variable"
                                     FontSize="14"
+                                    IsReadOnly="True"
                                     FontStyle="Normal"
                                     Foreground="#9A000000"
                                     Text="{Binding TenLoaiTietKiem, UpdateSourceTrigger=PropertyChanged}"
@@ -322,18 +322,18 @@
                                 Height="30"
                                 Padding="3"
                                 VerticalAlignment="Center"
-                                BorderBrush="#33000000"
-                                BorderThickness="1"
+                                Background="#CBC7C4"
                                 CornerRadius="4">
                                 <TextBox
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
-                                    Background="#FFFFFF"
+                                    Background="#CBC7C4"
                                     BorderThickness="0"
                                     FontFamily="Segoe UI Variable"
                                     FontSize="14"
                                     FontStyle="Normal"
                                     Foreground="#9A000000"
+                                    IsReadOnly="True"
                                     Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>

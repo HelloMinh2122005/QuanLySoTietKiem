@@ -188,7 +188,7 @@ namespace QuanLyDaiLy.ViewModels
 
         public void OpenCapNhatKhachHang()
         {
-            if (string.IsNullOrEmpty(SelectedKhachHangDto.KhachHang.CMND))
+            if (string.IsNullOrEmpty(SelectedKhachHangDto?.KhachHang.CMND))
             {
                 MessageBox.Show("Vui lòng chọn một khách hàng để cập nhật!");
                 return;
@@ -210,7 +210,7 @@ namespace QuanLyDaiLy.ViewModels
 
         public async Task XoaKhachHang()
         {
-            if (string.IsNullOrEmpty(SelectedKhachHangDto.KhachHang.CMND))
+            if (string.IsNullOrEmpty(SelectedKhachHangDto?.KhachHang.CMND))
             {
                 MessageBox.Show("Vui lòng chọn KH để xóa", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
@@ -239,7 +239,7 @@ namespace QuanLyDaiLy.ViewModels
 
         private void ExecuteClose()
         {
-            Window parentWindow = Application.Current.Windows
+            Window? parentWindow = Application.Current.Windows
                     .OfType<Window>()
                     .FirstOrDefault(w => w.IsActive);
             parentWindow?.Close();
