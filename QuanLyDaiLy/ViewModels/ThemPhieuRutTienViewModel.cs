@@ -101,14 +101,14 @@ namespace QuanLyDaiLy.ViewModels
                 TenLoaiTietKiem = soTietKiem.LoaiTietKiem.TenLoaiTietKiem;
                 KyHan = soTietKiem.LoaiTietKiem.KyHan;
                 SoTienRut = 0; //reset to 0
-                SoLanDaoHan = soTietKiem.SoLanDaoHan;
                 SoTienGui = soTietKiem.SoTienGui;
 
-                //Tinh LaiSuat
+                //Tinh LaiSuat va SoLanDaoHan
 
                 if (soTietKiem.LoaiTietKiem.KyHan != 0 && soTietKiem.SoTienGui > 0)
                 {
-                    TienLai = soTietKiem.SoTienGui * soTietKiem.LoaiTietKiem.LaiSuatQuyDinh * soTietKiem.SoLanDaoHan * soTietKiem.LoaiTietKiem.KyHan;
+                    SoLanDaoHan = DateTime.Now - soTietKiem.NgayMoSo >= TimeSpan.FromDays(30) ? (int)((DateTime.Now - soTietKiem.NgayMoSo).TotalDays / (soTietKiem.LoaiTietKiem.KyHan * 30)) : 0;
+                    TienLai = soTietKiem.SoTienGui * soTietKiem.LoaiTietKiem.LaiSuatQuyDinh * SoLanDaoHan * soTietKiem.LoaiTietKiem.KyHan;
                 }
                 else if (soTietKiem.LoaiTietKiem.KyHan == 0 && soTietKiem.SoTienGui > 0)
                 {
@@ -442,10 +442,14 @@ namespace QuanLyDaiLy.ViewModels
             if (loaiTietKiem.KyHan != 0 && loaiTietKiem.QuyDinhRutHetTien == true)
             {
                 //lai suat co ky han
-                var profit = soTietKiem.SoLanDaoHan * loaiTietKiem.LaiSuatQuyDinh * loaiTietKiem.KyHan * soTietKiem.SoTienGui;
-                if (SoTienRut != soTietKiem.SoTienGui + profit)
+                var profit = SoLanDaoHan * loaiTietKiem.LaiSuatQuyDinh * loaiTietKiem.KyHan * soTietKiem.SoTienGui;
+                if (SoTienRut < soTietKiem.SoTienGui + profit)
                 {
-                    return $"Cần rút hết tiền trong sổ tiết kiệm có kỳ hạn. Bạn đang có lãi suất {profit}.";
+                    return "Cần rút hết tiền trong sổ tiết kiệm có kỳ hạn.";
+                }
+                else if (SoTienRut > soTietKiem.SoTienGui + profit)
+                {
+                    return "Số tiền rút không được vượt quá số tiền trong sổ tiết kiệm cộng với tiền lãi đã tính.";
                 }
             }
 

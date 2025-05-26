@@ -257,76 +257,6 @@
                 <ColumnDefinition Width="5*" />
             </Grid.ColumnDefinitions>
 
-            <StackPanel
-                Grid.Column="0"
-                HorizontalAlignment="Left"
-                Orientation="Horizontal">
-                <TextBlock
-                    Width="150"
-                    Height="30"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    FontFamily="Arial"
-                    FontSize="20"
-                    FontStyle="Normal"
-                    FontWeight="Normal"
-                    Foreground="#060606"
-                    LineHeight="23"
-                    Text="Loại tiết kiệm"
-                    TextAlignment="Left" />
-
-                <ComboBox
-                    DisplayMemberPath="TenLoaiTietKiem"
-                    ItemsSource="{Binding DanhSachLoaiTietKiem}"
-                    SelectedItem="{Binding SelectedLoaiTietKiem, Mode=TwoWay}"
-                    Style="{StaticResource StyledComboBox}" />
-
-                <Button
-                    Width="67"
-                    Height="35"
-                    Margin="10,0,10,0"
-                    Background="#FFB498"
-                    Command="{Binding ResetKhachHangCommand}"
-                    Foreground="White">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border
-                                x:Name="buttonBorder"
-                                Padding="5,5,5,7"
-                                Background="{TemplateBinding Background}"
-                                CornerRadius="10">
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="buttonBorder" Property="Background" Value="#FFA080" />
-                                    <Setter TargetName="buttonBorder" Property="Effect">
-                                        <Setter.Value>
-                                            <DropShadowEffect
-                                                BlurRadius="5"
-                                                Opacity="0.3"
-                                                ShadowDepth="1"
-                                                Color="#555555" />
-                                        </Setter.Value>
-                                    </Setter>
-                                </Trigger>
-                                <Trigger Property="IsPressed" Value="True">
-                                    <Setter TargetName="buttonBorder" Property="Background" Value="#FF8060" />
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Button.Template>
-                    <TextBlock
-                        Width="57"
-                        Height="34"
-                        FontFamily="Segoe UI Variable"
-                        FontSize="18"
-                        FontWeight="SemiBold"
-                        Foreground="#92492D"
-                        Text="🔃"
-                        TextAlignment="Center" />
-                </Button>
-            </StackPanel>
 
             <StackPanel
                 Grid.Column="1"
@@ -488,9 +418,8 @@
                 LoadingRow="DataGrid_LoadingRow"
                 SelectedItem="{Binding SelectedKhachHangDto, Mode=TwoWay}">
                 <DataGrid.Resources>
-                    <!-- Don't blow up to white on inactive -->
-                    <SolidColorBrush x:Key="{x:Static Member=SystemColors.InactiveSelectionHighlightBrushKey}"
-                        Color="#FFB498" />
+                    <!--  Don't blow up to white on inactive  -->
+                    <SolidColorBrush x:Key="{x:Static Member=SystemColors.InactiveSelectionHighlightBrushKey}" Color="#FFB498" />
                     <!--  Cell style (kept unchanged)  -->
                     <Style TargetType="DataGridCell">
                         <Style.Resources>
@@ -528,7 +457,7 @@
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Background">
                                     <Setter.Value>
-                                        <SolidColorBrush Color="Wheat"/>
+                                        <SolidColorBrush Color="Wheat" />
                                     </Setter.Value>
                                 </Setter>
                             </Trigger>
