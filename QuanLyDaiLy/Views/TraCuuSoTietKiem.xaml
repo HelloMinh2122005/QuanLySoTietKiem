@@ -165,7 +165,7 @@
                                     FontFamily="Segoe UI Variable"
                                     FontSize="14"
                                     FontStyle="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     Text="{Binding MaSoTietKiem, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
@@ -242,7 +242,7 @@
                                                                         HorizontalAlignment="Center"
                                                                         VerticalAlignment="Center"
                                                                         Data="M7 10l5 5 5-5z"
-                                                                        Fill="#9A000000"
+                                                                        Fill="Black"
                                                                         Stretch="Fill" />
                                                                 </Grid>
                                                                 <ControlTemplate.Triggers>
@@ -382,7 +382,7 @@
                                                                         HorizontalAlignment="Center"
                                                                         VerticalAlignment="Center"
                                                                         Data="M7 10l5 5 5-5z"
-                                                                        Fill="#9A000000"
+                                                                        Fill="Black"
                                                                         Stretch="Fill" />
                                                                 </Grid>
                                                                 <ControlTemplate.Triggers>
@@ -482,7 +482,7 @@
                                     FontFamily="Segoe UI Variable"
                                     FontSize="14"
                                     FontStyle="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     Text="{Binding CMMND, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
@@ -519,7 +519,7 @@
                                     FontFamily="Segoe UI Variable"
                                     FontSize="14"
                                     FontStyle="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
@@ -553,7 +553,7 @@
                                     FontFamily="Segoe UI Variable"
                                     FontSize="14"
                                     FontStyle="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     Text="{Binding LaiSuatTu, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
@@ -580,7 +580,7 @@
                                     FontFamily="Segoe UI Variable"
                                     FontSize="14"
                                     FontStyle="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     Text="{Binding LaiSuatDen, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
@@ -618,7 +618,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     FontWeight="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     SelectedDate="{Binding NgayMoSoTu}">
                                     <DatePicker.Resources>
                                         <Style x:Key="HideCalendarButton" TargetType="Button">
@@ -650,7 +650,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     FontWeight="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     SelectedDate="{Binding NgayMoSoDen}">
                                     <DatePicker.Resources>
                                         <Style x:Key="HideCalendarButton" TargetType="Button">
@@ -684,7 +684,7 @@
                                     FontFamily="Segoe UI Variable"
                                     FontSize="14"
                                     FontStyle="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     Text="{Binding SoDuTu, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
@@ -711,7 +711,7 @@
                                     FontFamily="Segoe UI Variable"
                                     FontSize="14"
                                     FontStyle="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     Text="{Binding SoDuDen, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
@@ -749,7 +749,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     FontWeight="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     SelectedDate="{Binding NgayGuiPhieuGuiTienTu}">
                                     <DatePicker.Resources>
                                         <Style x:Key="HideCalendarButton" TargetType="Button">
@@ -781,7 +781,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     FontWeight="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     SelectedDate="{Binding NgayGuiPhieuGuiTienDen}">
                                     <DatePicker.Resources>
                                         <Style x:Key="HideCalendarButton" TargetType="Button">
@@ -815,7 +815,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     FontWeight="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     SelectedDate="{Binding NgayGuiPhieuRutTienTu}">
                                     <DatePicker.Resources>
                                         <Style x:Key="HideCalendarButton" TargetType="Button">
@@ -847,7 +847,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     FontWeight="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     SelectedDate="{Binding NgayGuiPhieuRutTienDen}">
                                     <DatePicker.Resources>
                                         <Style x:Key="HideCalendarButton" TargetType="Button">
@@ -888,7 +888,7 @@
                                     FontFamily="Segoe UI Variable"
                                     FontSize="14"
                                     FontStyle="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     Text="{Binding SoTienGuiTu, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
@@ -915,7 +915,7 @@
                                     FontFamily="Segoe UI Variable"
                                     FontSize="14"
                                     FontStyle="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     Text="{Binding SoTienGuiDen, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
@@ -944,7 +944,7 @@
                                     FontFamily="Segoe UI Variable"
                                     FontSize="14"
                                     FontStyle="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     Text="{Binding SoTienRutTu, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
@@ -971,7 +971,7 @@
                                     FontFamily="Segoe UI Variable"
                                     FontSize="14"
                                     FontStyle="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     Text="{Binding SoTienRutDen, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
@@ -1003,7 +1003,7 @@
                                     FontFamily="Segoe UI Variable"
                                     FontSize="14"
                                     FontStyle="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     Text="{Binding SoLuongPhieuGuiTienTu, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
@@ -1030,7 +1030,7 @@
                                     FontFamily="Segoe UI Variable"
                                     FontSize="14"
                                     FontStyle="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     Text="{Binding SoLuongPhieuGuiTienDen, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
@@ -1061,7 +1061,7 @@
                                     FontFamily="Segoe UI Variable"
                                     FontSize="14"
                                     FontStyle="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     Text="{Binding SoLuongPhieuRutTienTu, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
@@ -1088,7 +1088,7 @@
                                     FontFamily="Segoe UI Variable"
                                     FontSize="14"
                                     FontStyle="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     Text="{Binding SoLuongPhieuRutTienDen, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>

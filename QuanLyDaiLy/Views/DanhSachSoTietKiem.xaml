@@ -129,7 +129,7 @@
                                                         HorizontalAlignment="Center"
                                                         VerticalAlignment="Center"
                                                         Data="M7 10l5 5 5-5z"
-                                                        Fill="#9A000000"
+                                                        Fill="Black"
                                                         Stretch="Fill" />
                                                 </Grid>
                                                 <ControlTemplate.Triggers>
@@ -293,7 +293,7 @@
                     Tag="KhachHang" />
                 <RadioButton
                     Checked="RadioButton_Checked"
-                    Content=" 💰 Phiếu gửi tiền"
+                    Content=" 💰 Phiếu gởi tiền"
                     GroupName="NavGroup"
                     Style="{StaticResource NavButtonStyle}"
                     Tag="PhieuGoiTien" />

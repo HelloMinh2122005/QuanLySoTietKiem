@@ -154,7 +154,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     FontWeight="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     IsReadOnly="True"
                                     Text="{Binding MaPhieuRutTien, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
@@ -194,7 +194,7 @@
                                     FontFamily="Segoe UI Variable"
                                     FontSize="14"
                                     FontStyle="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     Text="{Binding MaSoTietKiem, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
@@ -229,7 +229,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     FontWeight="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     IsReadOnly="True"
                                     Text="{Binding TrangThai, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                                     TextAlignment="Left" />
@@ -275,7 +275,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     FontWeight="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     IsReadOnly="True"
                                     Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
@@ -310,7 +310,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     FontWeight="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     IsReadOnly="True"
                                     Text="{Binding NgayMoSo, UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}"
                                     TextAlignment="Left" />
@@ -345,7 +345,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     FontWeight="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     IsReadOnly="True"
                                     Text="15"
                                     TextAlignment="Left" />
@@ -391,7 +391,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     FontWeight="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     IsReadOnly="True"
                                     Text="{Binding TenLoaiTietKiem, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
@@ -426,7 +426,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     FontWeight="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     IsReadOnly="True"
                                     Text="{Binding KyHan, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
@@ -461,7 +461,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     FontWeight="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     IsReadOnly="True"
                                     Text="{Binding SoLanDaoHan, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
@@ -509,7 +509,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     FontWeight="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     SelectedDate="{Binding NgayRut}">
                                     <DatePicker.Resources>
                                         <Style x:Key="HideCalendarButton" TargetType="Button">
@@ -553,7 +553,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     FontWeight="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     IsReadOnly="True"
                                     Text="30"
                                     TextAlignment="Left" />
@@ -593,7 +593,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     FontWeight="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     IsReadOnly="True"
                                     Text="{Binding TrangThaiQuyDinh, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                                     TextAlignment="Left" />
@@ -643,7 +643,7 @@
                                     FontFamily="Segoe UI Variable"
                                     FontSize="14"
                                     FontStyle="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     Text="{Binding SoTienRut, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
@@ -682,7 +682,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     FontWeight="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     IsReadOnly="True"
                                     Text="{Binding SoTienGui, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
@@ -722,7 +722,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     FontWeight="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     IsReadOnly="True"
                                     Text="{Binding TienLai, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
