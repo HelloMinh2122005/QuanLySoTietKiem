@@ -113,6 +113,9 @@ public class BaoCaoDongMoViewModel : INotifyPropertyChanged
     {
         var loaiTietKiemList = await _loaiTietKiemRepo.GetAll();
         LoaiTietKiems.Clear();
+        var allLtk = new LoaiTietKiem();
+        allLtk.TenLoaiTietKiem = "Tất cả";
+        LoaiTietKiems.Add(allLtk);
         foreach (var ltk in loaiTietKiemList)
             LoaiTietKiems.Add(ltk);
 
@@ -125,10 +128,17 @@ public class BaoCaoDongMoViewModel : INotifyPropertyChanged
 
         if (SelectedLoaiTietKiem == null)
             return;
-
-        var soTietKiemList = (await _soTietKiemRepo.GetAll())
-            .Where(stk => stk.MaLoaiTietKiem == SelectedLoaiTietKiem.MaLoaiTietKiem)
-            .ToList();
+        List<SoTietKiem> soTietKiemList;
+        if (SelectedLoaiTietKiem.TenLoaiTietKiem.Equals(LoaiTietKiems[0].TenLoaiTietKiem))
+        {
+            soTietKiemList = (await _soTietKiemRepo.GetAll()).ToList();
+        }
+        else
+        {
+            soTietKiemList = (await _soTietKiemRepo.GetAll())
+                .Where(stk => stk.MaLoaiTietKiem == SelectedLoaiTietKiem.MaLoaiTietKiem)
+                .ToList();
+        }
 
         var phieuRutTienList = (await _phieuRutTienRepo.GetAll()).ToList();
         int tongMo = 0;
@@ -154,13 +164,18 @@ public class BaoCaoDongMoViewModel : INotifyPropertyChanged
             );
             tongDong += soDong;
 
-            FilteredDanhSachBaoCao.Add(new BaoCaoDongMoItem
+            if(soMo > 0 || soDong > 0)
             {
-                NgayMoDongSo = date,
-                SoLuongSoMo = soMo,
-                SoLuongSoDong = soDong,
-                ChenhLech = Math.Abs(soMo - soDong)
-            });
+                FilteredDanhSachBaoCao.Add(new BaoCaoDongMoItem
+                {
+                    NgayMoDongSo = date,
+                    SoLuongSoMo = soMo,
+                    SoLuongSoDong = soDong,
+                    ChenhLech = Math.Abs(soMo - soDong)
+                });
+            }
+
+            
         }
         TongSoMo = tongMo;
         TongSoDong = tongDong;
