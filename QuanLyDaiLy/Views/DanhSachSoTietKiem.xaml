@@ -73,6 +73,8 @@
 
         <converters:ComboBoxItemConverter x:Key="ComboBoxItemConverter" />
 
+        <converters:BooleanToStatusConverter x:Key="BooleanToStatusConverter" />
+
         <!--  ComboBox Style  -->
         <Style x:Key="StyledComboBox" TargetType="{x:Type ComboBox}">
             <Setter Property="Background" Value="#FFFFFF" />
@@ -278,7 +280,7 @@
             </Border>
 
             <StackPanel Grid.Row="1" Margin="0,20,0,0">
-                
+
                 <RadioButton
                     Checked="RadioButton_Checked"
                     Content=" 🛍  Sổ tiết kiệm"
@@ -684,9 +686,8 @@
                     LoadingRow="DataGrid_LoadingRow"
                     SelectedItem="{Binding SelectedSoTietKiem, Mode=TwoWay}">
                     <DataGrid.Resources>
-                        <!-- Don't blow up to white on inactive -->
-                        <SolidColorBrush x:Key="{x:Static Member=SystemColors.InactiveSelectionHighlightBrushKey}"
-                            Color="#FFB498" />
+                        <!--  Don't blow up to white on inactive  -->
+                        <SolidColorBrush x:Key="{x:Static Member=SystemColors.InactiveSelectionHighlightBrushKey}" Color="#FFB498" />
                         <!--  Cell style (kept unchanged)  -->
                         <Style TargetType="DataGridCell">
                             <Style.Resources>
@@ -724,7 +725,7 @@
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter Property="Background">
                                         <Setter.Value>
-                                            <SolidColorBrush Color="Wheat"/>
+                                            <SolidColorBrush Color="Wheat" />
                                         </Setter.Value>
                                     </Setter>
                                 </Trigger>
@@ -858,6 +859,26 @@
                             Width="*"
                             Binding="{Binding KhachHang.TenKhachHang}"
                             Header="Khách hàng">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="TextAlignment" Value="Left" />
+                                    <Setter Property="LineHeight" Value="23" />
+                                    <Setter Property="FontSize" Value="20" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected}" Value="True">
+                                            <Setter Property="Foreground" Value="Black" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding DangMo, Converter={StaticResource BooleanToStatusConverter}}"
+                            Header="Tình trạng">
                             <DataGridTextColumn.ElementStyle>
                                 <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
                                     <Setter Property="VerticalAlignment" Value="Center" />
