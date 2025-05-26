@@ -362,7 +362,7 @@
                                 FontSize="14"
                                 FontStyle="Normal"
                                 FontWeight="Normal"
-                                Foreground="#9A000000"
+                                Foreground="Black"
                                 IsReadOnly="False"
                                 Text="{Binding SoTienGoiToiThieu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 TextAlignment="Left" />
@@ -386,7 +386,7 @@
                                 FontSize="14"
                                 FontStyle="Normal"
                                 FontWeight="Normal"
-                                Foreground="#9A000000"
+                                Foreground="Black"
                                 IsReadOnly="False"
                                 Text="{Binding SoTienGuiThemToiThieu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 TextAlignment="Left" />
@@ -410,7 +410,7 @@
                                 FontSize="14"
                                 FontStyle="Normal"
                                 FontWeight="Normal"
-                                Foreground="#9A000000"
+                                Foreground="Black"
                                 IsReadOnly="False"
                                 Text="{Binding SoNgayMoSoToiThieu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 TextAlignment="Left" />
@@ -434,7 +434,7 @@
                                 FontSize="14"
                                 FontStyle="Normal"
                                 FontWeight="Normal"
-                                Foreground="#9A000000"
+                                Foreground="Black"
                                 IsReadOnly="False"
                                 Text="{Binding SoNgayMoSoToiThieuDeCoLai, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 TextAlignment="Left" />

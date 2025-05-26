@@ -159,7 +159,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     FontWeight="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     IsReadOnly="True"
                                     Text="{Binding MaSoTietKiem, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
@@ -200,7 +200,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     FontWeight="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     Text="{Binding Cmnd, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
@@ -240,7 +240,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     FontWeight="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     IsReadOnly="True"
                                     Text="{Binding TenKhachHang, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
@@ -292,7 +292,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     FontWeight="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     Text="{Binding SoTienGui, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
@@ -331,7 +331,7 @@
                                 FontSize="14"
                                 FontStyle="Normal"
                                 FontWeight="Normal"
-                                Foreground="#9A000000"
+                                Foreground="Black"
                                 ItemsSource="{Binding DsLoaiTietKiem}"
                                 SelectedItem="{Binding LoaiTietKiemDuocChon, Mode=TwoWay}"
                                 SelectedValuePath="MaLoaiTietKiem">
@@ -368,7 +368,7 @@
                                                                         HorizontalAlignment="Center"
                                                                         VerticalAlignment="Center"
                                                                         Data="M7 10l5 5 5-5z"
-                                                                        Fill="#9A000000"
+                                                                        Fill="Black"
                                                                         Stretch="Fill" />
                                                                 </Grid>
                                                                 <ControlTemplate.Triggers>
@@ -472,7 +472,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     FontWeight="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     SelectedDate="{Binding NgayMoSo}">
                                     <DatePicker.Resources>
                                         <Style x:Key="HideCalendarButton" TargetType="Button">
@@ -519,7 +519,7 @@
                                 FontSize="14"
                                 FontStyle="Normal"
                                 FontWeight="Normal"
-                                Foreground="#9A000000"
+                                Foreground="Black"
                                 IsReadOnly="True"
                                 Text="{Binding DiaChi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 TextAlignment="Left" />

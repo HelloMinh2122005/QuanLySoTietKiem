@@ -247,12 +247,12 @@ namespace QuanLyDaiLy.ViewModels
             }
 
             var thamSo = await _thamSoRepo.Get();
-            // Kiểm tra số tiền gửi
+            // Kiểm tra số tiền gởi
             if (SoTienGui < thamSo.SoTienGoiToiThieu)
             {
                 Console.WriteLine(SoTienGui);
 
-                return $"Số tiền gửi tối thiểu là {thamSo.SoTienGoiToiThieu}.";
+                return $"Số tiền gởi tối thiểu là {thamSo.SoTienGoiToiThieu}.";
             }
 
             // Kiểm tra ngày mở sổ

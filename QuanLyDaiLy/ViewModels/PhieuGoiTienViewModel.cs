@@ -164,7 +164,7 @@ namespace QuanLyDaiLy.ViewModels
         {
             if (SelectedPhieuGoiTien != null)
             {
-                var result = MessageBox.Show("Bạn có chắc chắn muốn xóa phiếu gửi tiền này không?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                var result = MessageBox.Show("Bạn có chắc chắn muốn xóa phiếu gởi tiền này không?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.Yes)
                 {
                     _ = _phieuGoiTienRepo.Delete(SelectedPhieuGoiTien.MaPhieuGoiTien);
