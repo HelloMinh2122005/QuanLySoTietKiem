@@ -153,20 +153,20 @@
                                 Height="30"
                                 Padding="3"
                                 VerticalAlignment="Center"
-                                Background="#CBC7C4"
+                                BorderBrush="#33000000"
+                                BorderThickness="1"
                                 CornerRadius="4">
                                 <TextBox
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
                                     VerticalContentAlignment="Center"
-                                    Background="#CBC7C4"
+                                    Background="#FFFF"
                                     BorderThickness="0"
                                     FontFamily="Segoe UI Variable"
                                     FontSize="14"
                                     FontStyle="Normal"
                                     FontWeight="Normal"
                                     Foreground="Black"
-                                    IsReadOnly="True"
                                     Text="{Binding MaSoTietKiem, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
