@@ -18,6 +18,7 @@ public class BaoCaoDoanhSoViewModel: INotifyPropertyChanged
         _phieuGoiTienRepo = phieuGoiTienRepo;
         _loaiTietKiemRepo = loaiTietKiemRepo;
         _phieuRutTienRepo = phieuRutTienRepo;
+        SelectedDate = DateTime.Now;
     }
     
     private DateTime _selectedDate;
