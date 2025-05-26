@@ -33,9 +33,6 @@ public partial class App : Application
         var dbService = ServiceProvider.GetRequiredService<DatabaseService>();
         await dbService.Initialize();
 
-        //var dashboard = ServiceProvider.GetRequiredService<Dashboard>();
-        //dashboard.Show();
-
         var danhSachSoTietKiem = ServiceProvider.GetRequiredService<DanhSachSoTietKiem>();
         danhSachSoTietKiem.Show();
     }

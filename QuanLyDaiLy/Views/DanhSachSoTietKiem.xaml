@@ -278,13 +278,7 @@
             </Border>
 
             <StackPanel Grid.Row="1" Margin="0,20,0,0">
-                <RadioButton
-                    Checked="RadioButton_Checked"
-                    Content=" 📊  Bảng điều khiển"
-                    GroupName="NavGroup"
-                    IsChecked="True"
-                    Style="{StaticResource NavButtonStyle}"
-                    Tag="Dashboard" />
+                
                 <RadioButton
                     Checked="RadioButton_Checked"
                     Content=" 🛍  Sổ tiết kiệm"
