@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using QuanLyDaiLy.ViewModels;
 
 namespace QuanLyDaiLy.Views.ThamSoView
 {
@@ -20,9 +21,10 @@ namespace QuanLyDaiLy.Views.ThamSoView
     /// </summary>
     public partial class ThamSoPage : Page
     {
-        public ThamSoPage()
+        public ThamSoPage(ThamSoViewModel viewModel)
         {
             InitializeComponent();
+            DataContext = viewModel;
         }
     }
 }

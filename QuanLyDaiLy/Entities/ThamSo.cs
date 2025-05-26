@@ -8,4 +8,5 @@ public class ThamSo
     public decimal SoTienGuiThemToiThieu { get; set; } = 100000;
     public int SoNgayMoToiThieu { get; set; } = 15;
     public int SoNgayMoToiThieuDeCoLai { get; set; } = 30;
+
 }

@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using QuanLyDaiLy.Entities;
 using QuanLyDaiLy.Helpers;
 using QuanLyDaiLy.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace QuanLyDaiLy.ViewModels
 {
@@ -16,6 +17,7 @@ namespace QuanLyDaiLy.ViewModels
     {
         public ICommand CloseCommand { get; }
         public ICommand LapPhieuCommand { get;  } 
+        public ICommand TraCuuSoCommand { get; }
 
         public event EventHandler<PhieuGoiTien>? LapPhieuEvent;
         private readonly IPhieuGoiTienRepo _phieuGoiTienRepo;
@@ -23,6 +25,7 @@ namespace QuanLyDaiLy.ViewModels
         private readonly IKhachHangRepo _khachHangRepo;
         private readonly IThamSoRepo _thamSoRepo;
         private readonly ILoaiTietKiemRepo _loaitietkiemRepo;
+        private readonly IServiceProvider _serviceProvider;
 
         private string _maPhieuGoiTien;
         public string MaPhieuGoiTien
@@ -62,7 +65,7 @@ namespace QuanLyDaiLy.ViewModels
                 {
                     _maSoTietKiem = value;
                     OnPropertyChanged();
-                    LoadFields(); //update UI
+                    LoadFields(); // Load fields when MaSoTietKiem changes
                 }
             }
         }
@@ -185,7 +188,7 @@ namespace QuanLyDaiLy.ViewModels
             get => IsFieldsEnabled ? "Đang áp dụng" : string.Empty;
         }
 
-        public ThemPhieuGoiTienViewModel(IPhieuGoiTienRepo phieuGoiTienRepo, ISoTietKiemRepo soTietKiemRepo, IKhachHangRepo khachHangRepo, IThamSoRepo thamSoRepo, ILoaiTietKiemRepo loaitietkiemRepo)
+        public ThemPhieuGoiTienViewModel(IPhieuGoiTienRepo phieuGoiTienRepo, ISoTietKiemRepo soTietKiemRepo, IKhachHangRepo khachHangRepo, IThamSoRepo thamSoRepo, ILoaiTietKiemRepo loaitietkiemRepo, IServiceProvider serviceProvider)
         {
             //repo
             _phieuGoiTienRepo = phieuGoiTienRepo;
@@ -193,12 +196,38 @@ namespace QuanLyDaiLy.ViewModels
             _khachHangRepo = khachHangRepo;
             _thamSoRepo = thamSoRepo;
             _loaitietkiemRepo = loaitietkiemRepo;
+            //service
+            _serviceProvider = serviceProvider;
             //command
             CloseCommand = new RelayCommand(ExecuteClose);
             LapPhieuCommand = new RelayCommand(LapPhieu);
-
+            TraCuuSoCommand = new RelayCommand(ExecuteCloseAndNavigate);
             //load fields
             NgayGoi = DateTime.Now;
+        }
+
+        private void ExecuteCloseAndNavigate()
+        {
+            // Close the current lapPhieuGoiTien window
+            var currentWindow = Application.Current.Windows.OfType<lapPhieuGoiTien>().FirstOrDefault();
+            currentWindow?.Close();
+
+            // Resolve the required dependencies
+            var viewModel = _serviceProvider.GetRequiredService<DanhSachSoTietKiemViewModel>();
+            var danhSachSoTietKiemWindow = new DanhSachSoTietKiem(viewModel, _serviceProvider);
+
+            //Navigate
+            var currentWindows = Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w.IsActive);
+            if (currentWindows != null)
+            {
+                currentWindows.Content = danhSachSoTietKiemWindow.Content;
+            }
+
+            // Call OpenTraCuuSoTietKiem function
+            if (viewModel is DanhSachSoTietKiemViewModel danhSachViewModel)
+            {
+                danhSachViewModel.OpenSearchWindow();
+            }
         }
 
         private async void LapPhieu()
@@ -250,6 +279,11 @@ namespace QuanLyDaiLy.ViewModels
 
         private async Task<string> ValidateFields()
         {
+            if (MaSoTietKiem == null || MaSoTietKiem.Trim() == "")
+            {
+                return "Vui lòng chọn sổ tiết kiệm.";
+            }
+
             var thamSo = await _thamSoRepo.Get();
             
             if (SoTienGui < thamSo.SoTienGuiThemToiThieu)

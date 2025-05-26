@@ -11,6 +11,7 @@ using QuanLyDaiLy.Helpers;
 using QuanLyDaiLy.Interfaces;
 using QuanLyDaiLy.Views.PhieuGoiTienViews;
 using QuanLyDaiLy.Views.PhieuRutTienViews;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace QuanLyDaiLy.ViewModels
 {
@@ -18,6 +19,7 @@ namespace QuanLyDaiLy.ViewModels
     {
         public ICommand CloseCommand { get; set; }
         public ICommand LapPhieuCommand { get; set; }
+        public ICommand TraCuuSoCommand { get; }
 
         public EventHandler<PhieuRutTien>? LapPhieuEvent;
         private readonly IPhieuRutTienRepo _phieuRutTienRepo;
@@ -25,6 +27,7 @@ namespace QuanLyDaiLy.ViewModels
         private readonly IKhachHangRepo _khachHangRepo;
         private readonly IThamSoRepo _thamSoRepo;
         private readonly ILoaiTietKiemRepo _loaitietkiemRepo;
+        private readonly IServiceProvider _serviceProvider;
 
         private string _maPhieuRutTien;
         public string MaPhieuRutTien
@@ -64,7 +67,7 @@ namespace QuanLyDaiLy.ViewModels
                 {
                     _maSoTietKiem = value;
                     OnPropertyChanged();
-                    LoadFields(); //update UI
+                    LoadFields(); //UI update
                 }
             }
         }
@@ -81,6 +84,7 @@ namespace QuanLyDaiLy.ViewModels
                 SoLanDaoHan = 0;
                 SoTienGui = 0;
                 TienLai = 0;
+                NgayMoSo = null;
                 return;
             }
 
@@ -197,8 +201,8 @@ namespace QuanLyDaiLy.ViewModels
             }
         }
 
-        public DateTime _ngayMoSo;
-        public DateTime NgayMoSo
+        public DateTime? _ngayMoSo;
+        public DateTime? NgayMoSo
         {
             get => _ngayMoSo;
             set
@@ -302,7 +306,7 @@ namespace QuanLyDaiLy.ViewModels
             }
         }
 
-        public ThemPhieuRutTienViewModel(IPhieuRutTienRepo phieuRutTienRepo, ISoTietKiemRepo soTietKiemRepo, IKhachHangRepo khachHangRepo, IThamSoRepo thamSoRepo, ILoaiTietKiemRepo loaiTietKiemRepo)
+        public ThemPhieuRutTienViewModel(IPhieuRutTienRepo phieuRutTienRepo, ISoTietKiemRepo soTietKiemRepo, IKhachHangRepo khachHangRepo, IThamSoRepo thamSoRepo, ILoaiTietKiemRepo loaiTietKiemRepo, IServiceProvider serviceProvider)
         {
             //repo 
             _phieuRutTienRepo = phieuRutTienRepo;
@@ -310,15 +314,43 @@ namespace QuanLyDaiLy.ViewModels
             _khachHangRepo = khachHangRepo;
             _thamSoRepo = thamSoRepo;
             _loaitietkiemRepo = loaiTietKiemRepo;
+            
+            //service
+            _serviceProvider = serviceProvider;
 
             //commands
             CloseCommand = new RelayCommand(ExecuteClose);
             LapPhieuCommand = new RelayCommand(LapPhieu);
+            TraCuuSoCommand = new RelayCommand(ExecuteCloseAndNavigate);
 
             //load fields 
             NgayRut = DateTime.Now;
+            _serviceProvider = serviceProvider;
         }
 
+        private void ExecuteCloseAndNavigate()
+        {
+            // Close the current lapPhieuGoiTien window
+            var currentWindow = Application.Current.Windows.OfType<LapPhieuRutTienWindow>().FirstOrDefault();
+            currentWindow?.Close();
+
+            // Resolve the required dependencies
+            var viewModel = _serviceProvider.GetRequiredService<DanhSachSoTietKiemViewModel>();
+            var danhSachSoTietKiemWindow = new DanhSachSoTietKiem(viewModel, _serviceProvider);
+
+            //Navigate
+            var currentWindows = Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w.IsActive);
+            if (currentWindows != null)
+            {
+                currentWindows.Content = danhSachSoTietKiemWindow.Content;
+            }
+
+            // Call OpenTraCuuSoTietKiem function
+            if (viewModel is DanhSachSoTietKiemViewModel danhSachViewModel)
+            {
+                danhSachViewModel.OpenSearchWindow();
+            }
+        }
 
         private async void LapPhieu()
         {
@@ -343,6 +375,7 @@ namespace QuanLyDaiLy.ViewModels
                 NgayRut = NgayRut,
                 SoTienRut = SoTienRut,
                 MaSoTietKiem = MaSoTietKiem,
+                SoTietKiem = soTietKiem
             };
 
             //save to db
@@ -352,7 +385,7 @@ namespace QuanLyDaiLy.ViewModels
 
                 //update SoTietKiem
                 soTietKiem.SoTienGui -= SoTienRut;
-                if (soTietKiem.SoTienGui == 0 )
+                if (soTietKiem.SoTienGui <= 0 )
                 {
                     soTietKiem.DangMo = false; //đóng sổ tiết kiệm nếu rút hết tiền
                 }
@@ -361,6 +394,7 @@ namespace QuanLyDaiLy.ViewModels
                 MessageBox.Show("Lập phiếu rút tiền thành công!", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
                 LapPhieuEvent?.Invoke(this, phieuRutTien);
                 MaPhieuRutTien = phieuRutTien.MaPhieuRutTien;
+
                 //reset fields
                 SoTienRut = 0;
                 MaSoTietKiem = string.Empty;
@@ -373,6 +407,11 @@ namespace QuanLyDaiLy.ViewModels
 
         private async Task<string> ValidateFields()
         {
+            if (MaSoTietKiem == null || MaSoTietKiem.Trim() == "")
+            {
+                return "Vui lòng chọn số tiết kiệm để rút tiền.";
+            }
+
             var soTietKiem = await _soTietKiemRepo.GetById(MaSoTietKiem);
             if (soTietKiem == null)
             {
@@ -381,11 +420,6 @@ namespace QuanLyDaiLy.ViewModels
             if (soTietKiem.DangMo == false)
             {
                 return "Số tiết kiệm đã đóng, không thể rút tiền.";
-            }
-
-            if (MaSoTietKiem == string.Empty)
-            {
-                return "Vui lòng chọn số tiết kiệm để rút tiền.";
             }
 
             var daysSinceOpened = (DateTime.Now - soTietKiem.NgayMoSo).TotalDays;

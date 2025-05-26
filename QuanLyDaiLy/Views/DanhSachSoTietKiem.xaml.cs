@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using QuanLyDaiLy.Views.BaoCaoDoanhSoViews;
 using QuanLyDaiLy.Views.BaoCaoDongMoViews;
 using QuanLyDaiLy.Views.CustomAnimation;
-using QuanLyDaiLy.Views.DashboardViews;
 using QuanLyDaiLy.Views.KhachHangViews;
 using QuanLyDaiLy.Views.PhieuGoiTienViews;
 using QuanLyDaiLy.Views.PhieuRutTienViews;
@@ -37,7 +36,7 @@ namespace QuanLyDaiLy.Views
 
             Loaded += (s, e) =>
             {
-                NavigateToPage("Dashboard");
+                NavigateToPage("SoTietKiem");
             };
         }
 
@@ -104,10 +103,6 @@ namespace QuanLyDaiLy.Views
                 case "KhachHang":
                     var khachHangPage = _serviceProvider.GetRequiredService<KhachHangPage>();
                     MainContent.Navigate(khachHangPage);
-                    break;
-                case "Dashboard":
-                    var dashboardPage = _serviceProvider.GetRequiredService<DashboardPage>();
-                    MainContent.Navigate(dashboardPage);
                     break;
                 case "PhieuGoiTien":
                     var DsPhieuGoiTien = _serviceProvider.GetRequiredService<DsPhieuGoiTien>();

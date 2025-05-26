@@ -312,7 +312,7 @@
                                     FontWeight="Normal"
                                     Foreground="#9A000000"
                                     IsReadOnly="True"
-                                    Text="{Binding NgayMoSo, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding NgayMoSo, UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}"
                                     TextAlignment="Left" />
                             </Border>
                         </Grid>
@@ -797,7 +797,7 @@
                         Height="35"
                         Margin="0,0,20,0"
                         Background="#FFB498"
-                        Command="{Binding CloseCommand}">
+                        Command="{Binding TraCuuSoCommand}">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border

@@ -278,13 +278,7 @@
             </Border>
 
             <StackPanel Grid.Row="1" Margin="0,20,0,0">
-                <RadioButton
-                    Checked="RadioButton_Checked"
-                    Content=" 📊  Bảng điều khiển"
-                    GroupName="NavGroup"
-                    IsChecked="True"
-                    Style="{StaticResource NavButtonStyle}"
-                    Tag="Dashboard" />
+                
                 <RadioButton
                     Checked="RadioButton_Checked"
                     Content=" 🛍  Sổ tiết kiệm"
@@ -305,25 +299,25 @@
                     Tag="PhieuGoiTien" />
                 <RadioButton
                     Checked="RadioButton_Checked"
-                    Content=" 💰 Phiếu rút tiền"
+                    Content=" 🏧 Phiếu rút tiền"
                     GroupName="NavGroup"
                     Style="{StaticResource NavButtonStyle}"
                     Tag="PhieuRutTien" />
                 <RadioButton
                     Checked="RadioButton_Checked"
-                    Content=" 💰 Báo cáo Doanh số"
+                    Content=" 📈 Báo cáo Doanh số"
                     GroupName="NavGroup"
                     Style="{StaticResource NavButtonStyle}"
                     Tag="BaoCaoDoanhSo" />
                 <RadioButton
                     Checked="RadioButton_Checked"
-                    Content=" 💰 Báo cáo Đóng mở"
+                    Content=" 📊 Báo cáo Đóng mở"
                     GroupName="NavGroup"
                     Style="{StaticResource NavButtonStyle}"
                     Tag="BaoCaoDongMo" />
                 <RadioButton
                     Checked="RadioButton_Checked"
-                    Content=" 💰 Tham số"
+                    Content=" ⚙️ Tham số"
                     GroupName="NavGroup"
                     Style="{StaticResource NavButtonStyle}"
                     Tag="ThamSo" />
@@ -493,7 +487,7 @@
                     <Button
                         Height="35"
                         Background="#FFB498"
-                        Command="{Binding CapNhatSoTietKiemCommand}"
+                        Command="{Binding MoTraCuuSoTietKiemCommand}"
                         Foreground="White">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
@@ -506,7 +500,7 @@
                                 </Border>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter TargetName="buttonBorder" Property="Background" Value="#F47346" />
+                                        <Setter TargetName="buttonBorder" Property="Background" Value="#FFA080" />
                                         <Setter TargetName="buttonBorder" Property="Effect">
                                             <Setter.Value>
                                                 <DropShadowEffect
@@ -518,7 +512,7 @@
                                         </Setter>
                                     </Trigger>
                                     <Trigger Property="IsPressed" Value="True">
-                                        <Setter TargetName="buttonBorder" Property="Background" Value="#D34816" />
+                                        <Setter TargetName="buttonBorder" Property="Background" Value="#FF8060" />
                                     </Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
@@ -540,7 +534,7 @@
                         Width="120"
                         Height="35"
                         Margin="0,0,10,0"
-                        Background="#E65F2B"
+                        Background="#FFB498"
                         Command="{Binding ThemSoTietKiemCommand}">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
@@ -574,8 +568,7 @@
                             Width="70"
                             FontFamily="Segoe UI Variable"
                             FontSize="18"
-                            FontWeight="SemiBold"
-                            Foreground="White"
+                            Foreground="#92492D"
                             Text="Thêm sổ"
                             TextAlignment="Center" />
                     </Button>
@@ -598,7 +591,7 @@
                                 </Border>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter TargetName="buttonBorder" Property="Background" Value="#F47346" />
+                                        <Setter TargetName="buttonBorder" Property="Background" Value="#FFA080" />
                                         <Setter TargetName="buttonBorder" Property="Effect">
                                             <Setter.Value>
                                                 <DropShadowEffect
@@ -610,7 +603,7 @@
                                         </Setter>
                                     </Trigger>
                                     <Trigger Property="IsPressed" Value="True">
-                                        <Setter TargetName="buttonBorder" Property="Background" Value="#D34816" />
+                                        <Setter TargetName="buttonBorder" Property="Background" Value="#FF8060" />
                                     </Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
@@ -619,7 +612,6 @@
                             Width="70"
                             FontFamily="Segoe UI Variable"
                             FontSize="18"
-                            FontWeight="SemiBold"
                             Foreground="#92492D"
                             Text="Xoá sổ"
                             TextAlignment="Center" />
@@ -642,7 +634,7 @@
                                 </Border>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter TargetName="buttonBorder" Property="Background" Value="#F47346" />
+                                        <Setter TargetName="buttonBorder" Property="Background" Value="#FFA080" />
                                         <Setter TargetName="buttonBorder" Property="Effect">
                                             <Setter.Value>
                                                 <DropShadowEffect
@@ -654,7 +646,7 @@
                                         </Setter>
                                     </Trigger>
                                     <Trigger Property="IsPressed" Value="True">
-                                        <Setter TargetName="buttonBorder" Property="Background" Value="#D34816" />
+                                        <Setter TargetName="buttonBorder" Property="Background" Value="#FF8060" />
                                     </Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
@@ -692,8 +684,14 @@
                     LoadingRow="DataGrid_LoadingRow"
                     SelectedItem="{Binding SelectedSoTietKiem, Mode=TwoWay}">
                     <DataGrid.Resources>
+                        <!-- Don't blow up to white on inactive -->
+                        <SolidColorBrush x:Key="{x:Static Member=SystemColors.InactiveSelectionHighlightBrushKey}"
+                            Color="#FFB498" />
                         <!--  Cell style (kept unchanged)  -->
                         <Style TargetType="DataGridCell">
+                            <Style.Resources>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FFB498" />
+                            </Style.Resources>
                             <Setter Property="BorderThickness" Value="0" />
                             <Setter Property="FocusVisualStyle" Value="{x:Null}" />
                             <Setter Property="Padding" Value="10,0" />
@@ -724,25 +722,9 @@
                             <Setter Property="BorderBrush" Value="#E0E0E0" />
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Effect">
+                                    <Setter Property="Background">
                                         <Setter.Value>
-                                            <DropShadowEffect
-                                                BlurRadius="3"
-                                                Opacity="0.2"
-                                                ShadowDepth="0"
-                                                Color="Black" />
-                                        </Setter.Value>
-                                    </Setter>
-                                </Trigger>
-                                <Trigger Property="IsSelected" Value="True">
-                                    <Setter Property="Background" Value="#F47346" />
-                                    <Setter Property="Effect">
-                                        <Setter.Value>
-                                            <DropShadowEffect
-                                                BlurRadius="5"
-                                                Opacity="0.3"
-                                                ShadowDepth="0"
-                                                Color="Black" />
+                                            <SolidColorBrush Color="Wheat"/>
                                         </Setter.Value>
                                     </Setter>
                                 </Trigger>
@@ -798,8 +780,7 @@
                                             <Style TargetType="TextBlock">
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected}" Value="True">
-                                                        <Setter Property="Foreground" Value="White" />
-                                                        <Setter Property="FontWeight" Value="SemiBold" />
+                                                        <Setter Property="Foreground" Value="Black" />
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
@@ -824,8 +805,7 @@
                                     <Setter Property="FontSize" Value="20" />
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected}" Value="True">
-                                            <Setter Property="Foreground" Value="White" />
-                                            <Setter Property="FontWeight" Value="SemiBold" />
+                                            <Setter Property="Foreground" Value="Black" />
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -847,8 +827,7 @@
                                     <Setter Property="FontSize" Value="20" />
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected}" Value="True">
-                                            <Setter Property="Foreground" Value="White" />
-                                            <Setter Property="FontWeight" Value="SemiBold" />
+                                            <Setter Property="Foreground" Value="Black" />
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -868,8 +847,7 @@
                                     <Setter Property="FontSize" Value="20" />
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected}" Value="True">
-                                            <Setter Property="Foreground" Value="White" />
-                                            <Setter Property="FontWeight" Value="SemiBold" />
+                                            <Setter Property="Foreground" Value="Black" />
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -889,8 +867,7 @@
                                     <Setter Property="FontSize" Value="20" />
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected}" Value="True">
-                                            <Setter Property="Foreground" Value="White" />
-                                            <Setter Property="FontWeight" Value="SemiBold" />
+                                            <Setter Property="Foreground" Value="Black" />
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -910,8 +887,7 @@
                                     <Setter Property="FontSize" Value="20" />
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected}" Value="True">
-                                            <Setter Property="Foreground" Value="White" />
-                                            <Setter Property="FontWeight" Value="SemiBold" />
+                                            <Setter Property="Foreground" Value="Black" />
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
