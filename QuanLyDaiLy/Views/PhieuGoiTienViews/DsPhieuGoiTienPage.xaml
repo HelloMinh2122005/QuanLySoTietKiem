@@ -199,7 +199,7 @@
                 FontWeight="Normal"
                 Foreground="#060606"
                 LineHeight="37"
-                Text="Phiếu gởi tiền"
+                Text="Phiếu gửi tiền"
                 TextAlignment="Center" />
 
             <!--  Search bar  -->
@@ -296,7 +296,7 @@
                         FontFamily="Segoe UI Variable"
                         FontSize="18"
                         FontWeight="SemiBold"
-                        Text="+ Thêm phiếu gởi tiền"
+                        Text="+ Thêm phiếu gửi tiền"
                         TextAlignment="Center" />
                 </Button>
             </StackPanel>
@@ -523,11 +523,11 @@
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
 
-                    <!--  Ngày gởi Column  -->
+                    <!--  Ngày gửi Column  -->
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding NgayGoi, StringFormat='{}{0:dd/MM/yyyy}'}"
-                        Header="Ngày gởi">
+                        Header="Ngày gửi">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
                                 <Setter Property="VerticalAlignment" Value="Center" />
@@ -544,11 +544,11 @@
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
 
-                    <!--  Số tiền gởi Column  -->
+                    <!--  Số tiền gửi Column  -->
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding SoTienGui, StringFormat='{}{0:N0} VNĐ'}"
-                        Header="Số tiền gởi">
+                        Header="Số tiền gửi">
                         <DataGridTextColumn.ElementStyle>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
                                 <Setter Property="VerticalAlignment" Value="Center" />
