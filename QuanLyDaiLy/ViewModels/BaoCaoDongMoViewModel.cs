@@ -91,6 +91,33 @@ public class BaoCaoDongMoViewModel : INotifyPropertyChanged
         }
     }
 
+    private string _textDisPlayLtkMo;
+    public string TextDisplayLtkMo
+    {
+        get => _textDisPlayLtkMo;
+        set
+        {
+            if(_textDisPlayLtkMo != value)
+            {
+                _textDisPlayLtkMo = value;
+                OnPropertyChanged(nameof(TextDisplayLtkMo));
+            }
+        }
+    }
+    private string _textDisPlayLtkDong;
+    public string TextDisplayLtkDong
+    {
+        get => _textDisPlayLtkDong;
+        set
+        {
+            if (_textDisPlayLtkDong != value)
+            {
+                _textDisPlayLtkDong = value;
+                OnPropertyChanged(nameof(TextDisplayLtkDong));
+            }
+        }
+    }
+
     public ObservableCollection<int> Years { get; } = new ObservableCollection<int>(Enumerable.Range(2020,DateTime.Now.Year-2020+1));
     private int _selectedYear;
     public int SelectedYear
@@ -120,6 +147,8 @@ public class BaoCaoDongMoViewModel : INotifyPropertyChanged
             LoaiTietKiems.Add(ltk);
 
         SelectedLoaiTietKiem = LoaiTietKiems.FirstOrDefault();
+        TextDisplayLtkMo = "Tống số sổ mở trong tháng của tất cả loại tiết kiệm  ";
+        TextDisplayLtkDong = "Tổng số sổ đóng trong tháng của tất cả loại tiết kiệm  ";
     }
 
     private async Task UpdateReportAsync()
@@ -132,12 +161,16 @@ public class BaoCaoDongMoViewModel : INotifyPropertyChanged
         if (SelectedLoaiTietKiem.TenLoaiTietKiem.Equals(LoaiTietKiems[0].TenLoaiTietKiem))
         {
             soTietKiemList = (await _soTietKiemRepo.GetAll()).ToList();
+            TextDisplayLtkMo = "Tống số sổ mở trong tháng của tất cả loại tiết kiệm  ";
+            TextDisplayLtkDong = "Tổng số sổ đóng trong tháng của tất cả loại tiết kiệm  ";
         }
         else
         {
             soTietKiemList = (await _soTietKiemRepo.GetAll())
                 .Where(stk => stk.MaLoaiTietKiem == SelectedLoaiTietKiem.MaLoaiTietKiem)
                 .ToList();
+            TextDisplayLtkMo = $"Tống số sổ mở trong tháng của loại tiết kiệm {SelectedLoaiTietKiem.TenLoaiTietKiem}  ";
+            TextDisplayLtkDong = $"Tống số sổ mở trong tháng của loại tiết kiệm {SelectedLoaiTietKiem.TenLoaiTietKiem}  ";
         }
 
         var phieuRutTienList = (await _phieuRutTienRepo.GetAll()).ToList();

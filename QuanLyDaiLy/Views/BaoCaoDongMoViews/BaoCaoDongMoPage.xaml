@@ -512,7 +512,8 @@
                     FontSize="20"
                     FontWeight="SemiBold"
                     Foreground="#000000"
-                    Text="Tổng số lượng Sổ tiết kiệm được mở trong tháng của Loại tiết kiệm  " />
+                    Text="{Binding TextDisplayLtkMo, UpdateSourceTrigger=PropertyChanged}"
+                />
                 <Border
                     Width="300"
                     Height="40"
@@ -548,7 +549,7 @@
                     FontSize="20"
                     FontWeight="SemiBold"
                     Foreground="#000000"
-                    Text="Tổng số lượng Sổ tiết kiệm đóng trong tháng của Loại tiết kiệm  " />
+                    Text="{Binding TextDisplayLtkDong, UpdateSourceTrigger=PropertyChanged}" />
                 <Border
                     Width="300"
                     Height="40"
