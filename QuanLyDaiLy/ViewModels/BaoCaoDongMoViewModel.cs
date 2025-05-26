@@ -48,6 +48,7 @@ public class BaoCaoDongMoViewModel : INotifyPropertyChanged
         }
     }
 
+    public ObservableCollection<int> Months { get; } = new ObservableCollection<int>(Enumerable.Range(1, 12));
     private int _selectedMonth;
     public int SelectedMonth
     {
@@ -63,6 +64,61 @@ public class BaoCaoDongMoViewModel : INotifyPropertyChanged
         }
     }
 
+    private int _tongSoMo;
+    public int TongSoMo
+    {
+        get => _tongSoMo;
+        set
+        {
+            if (_tongSoMo != value)
+            {
+                _tongSoMo = value;
+                OnPropertyChanged(nameof(TongSoMo));
+            }
+        }
+    }
+    private int _tongSoDong;
+    public int TongSoDong
+    {
+        get => _tongSoDong;
+        set
+        {
+            if (_tongSoDong != value)
+            {
+                _tongSoDong = value;
+                OnPropertyChanged(nameof(TongSoDong));
+            }
+        }
+    }
+
+    private string _textDisPlayLtkMo;
+    public string TextDisplayLtkMo
+    {
+        get => _textDisPlayLtkMo;
+        set
+        {
+            if(_textDisPlayLtkMo != value)
+            {
+                _textDisPlayLtkMo = value;
+                OnPropertyChanged(nameof(TextDisplayLtkMo));
+            }
+        }
+    }
+    private string _textDisPlayLtkDong;
+    public string TextDisplayLtkDong
+    {
+        get => _textDisPlayLtkDong;
+        set
+        {
+            if (_textDisPlayLtkDong != value)
+            {
+                _textDisPlayLtkDong = value;
+                OnPropertyChanged(nameof(TextDisplayLtkDong));
+            }
+        }
+    }
+
+    public ObservableCollection<int> Years { get; } = new ObservableCollection<int>(Enumerable.Range(2020,DateTime.Now.Year-2020+1));
     private int _selectedYear;
     public int SelectedYear
     {
@@ -84,10 +140,15 @@ public class BaoCaoDongMoViewModel : INotifyPropertyChanged
     {
         var loaiTietKiemList = await _loaiTietKiemRepo.GetAll();
         LoaiTietKiems.Clear();
+        var allLtk = new LoaiTietKiem();
+        allLtk.TenLoaiTietKiem = "Tất cả";
+        LoaiTietKiems.Add(allLtk);
         foreach (var ltk in loaiTietKiemList)
             LoaiTietKiems.Add(ltk);
 
         SelectedLoaiTietKiem = LoaiTietKiems.FirstOrDefault();
+        TextDisplayLtkMo = "Tống số sổ mở trong tháng của tất cả loại tiết kiệm  ";
+        TextDisplayLtkDong = "Tổng số sổ đóng trong tháng của tất cả loại tiết kiệm  ";
     }
 
     private async Task UpdateReportAsync()
@@ -96,12 +157,25 @@ public class BaoCaoDongMoViewModel : INotifyPropertyChanged
 
         if (SelectedLoaiTietKiem == null)
             return;
-
-        var soTietKiemList = (await _soTietKiemRepo.GetAll())
-            .Where(stk => stk.MaLoaiTietKiem == SelectedLoaiTietKiem.MaLoaiTietKiem)
-            .ToList();
+        List<SoTietKiem> soTietKiemList;
+        if (SelectedLoaiTietKiem.TenLoaiTietKiem.Equals(LoaiTietKiems[0].TenLoaiTietKiem))
+        {
+            soTietKiemList = (await _soTietKiemRepo.GetAll()).ToList();
+            TextDisplayLtkMo = "Tống số sổ mở trong tháng của tất cả loại tiết kiệm  ";
+            TextDisplayLtkDong = "Tổng số sổ đóng trong tháng của tất cả loại tiết kiệm  ";
+        }
+        else
+        {
+            soTietKiemList = (await _soTietKiemRepo.GetAll())
+                .Where(stk => stk.MaLoaiTietKiem == SelectedLoaiTietKiem.MaLoaiTietKiem)
+                .ToList();
+            TextDisplayLtkMo = $"Tống số sổ mở trong tháng của loại tiết kiệm {SelectedLoaiTietKiem.TenLoaiTietKiem}  ";
+            TextDisplayLtkDong = $"Tống số sổ mở trong tháng của loại tiết kiệm {SelectedLoaiTietKiem.TenLoaiTietKiem}  ";
+        }
 
         var phieuRutTienList = (await _phieuRutTienRepo.GetAll()).ToList();
+        int tongMo = 0;
+        int tongDong = 0;
 
         int daysInMonth = DateTime.DaysInMonth(SelectedYear, SelectedMonth);
 
@@ -111,7 +185,7 @@ public class BaoCaoDongMoViewModel : INotifyPropertyChanged
 
             // Sổ mở trong ngày
             int soMo = soTietKiemList.Count(stk => stk.NgayMoSo.Date == date.Date);
-
+            tongMo += soMo;
             // Sổ đóng trong ngày
             int soDong = soTietKiemList.Count(stk =>
                 stk.DangMo == false &&
@@ -121,15 +195,23 @@ public class BaoCaoDongMoViewModel : INotifyPropertyChanged
                     .FirstOrDefault() is { } lastRutTien &&
                 lastRutTien.NgayRut.Date == date.Date
             );
+            tongDong += soDong;
 
-            FilteredDanhSachBaoCao.Add(new BaoCaoDongMoItem
+            if(soMo > 0 || soDong > 0)
             {
-                NgayMoDongSo = date,
-                SoLuongSoMo = soMo,
-                SoLuongSoDong = soDong,
-                ChenhLech = Math.Abs(soMo - soDong)
-            });
+                FilteredDanhSachBaoCao.Add(new BaoCaoDongMoItem
+                {
+                    NgayMoDongSo = date,
+                    SoLuongSoMo = soMo,
+                    SoLuongSoDong = soDong,
+                    ChenhLech = Math.Abs(soMo - soDong)
+                });
+            }
+
+            
         }
+        TongSoMo = tongMo;
+        TongSoDong = tongDong;
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

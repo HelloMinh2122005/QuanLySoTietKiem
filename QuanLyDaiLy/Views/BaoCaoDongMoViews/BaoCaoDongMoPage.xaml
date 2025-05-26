@@ -106,11 +106,11 @@
                     FontStyle="Normal"
                     FontWeight="Normal"
                     Foreground="#000000"
-                    ItemsSource="{Binding LoaiDaiLies}"
-                    SelectedItem="{Binding SelectedLoaiDaiLy}">
+                    ItemsSource="{Binding LoaiTietKiems}"
+                    SelectedItem="{Binding SelectedLoaiTietKiem, Mode=TwoWay}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding TenLoaiDaiLy}" />
+                            <TextBlock Text="{Binding TenLoaiTietKiem}" />
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                     <ComboBox.Template>
@@ -248,11 +248,11 @@
                     FontStyle="Normal"
                     FontWeight="Normal"
                     Foreground="#000000"
-                    ItemsSource="{Binding LoaiDaiLies}"
-                    SelectedItem="{Binding SelectedLoaiDaiLy}">
+                    ItemsSource="{Binding Months}"
+                    SelectedItem="{Binding SelectedMonth, Mode=TwoWay}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding TenLoaiDaiLy}" />
+                            <TextBlock Text="{Binding}" />
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                     <ComboBox.Template>
@@ -390,11 +390,11 @@
                     FontStyle="Normal"
                     FontWeight="Normal"
                     Foreground="#000000"
-                    ItemsSource="{Binding LoaiDaiLies}"
-                    SelectedItem="{Binding SelectedLoaiDaiLy}">
+                    ItemsSource="{Binding Years}"
+                    SelectedItem="{Binding SelectedYear, Mode=TwoWay}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding TenLoaiDaiLy}" />
+                            <TextBlock Text="{Binding}" />
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                     <ComboBox.Template>
@@ -512,7 +512,8 @@
                     FontSize="20"
                     FontWeight="SemiBold"
                     Foreground="#000000"
-                    Text="Tổng số lượng Sổ tiết kiệm được mở trong tháng của Loại tiết kiệm  " />
+                    Text="{Binding TextDisplayLtkMo, UpdateSourceTrigger=PropertyChanged}"
+                />
                 <Border
                     Width="300"
                     Height="40"
@@ -532,7 +533,7 @@
                         FontWeight="Normal"
                         Foreground="#9A000000"
                         IsReadOnly="True"
-                        Text="{Binding KhachHang.DiaChi, UpdateSourceTrigger=PropertyChanged}"
+                        Text="{Binding TongSoMo, UpdateSourceTrigger=PropertyChanged}"
                         TextAlignment="Left" />
                 </Border>
             </StackPanel>
@@ -548,7 +549,7 @@
                     FontSize="20"
                     FontWeight="SemiBold"
                     Foreground="#000000"
-                    Text="Tổng số lượng Sổ tiết kiệm đóng trong tháng của Loại tiết kiệm  " />
+                    Text="{Binding TextDisplayLtkDong, UpdateSourceTrigger=PropertyChanged}" />
                 <Border
                     Width="300"
                     Height="40"
@@ -568,7 +569,7 @@
                         FontWeight="Normal"
                         Foreground="#9A000000"
                         IsReadOnly="True"
-                        Text="{Binding KhachHang.DiaChi, UpdateSourceTrigger=PropertyChanged}"
+                        Text="{Binding TongSoDong, UpdateSourceTrigger=PropertyChanged}"
                         TextAlignment="Left" />
                 </Border>
             </StackPanel>
