@@ -295,7 +295,7 @@
                     Tag="KhachHang" />
                 <RadioButton
                     Checked="RadioButton_Checked"
-                    Content=" 💰 Phiếu gửi tiền"
+                    Content=" 💰 Phiếu gởi tiền"
                     GroupName="NavGroup"
                     Style="{StaticResource NavButtonStyle}"
                     Tag="PhieuGoiTien" />

@@ -523,7 +523,7 @@
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
 
-                    <!--  Ngày gửi Column  -->
+                    <!--  Ngày gởi Column  -->
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding NgayRut, StringFormat='{}{0:dd/MM/yyyy}'}"
@@ -544,7 +544,7 @@
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
 
-                    <!--  Số tiền gửi Column  -->
+                    <!--  Số tiền gởi Column  -->
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding SoTienRut, StringFormat='{}{0:N0} VNĐ'}"

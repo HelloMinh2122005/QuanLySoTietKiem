@@ -219,12 +219,12 @@ namespace QuanLyDaiLy.ViewModels
             }
 
             var thamSo = await _thamSoRepo.Get();
-            // Kiểm tra số tiền gửi
+            // Kiểm tra số tiền gởi
             if (SoTienGui < thamSo.SoTienGoiToiThieu && thamSo.ApDungSoTienGuiToiThieu == true)
             {
                 Console.WriteLine(SoTienGui);
 
-                return $"Số tiền gửi tối thiểu là {thamSo.SoTienGoiToiThieu}.";
+                return $"Số tiền gởi tối thiểu là {thamSo.SoTienGoiToiThieu}.";
             }
 
 

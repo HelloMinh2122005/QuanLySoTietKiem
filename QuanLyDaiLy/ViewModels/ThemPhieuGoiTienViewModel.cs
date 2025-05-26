@@ -103,7 +103,7 @@ namespace QuanLyDaiLy.ViewModels
                 IsFieldsEnabled = loaiTietKiem?.TenLoaiTietKiem == "Không kỳ hạn";
                 if (!IsFieldsEnabled)
                 {
-                    MessageBox.Show("Không thể gửi thêm vào loại tiết kiệm này!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Không thể gởi thêm vào loại tiết kiệm này!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)
@@ -265,7 +265,7 @@ namespace QuanLyDaiLy.ViewModels
                 SoTietKiem.SoTienGui += SoTienGui;
                 await _soTietKiemRepo.Update(SoTietKiem);
 
-                MessageBox.Show("Lập phiếu gửi tiền thành công!", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Lập phiếu gởi tiền thành công!", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
                 LapPhieuEvent?.Invoke(this, phieuGoiTien);
                 MaPhieuGoiTien = phieuGoiTien.MaPhieuGoiTien;
                 //reset fields
@@ -273,7 +273,7 @@ namespace QuanLyDaiLy.ViewModels
                 MaSoTietKiem = string.Empty;
             }
             catch (Exception ex) {
-                MessageBox.Show($"Lỗi khi lập phiếu gửi tiền: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Lỗi khi lập phiếu gởi tiền: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -290,7 +290,7 @@ namespace QuanLyDaiLy.ViewModels
             {
                 Console.WriteLine(SoTienGui);
 
-                return $"Số tiền gửi thêm tối thiểu là {thamSo.SoTienGuiThemToiThieu}.";
+                return $"Số tiền gởi thêm tối thiểu là {thamSo.SoTienGuiThemToiThieu}.";
             }
             // only add LTK "Khong ky han" khi quy dinh ap dung duoc bat
             var soTietKiem = await _soTietKiemRepo.GetById(MaSoTietKiem);
@@ -298,7 +298,7 @@ namespace QuanLyDaiLy.ViewModels
             if (soTietKiem.MaLoaiTietKiem != "LTK0830010523001" && loaiTietKiem.ApDungSoTienGuiThemToiThieu == true)
             {
                 Console.WriteLine(soTietKiem.MaLoaiTietKiem);
-                return "Chỉ được gửi thêm vào loại tiết kiệm không kỳ hạn.";
+                return "Chỉ được gởi thêm vào loại tiết kiệm không kỳ hạn.";
             }
 
             return null;
