@@ -197,8 +197,8 @@ public class BaoCaoDongMoViewModel : INotifyPropertyChanged
             );
             tongDong += soDong;
 
-            if(soMo > 0 || soDong > 0)
-            {
+            
+            
                 FilteredDanhSachBaoCao.Add(new BaoCaoDongMoItem
                 {
                     NgayMoDongSo = date,
@@ -206,7 +206,7 @@ public class BaoCaoDongMoViewModel : INotifyPropertyChanged
                     SoLuongSoDong = soDong,
                     ChenhLech = Math.Abs(soMo - soDong)
                 });
-            }
+            
 
             
         }
