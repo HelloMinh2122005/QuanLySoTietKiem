@@ -100,9 +100,9 @@ namespace QuanLyDaiLy.ViewModels
                 TenKhachHang = soTietKiem.KhachHang.TenKhachHang;
                 TenLoaiTietKiem = soTietKiem.LoaiTietKiem.TenLoaiTietKiem;
                 KyHan = soTietKiem.LoaiTietKiem.KyHan;
-                SoTienRut = 0; //reset to 0
+                
                 SoTienGui = soTietKiem.SoTienGui;
-
+                
                 //Tinh LaiSuat va SoLanDaoHan
 
                 if (soTietKiem.LoaiTietKiem.KyHan != 0 && soTietKiem.SoTienGui > 0)
@@ -123,6 +123,7 @@ namespace QuanLyDaiLy.ViewModels
                 NgayMoSo = soTietKiem.NgayMoSo;
                 LoaiTietKiem = soTietKiem.LoaiTietKiem;
                 QuyDinhRutHetTien = LoaiTietKiem.QuyDinhRutHetTien;
+                SoTienRut = TienLai + SoTienGui;
             }
             catch (Exception ex)
             {
@@ -362,6 +363,7 @@ namespace QuanLyDaiLy.ViewModels
                 return;
             }
 
+
             //create new PhieuRutTien
             var soTietKiem = await _soTietKiemRepo.GetById(MaSoTietKiem);
             if (soTietKiem == null)
@@ -384,7 +386,7 @@ namespace QuanLyDaiLy.ViewModels
                 await _phieuRutTienRepo.Create(phieuRutTien);
 
                 //update SoTietKiem
-                soTietKiem.SoTienGui -= SoTienRut;
+                soTietKiem.SoTienGui -= SoTienGui;
                 if (soTietKiem.SoTienGui <= 0 )
                 {
                     soTietKiem.DangMo = false; //đóng sổ tiết kiệm nếu rút hết tiền

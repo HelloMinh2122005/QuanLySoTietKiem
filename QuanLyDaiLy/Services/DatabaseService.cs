@@ -23,7 +23,7 @@ public class DatabaseService
             Directory.CreateDirectory(appDataPath);
         }
 
-        return Path.Combine(appDataPath, "quanlydaily123.db");
+        return Path.Combine(appDataPath, "quanlydaily1234.db");
     }
 
     public async Task Initialize(string? dbPath = null)

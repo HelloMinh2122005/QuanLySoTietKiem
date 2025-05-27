@@ -173,7 +173,7 @@ namespace QuanLyDaiLy.ViewModels
             // Tạo đối tượng SoTietKiem từ dữ liệu hiện có
             var soTietKiem = new SoTietKiem
             {
-                MaSoTietKiem = IdGenerator.GenerateId<SoTietKiem>(),
+                MaSoTietKiem = MaSoTietKiem,
                 MaLoaiTietKiem = LoaiTietKiemDuocChon.MaLoaiTietKiem,
                 SoTienGui = SoTienGui,
                 KhachHang = khachHang,

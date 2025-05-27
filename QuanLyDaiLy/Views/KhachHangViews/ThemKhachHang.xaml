@@ -159,7 +159,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     FontWeight="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     Text="{Binding cmnd, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
                             </Border>
@@ -200,7 +200,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     FontWeight="Normal"
-                                    Foreground="#9A000000"
+                                    Foreground="Black"
                                     IsReadOnly="False"
                                     Text="{Binding tenKhachHang, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="Left" />
@@ -244,7 +244,7 @@
                                 FontSize="14"
                                 FontStyle="Normal"
                                 FontWeight="Normal"
-                                Foreground="#9A000000"
+                                Foreground="Black"
                                 IsReadOnly="False"
                                 Text="{Binding diachi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 TextAlignment="Left" />
