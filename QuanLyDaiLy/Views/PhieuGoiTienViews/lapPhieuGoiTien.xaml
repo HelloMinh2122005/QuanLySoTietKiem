@@ -247,7 +247,7 @@
                                     FontSize="14"
                                     FontStyle="Normal"
                                     Foreground="Black"
-                                    Text="{Binding MaSoTietKiem, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding MaSoTietKiem, UpdateSourceTrigger=LostFocus}"
                                     TextAlignment="Left" />
                             </Border>
                         </Grid>
