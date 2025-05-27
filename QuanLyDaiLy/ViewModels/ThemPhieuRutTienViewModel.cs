@@ -265,6 +265,7 @@ namespace QuanLyDaiLy.ViewModels
                 {
                     _quyDinhRutHetTien = value;
                     OnPropertyChanged();
+                    OnPropertyChanged(nameof(TrangThaiQuyDinh));
                 }
             }
         }
