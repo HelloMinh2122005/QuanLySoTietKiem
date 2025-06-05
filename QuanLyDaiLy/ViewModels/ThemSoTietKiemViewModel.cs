@@ -105,7 +105,16 @@ namespace QuanLyDaiLy.ViewModels
                 {
                     _cmnd = value;
                     OnPropertyChanged();
-                    TimKiemKhachHangAsync(value);
+
+                    if (string.IsNullOrEmpty(value))
+                    {
+                        ResetFields();
+                    }
+                    else
+                    {
+                        TimKiemKhachHangAsync(value);
+                    }
+
                 }
             }
         }
@@ -195,7 +204,6 @@ namespace QuanLyDaiLy.ViewModels
             {
                 MessageBox.Show("Lập sổ tiết kiệm thất bại. Vui lòng thử lại.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
                        
         }
         
@@ -252,11 +260,16 @@ namespace QuanLyDaiLy.ViewModels
         
         private async Task TimKiemKhachHangAsync(string cmnd)
         {
-            KhachHang = await _khachHangRepo.GetById(cmnd);
-            if (KhachHang == null)
-            {
-                MessageBox.Show("Không tìm thấy khách hàng", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            try
+            { 
+                KhachHang = await _khachHangRepo.GetById(cmnd);
             }
+            catch (Exception ex)
+            {
+         
+                MessageBox.Show("Không tìm thấy khách hàng", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);           
+            }
+            
         }
     }
 } 

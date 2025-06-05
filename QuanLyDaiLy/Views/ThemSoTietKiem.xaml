@@ -207,7 +207,7 @@
                                     FontStyle="Normal"
                                     FontWeight="Normal"
                                     Foreground="Black"
-                                    Text="{Binding Cmnd, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding Cmnd, UpdateSourceTrigger=LostFocus}"
                                     TextAlignment="Left" />
                             </Border>
                         </Grid>
