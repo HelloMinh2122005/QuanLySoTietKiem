@@ -14,7 +14,7 @@ public class SoTietKiem
     public bool DangMo { get; set; } = true;
     public decimal LaiSuat { get; set; } = 0;
     public int SoLanDaoHan { get; set; } = 0;
-
+    
     public ICollection<PhieuGoiTien> DsPhieuGoiTien { get; set; } = [];
     public ICollection<PhieuRutTien> DsPhieuRutTien { get; set; } = [];
     // Navigation properties

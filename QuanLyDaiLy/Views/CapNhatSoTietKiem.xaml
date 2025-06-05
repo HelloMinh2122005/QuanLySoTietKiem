@@ -383,13 +383,13 @@
                                                         </ToggleButton.Template>
                                                     </ToggleButton>
 
-                                                    <ContentPresenter
-                                                        x:Name="contentPresenter"
-                                                        Margin="10,0,30,0"
-                                                        HorizontalAlignment="Left"
-                                                        VerticalAlignment="Center"
-                                                        Content="{TemplateBinding SelectionBoxItem}"
-                                                        ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" />
+                                                    <TextBlock
+                                                    Margin="10,0,30,0"
+                                                    VerticalAlignment="Center"
+                                                    HorizontalAlignment="Left"
+                                                    Text="{Binding SelectedItem.TenLoaiTietKiem, RelativeSource={RelativeSource TemplatedParent}}"
+                                                    FontSize="14"
+                                                    Foreground="Black" />   
                                                 </Grid>
                                             </Border>
 

@@ -10,17 +10,17 @@ using QuanLyDaiLy.Interfaces;
 
 namespace QuanLyDaiLy.ViewModels
 {
-    public class CapNhatSoTietKiemViewModel: INotifyPropertyChanged
+    public class CapNhatSoTietKiemViewModel : INotifyPropertyChanged
     {
         public ICommand CloseCommand { get; }
-        
+
         public ICommand CapNhatCommand { get; }
-        
+
         public event EventHandler<SoTietKiem>? CapNhatEvent;
 
-        
+
         private readonly ILoaiTietKiemRepo _loaiTietKiemRepo;
-        
+
         private readonly IKhachHangRepo _khachHangRepo;
         private readonly ISoTietKiemRepo _soTietKiemRepo;
         private readonly IThamSoRepo _thamSoRepo;
@@ -39,7 +39,7 @@ namespace QuanLyDaiLy.ViewModels
             }
         }
 
-        private LoaiTietKiem? _loaiTietKiemDuocChon = new();
+        private LoaiTietKiem? _loaiTietKiemDuocChon;
         public LoaiTietKiem? LoaiTietKiemDuocChon
         {
             get => _loaiTietKiemDuocChon;
@@ -65,7 +65,7 @@ namespace QuanLyDaiLy.ViewModels
                 }
             }
         }
-        
+
         private string _tenKhachHang = "";
         public string TenKhachHang
         {
@@ -106,7 +106,7 @@ namespace QuanLyDaiLy.ViewModels
                 }
             }
         }
-        
+
         private string _maSoTietKiem = "";
         public string MaSoTietKiem
         {
@@ -120,7 +120,7 @@ namespace QuanLyDaiLy.ViewModels
                 }
             }
         }
-        
+
         private DateTime _ngayMoSo = DateTime.Now;
         public DateTime NgayMoSo
         {
@@ -134,8 +134,8 @@ namespace QuanLyDaiLy.ViewModels
                 }
             }
         }
-        
-        
+
+
 
         public void SetData(SoTietKiem soTietKiem)
         {
@@ -143,26 +143,26 @@ namespace QuanLyDaiLy.ViewModels
             MaSoTietKiem = soTietKiem.MaSoTietKiem;
             NgayMoSo = soTietKiem.NgayMoSo;
             Cmnd = soTietKiem.CMND;
-            
+
             LoaiTietKiemDuocChon = DsLoaiTietKiem.Where(item => item.MaLoaiTietKiem == soTietKiem.MaLoaiTietKiem).FirstOrDefault();
         }
 
-        public CapNhatSoTietKiemViewModel(IKhachHangRepo khachHangRepo,ILoaiTietKiemRepo LoaiTietKiemRepo,ISoTietKiemRepo SoTietKiemRepo, IThamSoRepo ThamSoRepo)
+        public CapNhatSoTietKiemViewModel(IKhachHangRepo khachHangRepo, ILoaiTietKiemRepo LoaiTietKiemRepo, ISoTietKiemRepo SoTietKiemRepo, IThamSoRepo ThamSoRepo)
         {
             //command
             CloseCommand = new RelayCommand(ExecuteClose);
             CapNhatCommand = new RelayCommand(CapNhat);
-            
+
             //repo
             _khachHangRepo = khachHangRepo;
             _loaiTietKiemRepo = LoaiTietKiemRepo;
             _soTietKiemRepo = SoTietKiemRepo;
             _thamSoRepo = ThamSoRepo;
-            
+
             LoadLoaiTietKiem();
 
         }
-        
+
         private async Task TimKiemKhachHangAsync(string cmnd)
         {
             var data = await _khachHangRepo.GetById(cmnd);
@@ -170,18 +170,25 @@ namespace QuanLyDaiLy.ViewModels
             TenKhachHang = data.TenKhachHang;
 
         }
-        
-        private async void LoadLoaiTietKiem()
+
+        private async void LoadLoaiTietKiem(SoTietKiem? soTietKiem = null)
         {
             var danhSach = await _loaiTietKiemRepo.GetAll();
             DsLoaiTietKiem = [.. danhSach];
+
+            if (soTietKiem != null)
+            {
+                LoaiTietKiemDuocChon = DsLoaiTietKiem
+                    .FirstOrDefault(item => item.MaLoaiTietKiem == soTietKiem.MaLoaiTietKiem);
+            }
         }
+
 
         private void ExecuteClose()
         {
             Application.Current.Windows.OfType<CapNhatSoTietKiem>().FirstOrDefault()?.Close();
         }
-        
+
         private async void CapNhat()
         {
             // Kiểm tra các trường
@@ -225,7 +232,7 @@ namespace QuanLyDaiLy.ViewModels
                 MessageBox.Show("Cập nhật sổ tiết kiệm thất bại. Vui lòng thử lại.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        
+
         private async Task<string> ValidateFields()
         {
             // Kiểm tra CMND

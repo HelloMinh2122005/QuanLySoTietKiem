@@ -4,14 +4,14 @@ using QuanLyDaiLy.Interfaces;
 
 namespace QuanLyDaiLy.ViewModels;
 
-public class BaoCaoDoanhSoViewModel: INotifyPropertyChanged
+public class BaoCaoDoanhSoViewModel : INotifyPropertyChanged
 {
     private readonly ISoTietKiemRepo _soTietKiemRepo;
     private readonly IPhieuGoiTienRepo _phieuGoiTienRepo;
     private readonly ILoaiTietKiemRepo _loaiTietKiemRepo;
     private readonly IPhieuRutTienRepo _phieuRutTienRepo;
-    
-    public BaoCaoDoanhSoViewModel(ISoTietKiemRepo soTietKiemRepo, 
+
+    public BaoCaoDoanhSoViewModel(ISoTietKiemRepo soTietKiemRepo,
         IPhieuGoiTienRepo phieuGoiTienRepo, ILoaiTietKiemRepo loaiTietKiemRepo, IPhieuRutTienRepo phieuRutTienRepo)
     {
         _soTietKiemRepo = soTietKiemRepo;
@@ -20,7 +20,7 @@ public class BaoCaoDoanhSoViewModel: INotifyPropertyChanged
         _phieuRutTienRepo = phieuRutTienRepo;
         SelectedDate = DateTime.Now;
     }
-    
+
     private DateTime _selectedDate;
 
     public DateTime SelectedDate
@@ -36,9 +36,9 @@ public class BaoCaoDoanhSoViewModel: INotifyPropertyChanged
             }
         }
     }
-    
+
     private Decimal _tongDoanhSo;
-    
+
     public Decimal TongDoanhSo
     {
         get => _tongDoanhSo;
@@ -48,7 +48,7 @@ public class BaoCaoDoanhSoViewModel: INotifyPropertyChanged
             OnPropertyChanged(nameof(TongDoanhSo));
         }
     }
-    
+
     private ObservableCollection<BaoCaoDoanhSo> _dsBaoCaoDoanhSo;
     public ObservableCollection<BaoCaoDoanhSo> DSBaoCaoDoanhSo
     {
@@ -64,7 +64,7 @@ public class BaoCaoDoanhSoViewModel: INotifyPropertyChanged
     {
         var loaiTietKiems = _loaiTietKiemRepo.GetAll().Result;
         var soTietKiems = _soTietKiemRepo.GetAll().Result;
-        var phieuGoiTiens = _phieuGoiTienRepo.GetAll().Result.Where(pg => pg.NgayGoi.Date == SelectedDate.Date);            
+        var phieuGoiTiens = _phieuGoiTienRepo.GetAll().Result.Where(pg => pg.NgayGoi.Date == SelectedDate.Date);
         var phieuRuts = _phieuRutTienRepo.GetAll().Result.Where(pr => pr.NgayRut.Date == SelectedDate.Date);
 
         var baoCaoList = loaiTietKiems.Select(loaiTietKiem =>
@@ -72,6 +72,9 @@ public class BaoCaoDoanhSoViewModel: INotifyPropertyChanged
             var soTietKiemCuaLoai = soTietKiems.Where(stk => stk.MaLoaiTietKiem.Equals(loaiTietKiem.MaLoaiTietKiem));
             var tongThu = phieuGoiTiens
                 .Where(pg => soTietKiemCuaLoai.Any(stk => stk.MaSoTietKiem.Equals(pg.MaSoTietKiem)))
+                .Sum(pg => pg.SoTienGui);
+            tongThu += soTietKiemCuaLoai
+                .Where(pg => soTietKiemCuaLoai.Any(stk => stk.MaSoTietKiem.Equals(pg.MaSoTietKiem) && stk.NgayMoSo == SelectedDate.Date))
                 .Sum(pg => pg.SoTienGui);
             var tongChi = phieuRuts
                 .Where(pr => soTietKiemCuaLoai.Any(stk => stk.MaSoTietKiem.Equals(pr.MaSoTietKiem)))
