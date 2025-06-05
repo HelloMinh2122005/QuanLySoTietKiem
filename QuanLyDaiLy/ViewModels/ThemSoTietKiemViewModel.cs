@@ -183,7 +183,7 @@ namespace QuanLyDaiLy.ViewModels
             // Tạo đối tượng SoTietKiem từ dữ liệu hiện có
             var soTietKiem = new SoTietKiem
             {
-                MaSoTietKiem = MaSoTietKiem,
+                MaSoTietKiem = IdGenerator.GenerateId<SoTietKiem>(),
                 MaLoaiTietKiem = LoaiTietKiemDuocChon.MaLoaiTietKiem,
                 SoTienGui = SoTienGui,
                 KhachHang = khachHang,
@@ -202,7 +202,7 @@ namespace QuanLyDaiLy.ViewModels
             }
             catch (Exception e)
             {
-                MessageBox.Show("Lập sổ tiết kiệm thất bại. Vui lòng thử lại.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Lập sổ tiết kiệm thất bại. Vui lòng thử lại: {e.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
                        
         }
