@@ -104,7 +104,7 @@ namespace QuanLyDaiLy.ViewModels
                 }
 
                 await _khachHangRepo.Update(khachHang);
-                MessageBox.Show("Update KH thành công!", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Cập nhật khách hàng thành công!", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
                 CapNhatEvent?.Invoke(this, khachHang);
             }
             catch (Exception e)
@@ -112,7 +112,7 @@ namespace QuanLyDaiLy.ViewModels
                 // Log the exception details
                 Console.WriteLine($"Exception: {e.Message}");
                 Console.WriteLine($"Stack Trace: {e.StackTrace}");
-                MessageBox.Show($"Update KH thất bại. Vui lòng thử lại. Error: {e.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Cập nhật khách hàng thất bại. Vui lòng thử lại. Error: {e.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

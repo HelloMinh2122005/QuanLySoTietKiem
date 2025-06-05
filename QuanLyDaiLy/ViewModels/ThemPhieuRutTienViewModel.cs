@@ -104,26 +104,27 @@ namespace QuanLyDaiLy.ViewModels
                 SoTienGui = soTietKiem.SoTienGui;
                 
                 //Tinh LaiSuat va SoLanDaoHan
-
+               
                 if (soTietKiem.LoaiTietKiem.KyHan != 0 && soTietKiem.SoTienGui > 0)
-                {
-                    SoLanDaoHan = DateTime.Now - soTietKiem.NgayMoSo >= TimeSpan.FromDays(30) ? (int)((DateTime.Now - soTietKiem.NgayMoSo).TotalDays / (soTietKiem.LoaiTietKiem.KyHan * 30)) : 0;
-                    TienLai = soTietKiem.SoTienGui * soTietKiem.LoaiTietKiem.LaiSuatQuyDinh * SoLanDaoHan * soTietKiem.LoaiTietKiem.KyHan;
-                }
+                    {
+                        SoLanDaoHan = DateTime.Now - soTietKiem.NgayMoSo >= TimeSpan.FromDays(30) ? (int)((DateTime.Now - soTietKiem.NgayMoSo).TotalDays / (soTietKiem.LoaiTietKiem.KyHan * 30)) : 0;
+                        TienLai = soTietKiem.SoTienGui * soTietKiem.LoaiTietKiem.LaiSuatQuyDinh * SoLanDaoHan * soTietKiem.LoaiTietKiem.KyHan;
+                    }
                 else if (soTietKiem.LoaiTietKiem.KyHan == 0 && soTietKiem.SoTienGui > 0)
-                {
-                    TienLai = soTietKiem.SoTienGui * soTietKiem.LoaiTietKiem.LaiSuatQuyDinh;
-                }
+                    {
+                        TienLai = soTietKiem.SoTienGui * soTietKiem.LoaiTietKiem.LaiSuatQuyDinh;
+                    }
                 else
-                {
-                    TienLai = 0;
-                }
+                    {
+                        TienLai = 0;
+                    }
 
                 DangMo = soTietKiem.DangMo;
                 NgayMoSo = soTietKiem.NgayMoSo;
                 LoaiTietKiem = soTietKiem.LoaiTietKiem;
                 QuyDinhRutHetTien = LoaiTietKiem.QuyDinhRutHetTien;
-                SoTienRut = TienLai + SoTienGui;
+                if (LoaiTietKiem.QuyDinhRutHetTien) SoTienRut = TienLai + SoTienGui;
+                else SoTienRut = 0;
             }
             catch (Exception ex)
             {
@@ -269,6 +270,21 @@ namespace QuanLyDaiLy.ViewModels
                 }
             }
         }
+
+        public decimal SoTienRutTheoQuyDinh
+        {
+            get
+            {
+                if (QuyDinhRutHetTien)
+                {
+                    return SoTienRut;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
         public string TrangThaiQuyDinh
         {
             get
@@ -387,7 +403,12 @@ namespace QuanLyDaiLy.ViewModels
                 await _phieuRutTienRepo.Create(phieuRutTien);
 
                 //update SoTietKiem
-                soTietKiem.SoTienGui -= SoTienGui;
+                soTietKiem.SoTienGui -= SoTienRut;
+                if (soTietKiem.SoTienGui < 0)
+                {
+                    soTietKiem.SoTienGui = 0;
+                }
+
                 if (soTietKiem.SoTienGui <= 0 )
                 {
                     soTietKiem.DangMo = false; //đóng sổ tiết kiệm nếu rút hết tiền

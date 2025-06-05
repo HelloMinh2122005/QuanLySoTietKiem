@@ -170,6 +170,7 @@ namespace QuanLyDaiLy.ViewModels
             
             var loaiTietKiem = await _loaiTietKiemRepo.GetById(LoaiTietKiemDuocChon.MaLoaiTietKiem);
             var khachHang = await _khachHangRepo.GetById(Cmnd);
+
             // Tạo đối tượng SoTietKiem từ dữ liệu hiện có
             var soTietKiem = new SoTietKiem
             {
@@ -252,6 +253,10 @@ namespace QuanLyDaiLy.ViewModels
         private async Task TimKiemKhachHangAsync(string cmnd)
         {
             KhachHang = await _khachHangRepo.GetById(cmnd);
+            if (KhachHang == null)
+            {
+                MessageBox.Show("Không tìm thấy khách hàng", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 } 

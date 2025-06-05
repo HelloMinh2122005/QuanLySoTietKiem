@@ -213,7 +213,7 @@ namespace QuanLyDaiLy.ViewModels
         {
             if (string.IsNullOrEmpty(SelectedKhachHangDto?.KhachHang.CMND))
             {
-                MessageBox.Show("Vui lòng chọn KH để xóa", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Vui lòng chọn khách hàng để xóa", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
@@ -229,11 +229,11 @@ namespace QuanLyDaiLy.ViewModels
                 {
                     await _khachHangRepo.Delete(SelectedKhachHangDto.KhachHang.CMND);
                     await LoadData();
-                    MessageBox.Show("Xóa KH thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Xóa khách hàng thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Lỗi khi xóa KH: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show($"Lỗi khi xóa khách hàng: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
